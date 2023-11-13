@@ -237,29 +237,23 @@ let avatar;
     </li>
   </ul>
   <h3>My favorite</h3>
-  <div class="card" style="width: 18rem" v-for="item in favoritoAnimales">
-    <img v-bind:src="item.Imagen" class="card-img-top" alt="..." />
-    <div class="card-body">
-      <h5 class="card-title">{{ item.Nombre }}</h5>
-      <p class="card-text">
-        {{ item.Tipo }}
-      </p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+  <template v-for="item in favoritoAnimales">
+    <div class="card" style="width: 18rem">
+      <img v-bind:src="item.Imagen" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">{{ item.Nombre }}</h5>
+        <p class="card-text">
+          {{ item.Tipo }}
+        </p>
+        <div class="d-flex" style="justify-content: space-around">
+          <a href="#" class="btn btn-danger">Eliminar</a>
+          <a href="#" class="btn btn-warning">Modificar</a>
+        </div>
+      </div>
     </div>
-  </div>
-  <ul v-for="item in favoritoAnimales">
-    <li class="d-flex">
-      <img v-bind:src="item.Imagen" />
-      <h5>
-        {{ item.Nombre }}
-      </h5>
-      <h5>
-        {{ item.Tipo }}
-      </h5>
-    </li>
-  </ul>
-  <hr />
-  <br />
+
+    <hr />
+  </template>
 </template>
 <section>
 
