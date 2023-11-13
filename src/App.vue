@@ -4,7 +4,7 @@ import { ref } from 'vue';
 const counter = ref(0);
 const recorrer = ref();
 const letra = 'siete';
-const favoritoAnimales = ref({});
+const favoritoAnimales = ref([]);
 let convertir = ref([]);
 const contador = () => {
   letra;
@@ -180,14 +180,18 @@ const add = (id) => {
   var nombre = ref();
   var tipo = ref();
   var imagen = ref();
-  var mascota = ref();
+  var mascota = ref([]);
   nombre.value = animalNames.find((animal) => animal.id === id).Nombre;
   tipo.value = animalNames.find((animal) => animal.id === id).Tipo;
   imagen.value = animalNames.find((animal) => animal.id === id).Imagen;
-  mascota.value = [nombre.value, tipo.value, imagen.value];
-  favoritoAnimales.value = { Nombre: nombre.value, Tipo: tipo.value };
-  favoritoAnimales.value.push(mascota);
-  console.log(favoritoAnimales.value.Tipo);
+  mascota.value = {
+    Nombre: nombre.value,
+    Tipo: tipo.value,
+    Imagen: imagen.value,
+  };
+  favoritoAnimales.value.push(mascota.value);
+  console.log(favoritoAnimales.value);
+  console.log(mascota.value);
 };
 let avatar;
 </script>
@@ -233,16 +237,24 @@ let avatar;
     </li>
   </ul>
   <h3>My favorite</h3>
-  <ul>
-    <li
-      v-for="item in favoritoAnimales"
-      style="display: flex; justify-content: space-around; align-items: center,margin:0px"
-    >
+  <div class="card" style="width: 18rem" v-for="item in favoritoAnimales">
+    <img v-bind:src="item.Imagen" class="card-img-top" alt="..." />
+    <div class="card-body">
+      <h5 class="card-title">{{ item.Nombre }}</h5>
+      <p class="card-text">
+        {{ item.Tipo }}
+      </p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+  <ul v-for="item in favoritoAnimales">
+    <li class="d-flex">
+      <img v-bind:src="item.Imagen" />
       <h5>
-        {{ favoritoAnimales.Nombre }}
+        {{ item.Nombre }}
       </h5>
       <h5>
-        {{ favoritoAnimales.Tipo }}
+        {{ item.Tipo }}
       </h5>
     </li>
   </ul>
