@@ -212,6 +212,29 @@ let avatar;
   id: 16, Tipo: 'Perro', Nombre: 'Kiko', Observacion: 'en adopcion', Ubicacion:
   'Estoy en bello', Rasgos: 'Perro pitbull', Imagen
   <button @click="contador">Contador</button>
+  <ul class="row row-cols-1 row-cols-md-2 g-4">
+    <li class="col" v-for="items in animalNames">
+      <div class="card">
+        <img v-bind:src="items.Imagen" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">{{ items.Nombre }}</h5>
+          <span> {{ items.Tipo }}</span>
+          <p class="card-text">Observacion:{{ items.Observacion }}</p>
+          <p class="card-text">Ubicacion:{{ items.Ubicacion }}</p>
+          <p class="card-text">Rasgos:{{ items.Rasgos }}</p>
+        </div>
+        <div class="card-footer">
+          <button
+            @click="add(items.id)"
+            style="margin-top: 1rem; background-color: blue"
+          >
+            Favorito
+          </button>
+        </div>
+      </div>
+    </li>
+  </ul>
+
   <ul style="list-style: none">
     <li
       v-for="items in animalNames"
@@ -271,5 +294,11 @@ let avatar;
 }
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
+}
+.card-img,
+.card-img-bottom,
+.card-img-top {
+  width: 100%;
+  height: 258px;
 }
 </style>
