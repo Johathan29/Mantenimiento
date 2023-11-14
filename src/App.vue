@@ -262,7 +262,8 @@ const add = (id) => {
 }
   .card {
     height: 32rem;
-    max-height: 34rem;
+    max-height: 34rem
+  }
 .logo {
   height: 6em;
   padding: 1.5em;
