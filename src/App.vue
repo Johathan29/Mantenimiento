@@ -259,6 +259,13 @@ let avatar;
 </section>
 
 <style scoped>
+  .col-md-6 {
+    height: 33rem;
+    list-style: none;
+}
+  .card {
+    height: 32rem;
+    max-height: 34rem;
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -281,5 +288,11 @@ let avatar;
     flex: 0 0 auto;
     width: 33%;
     line-height: 0.9;
+}
+  .card {
+  
+    height: 32rem;
+   
+    max-height: 34rem;
 }
 </style>
