@@ -235,30 +235,6 @@ let avatar;
     </li>
   </ul>
 
-  <ul style="list-style: none">
-    <li
-      v-for="items in animalNames"
-      style="border-bottom: 2px Solid; padding: 3rem"
-    >
-      <span> {{ items.Tipo }}</span>
-      <div style="display: flex">
-        <img v-bind:src="items.Imagen" style="width: 120px" />
-        <h3>Nombre : {{ items.Nombre }}</h3>
-      </div>
-
-      <ol>
-        <li>Observacion:{{ items.Observacion }}</li>
-        <li>Ubicacion:{{ items.Ubicacion }}</li>
-        <li>Rasgos:{{ items.Rasgos }}</li>
-      </ol>
-      <button
-        @click="add(items.id)"
-        style="margin-top: 1rem; background-color: blue"
-      >
-        Favorito
-      </button>
-    </li>
-  </ul>
   <h3>My favorite</h3>
   <template v-for="item in favoritoAnimales">
     <div class="card" style="width: 18rem">
