@@ -226,7 +226,7 @@ let avatar;
         <div class="card-footer">
           <button
             @click="add(items.id)"
-            style="margin-top: 1rem; background-color: blue"
+            class="btn btn btn-success"
           >
             Favorito
           </button>
