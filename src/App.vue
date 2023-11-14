@@ -200,8 +200,6 @@ const Delete = (index) => {
   } else {
     favoritoAnimales.value.splice(index);
   }
-  console.log(index);
-  return favoritoAnimales.value;
 };
 </script>
 
