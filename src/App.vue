@@ -213,15 +213,15 @@ let avatar;
   'Estoy en bello', Rasgos: 'Perro pitbull', Imagen
   <button @click="contador">Contador</button>
   <ul class="row row-cols-1 row-cols-md-2 g-4">
-    <li class="col" v-for="items in animalNames">
+    <li class="col-sm-5 offset-sm-2 col-md-6 offset-md-0" v-for="items in animalNames">
       <div class="card p-0">
         <img v-bind:src="items.Imagen" class="card-img-top" alt="..." />
         <div class="card-body">
           <h5 class="card-title">{{ items.Nombre }}</h5>
           <span> {{ items.Tipo }}</span>
-          <p class="card-text">Observacion:{{ items.Observacion }}</p>
-          <p class="card-text">Ubicacion:{{ items.Ubicacion }}</p>
-          <p class="card-text">Rasgos:{{ items.Rasgos }}</p>
+          <p class="card-text">Observacion: {{ items.Observacion }}</p>
+          <p class="card-text">Ubicacion: {{ items.Ubicacion }}</p>
+          <p class="card-text">Rasgos: {{ items.Rasgos }}</p>
         </div>
         <div class="card-footer">
           <button
@@ -276,5 +276,10 @@ let avatar;
 .card-img-top {
   width: 100%;
   height: 258px;
+}
+  .col-md-6 {
+    flex: 0 0 auto;
+    width: 33%;
+    line-height: 0.9;
 }
 </style>
