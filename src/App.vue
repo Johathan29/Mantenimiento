@@ -193,7 +193,6 @@ const add = (id) => {
   console.log(favoritoAnimales.value);
   console.log(mascota.value);
 };
-let avatar;
 </script>
 
 <template>
@@ -234,7 +233,6 @@ let avatar;
       </div>
     </li>
   </ul>
-
   <h3>My favorite</h3>
   <template v-for="item in favoritoAnimales">
     <div class="card" style="width: 18rem">
