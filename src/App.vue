@@ -1,5 +1,6 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue';
+import HelloWorld from './components/Header.vue';
+
 import { ref } from 'vue';
 const counter = ref(0);
 const recorrer = ref();
@@ -193,77 +194,79 @@ const add = (id) => {
   console.log(favoritoAnimales.value);
   console.log(mascota.value);
 };
+const Delete = (index) => {
+  if (index === 0) {
+    favoritoAnimales.value.shift();
+  } else {
+    favoritoAnimales.value.splice(index);
+  }
+  console.log(index);
+  return favoritoAnimales.value;
+};
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
-  <h2 v-if="counter < 7" style="color: red">{{ counter }}</h2>
-  <h2 v-else-if="counter === 7" style="color: blue">{{ letra }}</h2>
-  <h2 v-else style="color: yellow">{{ counter }}</h2>
-  id: 16, Tipo: 'Perro', Nombre: 'Kiko', Observacion: 'en adopcion', Ubicacion:
-  'Estoy en bello', Rasgos: 'Perro pitbull', Imagen
-  <button @click="contador">Contador</button>
-  <ul class="row row-cols-1 row-cols-md-2 g-4">
-    <li class="col-sm-5 offset-sm-2 col-md-6 offset-md-0" v-for="items in animalNames">
-      <div class="card p-0">
-        <img v-bind:src="items.Imagen" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">{{ items.Nombre }}</h5>
-          <span> {{ items.Tipo }}</span>
-          <p class="card-text">Observacion: {{ items.Observacion }}</p>
-          <p class="card-text">Ubicacion: {{ items.Ubicacion }}</p>
-          <p class="card-text">Rasgos: {{ items.Rasgos }}</p>
-        </div>
-        <div class="card-footer">
-          <button
-            @click="add(items.id)"
-            class="btn btn btn-success"
-          >
-            Favorito
-          </button>
-        </div>
-      </div>
-    </li>
-  </ul>
-  <h3>My favorite</h3>
-  <template v-for="item in favoritoAnimales">
-    <div class="card" style="width: 18rem">
-      <img v-bind:src="item.Imagen" class="card-img-top" alt="..." />
-      <div class="card-body">
-        <h5 class="card-title">{{ item.Nombre }}</h5>
-        <p class="card-text">
-          {{ item.Tipo }}
-        </p>
-        <div class="d-flex" style="justify-content: space-around">
-          <a href="#" class="btn btn-danger">Eliminar</a>
-          <a href="#" class="btn btn-warning">Modificar</a>
-        </div>
-      </div>
+  <HelloWorld />
+  <section>
+    <button @click="" class="btn btn btn-success">Favorito</button>
+    <div class="container row">
+      <ul class="row row-cols-1 row-cols-md-2 g-4">
+        <li
+          class="col-sm-5 offset-sm-2 col-md-6 offset-md-0"
+          v-for="items in animalNames"
+        >
+          <div class="card p-0">
+            <img v-bind:src="items.Imagen" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">{{ items.Nombre }}</h5>
+              <span> {{ items.Tipo }}</span>
+              <p class="card-text">Observacion: {{ items.Observacion }}</p>
+              <p class="card-text">Ubicacion: {{ items.Ubicacion }}</p>
+              <p class="card-text">Rasgos: {{ items.Rasgos }}</p>
+            </div>
+            <div class="card-footer">
+              <button @click="add(items.id)" class="btn btn btn-success">
+                Favorito
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
+  </section>
+  <section>
+    <div class="container row">
+      <h3>My favorite</h3>
+      <template v-for="(item, index) in favoritoAnimales" :key="index">
+        <div class="card" style="width: 18rem">
+          <img v-bind:src="item.Imagen" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title">{{ item.Nombre }}</h5>
+            <p class="card-text">
+              {{ item.Tipo }}
+            </p>
+            <div class="d-flex" style="justify-content: space-around">
+              <a @click="Delete(index)" class="btn btn-danger">Eliminar</a>
+              <a href="#" class="btn btn-warning">Modificar</a>
+            </div>
+          </div>
+        </div>
 
-    <hr />
-  </template>
+        <hr />
+      </template>
+    </div>
+  </section>
 </template>
-<section>
-</section>
 
 <style scoped>
-  .col-md-6 {
-    height: 33rem;
-    list-style: none;
+.col-md-6 {
+  height: 33rem;
+  list-style: none;
 }
-  .card {
-    height: 32rem;
-    max-height: 34rem
-  }
+.card {
+  height: 32rem;
+  max-height: 34rem;
+}
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -282,15 +285,22 @@ const add = (id) => {
   width: 100%;
   height: 258px;
 }
-  .col-md-6 {
-    flex: 0 0 auto;
-    width: 33%;
-    line-height: 0.9;
+.col-md-6 {
+  flex: 0 0 auto;
+  width: 33%;
+  line-height: 0.9;
 }
-  .card {
-  
-    height: 32rem;
-   
-    max-height: 34rem;
+.card {
+  height: 32rem;
+
+  max-height: 34rem;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0px;
+  padding: 0px;
+  border-bottom: 3px solid #74aaff5e;
 }
 </style>
