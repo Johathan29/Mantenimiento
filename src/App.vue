@@ -214,7 +214,7 @@ let avatar;
   <button @click="contador">Contador</button>
   <ul class="row row-cols-1 row-cols-md-2 g-4">
     <li class="col" v-for="items in animalNames">
-      <div class="card">
+      <div class="card p-0">
         <img v-bind:src="items.Imagen" class="card-img-top" alt="..." />
         <div class="card-body">
           <h5 class="card-title">{{ items.Nombre }}</h5>
