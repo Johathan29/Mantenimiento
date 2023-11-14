@@ -255,7 +255,6 @@ let avatar;
   </template>
 </template>
 <section>
-
 </section>
 
 <style scoped>
