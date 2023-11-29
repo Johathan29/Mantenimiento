@@ -6,6 +6,7 @@ const counter = ref(0);
 const classes = ref('card  d-none');
 const valorId = ref([]);
 const animalNames = ref();
+const dataupdate = ref([]);
 const letra = 'siete';
 const favoritoAnimales = ref([]);
 let convertir = ref([]);
@@ -52,18 +53,17 @@ const Delete = (index) => {
   }
 };
 const Update = (index) => {
-  var block = 'row g-3';
+  dataupdate.value = favoritoAnimales.value.find((item) => item.Id === index);
+  console.log(dataupdate.value.Id);
 };
 const auto = (id) => {
   const valorVerificar = valorId.value.find((item) => item === id);
-
   return valorVerificar ? true : false;
 };
 </script>
 
 <template>
   <section>
-    <button @click="" class="btn btn btn-success">Favorito</button>
     <div class="container row">
       <ul class="row row-cols-1 row-cols-md-2 g-4">
         <li
@@ -96,7 +96,7 @@ const auto = (id) => {
   <section>
     <div class="container row">
       <h3>My favorite</h3>
-      <p>{{ valorId }}</p>
+
       <template v-for="(item, index) in favoritoAnimales" :key="item.Id">
         <div class="card" style="width: 18rem">
           <img v-bind:src="item.Imagen" class="card-img-top" alt="..." />
@@ -110,10 +110,15 @@ const auto = (id) => {
               <a @click="Update(item.Id)" class="btn btn-warning">Modificar</a>
             </div>
           </div>
-          <form class="" style="display: none">
+          <form class="">
             <div class="col-md-6">
               <label for="inputNombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="inputNombre" />
+              <input
+                type="text"
+                :value="dataupdate.Nombre"
+                class="form-control"
+                id="inputNombre"
+              />
             </div>
             <div class="col-md-4">
               <label for="inputTipo" class="form-label">Tipo</label>

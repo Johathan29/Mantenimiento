@@ -1,11 +1,15 @@
 <script setup>
 import data from '../Data';
+import fetch from '../About.vue';
 import { ref } from 'vue';
 const valores = ref([]);
 console.log(data.value);
 const activeclass = ref('active carousel-item');
 valores.value = data.value;
 console.log(valores.value.map((item) => item));
+const detalleUser = () => {
+  console.log('users.value');
+};
 </script>
 <template>
   <div
@@ -46,4 +50,14 @@ console.log(valores.value.map((item) => item));
       <span class="visually-hidden">Next</span>
     </button>
   </div>
+  <!--<Suspense>
+    <template #default>
+      <fetch> </fetch>
+    </template>
+    <template #fallback
+      ><h1 contenteditable data-heading="Frozen">Cargando</h1>
+    </template>
+  </Suspense>-->
+
+  <fetch> </fetch>
 </template>
