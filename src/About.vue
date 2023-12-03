@@ -11,12 +11,13 @@ onMounted(async () => {
 
 const detalleUser = (index) => {
   setTimeout(() => {
-  itemUser.value = users.value.find((item) => item.id === index);
+   grupoItem.value="";
+  },'5000');
+
+    itemUser.value = users.value.find((item) => item.id === index);
   grupoItem.value = itemUser.value;
 
   console.log(grupoItem.value);
-  },'5000');
-   grupoItem.value="";
 };
 </script>
 
