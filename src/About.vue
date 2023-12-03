@@ -56,6 +56,9 @@ const detalleUser = (index) => {
   </table>
 </template>
 <style>
+th {
+    width: 135px!important;
+}
 td.alert.alert-primary {
   float: inline-start;
   margin-left: -17rem;
