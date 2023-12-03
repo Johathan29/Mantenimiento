@@ -16,6 +16,7 @@ const detalleUser = (index) => {
 
   console.log(grupoItem.value);
   },'5000');
+   grupoItem.value="";
 };
 </script>
 
