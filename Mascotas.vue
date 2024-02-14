@@ -64,35 +64,33 @@ const auto = (id) => {
 <template>
   <section>
     <button @click="" class="btn btn btn-success">Favorito</button>
-    <div class="container row">
-      <ul class="row row-cols-1 row-cols-md-2 g-4">
-        <li
-          class="col-sm-5 offset-sm-2 col-md-6 offset-md-0"
-          v-for="items in animalNames"
-        >
-          <div class="card p-0">
-            <img v-bind:src="items.Imagen" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h5 class="card-title">{{ items.Nombre }}</h5>
-              <span> {{ items.Tipo }}</span>
-              <p class="card-text">Observacion: {{ items.Observacion }}</p>
-              <p class="card-text">Ubicacion: {{ items.Ubicacion }}</p>
-              <p class="card-text">Rasgos: {{ items.Rasgos }}</p>
-            </div>
-            <div class="card-footer">
-              <button
-                @click="add(items.id)"
-                :disabled="auto(items.id)"
-                class="btn btn btn-success"
-              >
-                Favorito
-              </button>
-            </div>
-          </div>
-        </li>
-      </ul>
+    <div class="container">
+        <div class="row">
+            <ul class="row-cols-1 row-cols-md-2 g-4">
+                <li class="col-sm-5 offset-sm-2 col-md-6 offset-md-0" v-for="items in animalNames">
+                    <div class="card p-0">
+                        <img v-bind:src="items.Imagen" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <h5 class="card-title">{{ items.Nombre }}</h5>
+                            <span> {{ items.Tipo }}</span>
+                            <p class="card-text">Observacion: {{ items.Observacion }}</p>
+                            <p class="card-text">Ubicacion: {{ items.Ubicacion }}</p>
+                            <p class="card-text">Rasgos: {{ items.Rasgos }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <button
+                                @click="add(items.id)"
+                                :disabled="auto(items.id)"
+                                class="btn btn btn-success">
+                                Favorito
+                                </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
-  </section>
+</section>
   <section>
     <div class="container row">
       <h3>My favorite</h3>
