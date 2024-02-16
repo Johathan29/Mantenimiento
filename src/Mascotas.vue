@@ -1,6 +1,7 @@
 <script setup>
 import HelloWorld from './components/Header.vue';
 import data from './Data';
+
 import { ref, computed } from 'vue';
 const counter = ref(0);
 const classes = ref('card  d-none');
@@ -45,8 +46,25 @@ const add = (id) => {
 };
 const Delete = (index) => {
   if (index === 0) {
-    favoritoAnimales.value.shift();
-    valorId.value.shift();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'Your file has been deleted.',
+          icon: 'success',
+        });
+        favoritoAnimales.value.shift();
+        valorId.value.shift();
+      }
+    });
   } else {
     favoritoAnimales.value.splice(index);
     valorId.value.splice(index);
