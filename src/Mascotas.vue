@@ -15,22 +15,18 @@ const contador = () => {
   letra;
   counter.value++;
 };
-console.log(data);
 animalNames.value = data.value;
 const animales = () => {
   let nombre = '';
   let tipo = '';
 };
-console.log(animalNames);
 const add = (id) => {
   const idmascosta = ref();
   const nombre = ref();
   const tipo = ref();
   const imagen = ref();
-
   const mascota = ref([]);
   valorId.value.push(animalNames.value.find((animal) => animal.id === id).id);
-  console.log(valorId.value);
   idmascosta.value = animalNames.value.find((animal) => animal.id === id).id;
   nombre.value = animalNames.value.find((animal) => animal.id === id).Nombre;
   tipo.value = animalNames.value.find((animal) => animal.id === id).Tipo;
@@ -72,7 +68,6 @@ const Delete = (index) => {
 };
 const Update = (index) => {
   dataupdate.value = favoritoAnimales.value.find((item) => item.Id === index);
-  console.log(dataupdate.value.Id);
 };
 const auto = (id) => {
   const valorVerificar = valorId.value.find((item) => item === id);
