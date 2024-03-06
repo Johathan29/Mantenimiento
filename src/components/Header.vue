@@ -1,6 +1,7 @@
 <script></script>
 <template>
   <header class="header">
+    <div class="container">
     <div
       class="d-flex"
       style="
@@ -57,5 +58,6 @@
         </div>
       </nav>
     </div>
+  </div>
   </header>
 </template>
