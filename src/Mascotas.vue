@@ -136,8 +136,8 @@ const auto = (id) => {
             <div class="col-md-4">
               <label for="inputTipo" class="form-label">Tipo</label>
               <select id="inputTipo" class="form-select">
-                <option selected>Choose...</option>
-                <option value="Gato">Gato</option>
+                <option >Choose...</option>
+                <option value="Gato" selected="true">Gato</option>
                 <option value="Perro">Perro</option>
                 <option value="Ave">Ave</option>
               </select>
