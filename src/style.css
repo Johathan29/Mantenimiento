@@ -222,11 +222,12 @@ h1::before {
 
 h1 {
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  position: absolute;
-  font-size: 10vw;
-  margin: 0;
-  font-family: 'frozen', serif;
-  font-weight: 700;
+-webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    position: absolute;
+    font-size: 10vw;
+    top: 19rem;
+    margin: 0;
+    font-family: frozen, serif;
+    font-weight: 700;
 }
