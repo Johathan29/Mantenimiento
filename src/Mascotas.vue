@@ -137,7 +137,7 @@ const auto = (id) => {
               <label for="inputTipo" class="form-label">Tipo</label>
               <select id="inputTipo" class="form-select">
                 <option >Choose...</option>
-                <option value="Gato" selected="false">Gato</option>
+                <option value="Gato" v-bind:selected="dataupdate.Tipo=='Gato'">Gato</option>
                 <option value="Perro">Perro</option>
                 <option value="Ave">Ave</option>
               </select>
