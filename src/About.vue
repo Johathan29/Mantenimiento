@@ -6,7 +6,7 @@ const itemUser = ref([]);
 const grupoItem = ref([]);
   //https://jsonplaceholder.typicode.com/users
 onMounted(async () => {
-  const response = await fetch('https://binx.hacienda.gob.do/Reports/powerbi/PUBLICACION/TRANSPARENCIA/DASHBOARDS/PTF_INDICADORES_PRESUPUESTO?rs:Embed=true');
+  const response = await fetch('https://jsonplaceholder.typicode.com/users');
   users.value = await response.json();
   console.log(user.value);
 });
