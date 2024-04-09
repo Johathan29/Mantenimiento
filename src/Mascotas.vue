@@ -62,7 +62,7 @@ const Delete = (index) => {
       }
     });
   } else {
-    favoritoAnimales.value.splice(index);
+    favoritoAnimales.value.splice(index,1);
     valorId.value.splice(index);
   }
 };
