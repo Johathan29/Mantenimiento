@@ -98,8 +98,8 @@ const auto = (id) => {
     <div class="container row">
       <ul class="row row-cols-1 row-cols-md-2 g-4">
         <li
-          class=" offset-sm-2 offset-md-0"
-          v-for="items in animalNames" style="width:17rem"
+          class="col-sm-5 offset-sm-2 col-md-6 offset-md-0"
+          v-for="items in animalNames"
         >
           <div class="card p-0">
             <img v-bind:src="items.Imagen" class="card-img-top" alt="..." />
