@@ -2,19 +2,11 @@
 <template>
   <header class="header">
       <div class="px-3 py-2 bg-dark text-white">
-      <div class="container">
-    <div
-      class="d-flex"
-      style="
-        justify-content: space-between;
-        align-items: center;
-        margin: 0px;
-        padding: 0px;
-      "
-    >
-      <div class="d-sm-none d-lg-block">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" class="logo" alt="Vite logo" />
+        <div class="container">
+          <div class="d-flex justify-content-between align-self-baseline p-0 m-0">
+            <div class="d-sm-none d-lg-block">
+              <a href="https://vitejs.dev" target="_blank">
+                <img src="/vite.svg" class="logo" alt="Vite logo" />
         </a>
         <a href="https://vuejs.org/" target="_blank">
           <img src="../assets/vue.svg" class="logo vue" alt="Vue logo" />
@@ -60,13 +52,14 @@
       </nav>
     </div>
   </div>
+  </div>
   </header>
   <header>
     <div class="px-3 py-2 bg-dark text-white">
       <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+        <div class="d-flex justify-content-center align-justify-content-lg-start align-items-center ">
+          <a href="/" class="d-block align-items-center  m-0 me-lg-auto text-white text-decoration-none">
+            <img src="/vite.svg" class="logo" alt="Vite logo" />
           </a>
 
           <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
