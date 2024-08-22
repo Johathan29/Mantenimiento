@@ -12,52 +12,37 @@ const detalleUser = () => {
 };
 </script>
 <template>
-  <div
-    id="carouselExampleDark"
-    class="carousel carousel-dark slide"
-    data-bs-ride="carousel"
-  >
-    <div class="carousel-inner">
-      <div
-        v-for="(item, index) in valores"
-        :key="index"
-        :class="[index == 0 ? activeclass : 'carousel-item']"
-        data-bs-interval="10000"
-      >
-        <img v-bind:src="item.Imagen" class="d-block w-100" alt="..." />
-        <div class="carousel-caption d-none d-md-block">
+  <div id="animation-carousel" class="relative w-full" data-carousel="slide">
+    <!-- Carousel wrapper -->
+    <div class="relative h-[23rem] overflow-hidden rounded-lg  min-h-56 max-h-[25rem]">
+         <!-- start loop  -->
+      <div class="hidden duration-200 ease-linear" data-carousel-item  v-for="(item, index) in valores.slice(0, 5)"
+        :key="index" :class="[index == 0 ? activeclass : 'carousel-item']" data-bs-interval="10000" >
+        <img  v-bind:src="item.Imagen" class="-z-10 absolute object-cover block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+        <div class="z-50 items-end flex p-[5rem] h-full justify-center">
           <h5>{{ item.Nombre }}</h5>
           <p></p>
         </div>
       </div>
     </div>
-    <button
-      class="carousel-control-prev"
-      type="button"
-      data-bs-target="#carouselExampleDark"
-      data-bs-slide="prev"
-    >
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
+    <!-- Slider controls -->
+    <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+            </svg>
+            <span class="sr-only">Previous</span>
+        </span>
     </button>
-    <button
-      class="carousel-control-next"
-      type="button"
-      data-bs-target="#carouselExampleDark"
-      data-bs-slide="next"
-    >
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
+    <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+            </svg>
+            <span class="sr-only">Next</span>
+        </span>
     </button>
-  </div>
-  <!--<Suspense>
-    <template #default>
-      <fetch> </fetch>
-    </template>
-    <template #fallback
-      ><h1 contenteditable data-heading="Frozen">Cargando</h1>
-    </template>
-  </Suspense>-->
+</div>
 
   <fetch> </fetch>
 </template>

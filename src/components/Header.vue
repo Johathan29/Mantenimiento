@@ -1,113 +1,101 @@
-<script></script>
+<script setup lang="ts">
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faPaw } from '@fortawesome/free-solid-svg-icons'
+import { faHouse } from '@fortawesome/free-solid-svg-icons'
+</script>
 <template>
-  <header class="header">
-      <div class="px-3 py-2 bg-dark text-white">
-        <div class="container">
-          <div class="d-flex justify-content-between align-self-baseline p-0 m-0">
-            <div class="d-sm-none d-lg-block">
-              <a href="https://vitejs.dev" target="_blank">
-                <img src="/vite.svg" class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://vuejs.org/" target="_blank">
-          <img src="../assets/vue.svg" class="logo vue" alt="Vue logo" />
-        </a>
-      </div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <div class="navbar-brand d-lg-none d-sm-block">
-            <a href="https://vitejs.dev" target="_blank">
-              <img src="/vite.svg" class="logo" alt="Vite logo" />
-            </a>
-            <a href="https://vuejs.org/" target="_blank">
-              <img src="../assets/vue.svg" class="logo vue" alt="Vue logo" />
-            </a>
-          </div>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
+ <header class="">
+      
+          <nav class="bg-gray-800 border-gray-200 dark:bg-gray-900">
+  <div
+    class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+  >
+    <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <img
+        src="https://stackblitz.com/storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNWt4RGc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--f62b5950707c670df0d7263d2b23e244642095d3/logo.png"
+        class="w-20"
+        alt=""
+      />
+      <span
+        class="self-center text-white text-2xl font-semibold whitespace-nowrap dark:text-white"
+        >SOLUTION SUPPORTS</span
+      >
+    </a>
+    <button
+      data-collapse-toggle="navbar-default"
+      type="button"
+      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+      aria-controls="navbar-default"
+      aria-expanded="false"
+    >
+      <span class="sr-only">Open main menu</span>
+      <svg
+        class="w-5 h-5"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 17 14"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M1 1h15M1 7h15M1 13h15"
+        />
+      </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul
+        class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+      >
+        <li>
+           
+                    <router-link class="  px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page" to="/">
+                     <FontAwesomeIcon :icon="faHouse" class="mb-0"/> Home
+                    </router-link>
+        </li>
+        <li>
+        
+         
+                   
+                    <router-link class=" px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page" to="/mascotas">
+                      <FontAwesomeIcon :icon="faPaw" class="mb-0"/> Mascotas
+                    </router-link>
+        </li>
+        <li>
+          <a
+            href="/#proyectos"
+            class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            >Proyectos</a
           >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <router-link class="nav-link" aria-current="page" to="/"
-                  >Home</router-link
-                >
-              </li>
-
-              <li class="nav-item">
-                <router-link class="nav-link" to="/mascotas"
-                  >Mascotas</router-link
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            >Calendar</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            >Contact</a
+          >
+        </li>
+      </ul>
     </div>
   </div>
-  </div>
+</nav>
+           
+       
   </header>
-  <header>
-    <div class="px-3 py-2 bg-dark text-white">
-      <div class="container">
-        <div class="d-flex justify-content-center align-justify-content-lg-start align-items-center ">
-          <a href="/" class="d-block align-items-center  m-0 me-lg-auto text-white text-decoration-none">
-            <img src="/vite.svg" class="logo" alt="Vite logo" />
-          </a>
-
-          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-            <li>
-              <a href="#" class="nav-link text-secondary">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"></use></svg>
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"></use></svg>
-                Dashboard
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"></use></svg>
-                Orders
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"></use></svg>
-                Products
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
-                Customers
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="px-3 py-2 border-bottom mb-3">
-      <div class="container d-flex flex-wrap justify-content-center">
-        <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
-          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-        </form>
-
-        <div class="text-end">
-          <button type="button" class="btn btn-light text-dark me-2">Login</button>
-          <button type="button" class="btn btn-primary">Sign-up</button>
-        </div>
-      </div>
-    </div>
-  </header>
+ 
 </template>
+<style>
+a.router-link-active.router-link-exact-active{
+    border-radius: 0.375rem;
+    background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+</style>
