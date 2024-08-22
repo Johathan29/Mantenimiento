@@ -12,32 +12,18 @@ const detalleUser = () => {
 };
 </script>
 <template>
- 
-  <!--<Suspense>
-    <template #default>
-      <fetch> </fetch>
-    </template>
-    <template #fallback
-      ><h1 contenteditable data-heading="Frozen">Cargando</h1>
-    </template>
-  </Suspense>-->
-
-
-<div id="animation-carousel" class="relative w-full" data-carousel="slide">
+  <div id="animation-carousel" class="relative w-full" data-carousel="slide">
     <!-- Carousel wrapper -->
     <div class="relative h-[23rem] overflow-hidden rounded-lg  min-h-56 max-h-[25rem]">
-         <!-- Item 1 -->
-        <div class="hidden duration-200 ease-linear" data-carousel-item  v-for="(item, index) in valores"
-        :key="index"
-        :class="[index == 0 ? activeclass : 'carousel-item']"
-        data-bs-interval="10000">
-            <img v-bind:src="item.Imagen" class="-z-10 absolute object-cover block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-            <div class="z-50">
+         <!-- start loop  -->
+      <div class="hidden duration-200 ease-linear" data-carousel-item  v-for="(item, index) in valores.slice(0, 5)"
+        :key="index" :class="[index == 0 ? activeclass : 'carousel-item']" data-bs-interval="10000" >
+        <img  v-bind:src="item.Imagen" class="-z-10 absolute object-cover block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+        <div class="z-50 items-end flex p-[5rem] h-full justify-center">
           <h5>{{ item.Nombre }}</h5>
           <p></p>
         </div>
-        </div>
-        
+      </div>
     </div>
     <!-- Slider controls -->
     <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
