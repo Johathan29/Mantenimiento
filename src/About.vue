@@ -176,7 +176,7 @@ const detalleUser =computed(
                     </div>
                 </td>
                 <td class="px-6 py-4">
-                    <router-link aria-current="page" v-bind:to="'user/'+user.firstName" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</router-link>
+                    <router-link aria-current="page" v-bind:to="'user/'+user.id" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</router-link>
                 </td>
             </tr>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">

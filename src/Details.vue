@@ -16,8 +16,7 @@ onMounted(async () =>
     users.value = await response.json();
     users.value=users.value.users;
     test.value= users.value.find(item=>item.id===id.value)
-   console.log();
-   
+   console.log(test.value);
 }
 );
 const datails =computed( 
@@ -34,7 +33,7 @@ const datails =computed(
 </script>
 
 <template>
-<nav class="flex p-2 bg-[#77889930] " aria-label="Breadcrumb" >
+<nav class="flex p-2 bg-[#77889930] " aria-label="Breadcrumb" style="background: #77889930;">
     <div class="lg:container md:mx-auto px-5">
   <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
     <li class="inline-flex items-center">
@@ -58,7 +57,7 @@ const datails =computed(
         <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
         </svg>
-        <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">flowbite</span>
+        <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Flowbite</span>
       </div>
     </li>
   </ol>
@@ -66,9 +65,10 @@ const datails =computed(
 </nav>
 <section>
     <div class="lg:container md:mx-auto px-5">
-        <div v-for="items in users">
-            <div v-if="items.id ==id">
-                {{items.firstName}}
+        <div v-for="items in users" >
+            <div v-if="items.id ==id" class="w-72 h-2/6 p-5 max-h-[29rem]">
+               <h1> {{items.firstName}}</h1>
+               <img v-bind:src="items.image" class="w-72"/>
             </div>
             
         </div>
