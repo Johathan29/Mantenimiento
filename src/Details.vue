@@ -67,7 +67,7 @@ const datails =computed(
     <div class="lg:container md:mx-auto px-5 my-3">
         <div v-for="items in users" >
             <div v-if="items.id ==id" class="w-72 h-2/6 p-5 max-h-[29rem] rounded-lg border-2 bg-[#1f2937]">
-               <h1> {{items.firstName}}</h1>
+               <h1 class="text-white text-[1.5rem]" > {{items.firstName}}</h1>
                <img v-bind:src="items.image" class="w-72 opacity-[.08]"/>
             </div>
             
