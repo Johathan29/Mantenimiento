@@ -64,11 +64,11 @@ const datails =computed(
   </div>
 </nav>
 <section>
-    <div class="lg:container md:mx-auto px-5">
+    <div class="lg:container md:mx-auto px-5 my-3">
         <div v-for="items in users" >
-            <div v-if="items.id ==id" class="w-72 h-2/6 p-5 max-h-[29rem]">
+            <div v-if="items.id ==id" class="w-72 h-2/6 p-5 max-h-[29rem] rounded-lg border-2 bg-[#1f2937]">
                <h1> {{items.firstName}}</h1>
-               <img v-bind:src="items.image" class="w-72"/>
+               <img v-bind:src="items.image" class="w-72 opacity-[.08]"/>
             </div>
             
         </div>
