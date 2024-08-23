@@ -12,7 +12,7 @@ import { faHouse } from '@fortawesome/free-solid-svg-icons'
   >
     <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
       <img
-        src="https://stackblitz.com/storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNWt4RGc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--f62b5950707c670df0d7263d2b23e244642095d3/logo.png"
+        src="../assets/logo.png"
         class="w-20"
         alt=""
       />
@@ -46,43 +46,31 @@ import { faHouse } from '@fortawesome/free-solid-svg-icons'
       </svg>
     </button>
     <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-      <ul
-        class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
-      >
+      <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
         <li>
-           
-                    <router-link class="  px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page" to="/">
-                     <FontAwesomeIcon :icon="faHouse" class="mb-0"/> Home
-                    </router-link>
+          <router-link class="  px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page" to="/">
+            <FontAwesomeIcon :icon="faHouse" class="mb-0"/> Home
+          </router-link>
         </li>
         <li>
-        
-         
-                   
-                    <router-link class=" px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page" to="/mascotas">
-                      <FontAwesomeIcon :icon="faPaw" class="mb-0"/> Mascotas
-                    </router-link>
+          <router-link class=" px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page" to="/mascotas">
+           <FontAwesomeIcon :icon="faPaw" class="mb-0"/> Mascotas
+          </router-link>
         </li>
         <li>
-          <a
-            href="/#proyectos"
-            class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-            >Proyectos</a
-          >
+          <router-link class=" px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page" to="/mascotas">
+           <FontAwesomeIcon :icon="faPaw" class="mb-0"/> Mascotas
+          </router-link>
         </li>
         <li>
-          <a
-            href="#"
-            class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-            >Calendar</a
-          >
+          <router-link class=" px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page" to="/mascotas">
+           <FontAwesomeIcon :icon="faPaw" class="mb-0"/> Mascotas
+          </router-link>
         </li>
         <li>
-          <a
-            href="#"
-            class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-            >Contact</a
-          >
+         <router-link class=" px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page" to="/mascotas">
+           <FontAwesomeIcon :icon="faPaw" class="mb-0"/> Mascotas
+          </router-link>
         </li>
       </ul>
     </div>

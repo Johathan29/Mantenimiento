@@ -19,8 +19,8 @@ const detalleUser = () => {
       <div class="hidden duration-200 ease-linear" data-carousel-item  v-for="(item, index) in valores.slice(0, 5)"
         :key="index" :class="[index == 0 ? activeclass : 'carousel-item']" data-bs-interval="10000" >
         <img  v-bind:src="item.Imagen" class="-z-10 absolute object-cover block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-        <div class="z-50 items-end flex p-[5rem] h-full justify-center">
-          <h5>{{ item.Nombre }}</h5>
+        <div class="z-50 items-end flex p-[5rem] h-full justify-center ">
+          <h3 class="text-gray-600 text-[2rem] w-full text-center" >{{ item.Nombre }}</h3>
           <p></p>
         </div>
       </div>
