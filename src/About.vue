@@ -6,36 +6,69 @@ const itemUser = ref([]);
 const grupoItem = ref([]);
  const checkedItem = ref([])
   //https://jsonplaceholder.typicode.com/users
-onMounted(async () => {
-  const response = await fetch('https://dummyjson.com/users');
-  users.value = await response.json();
-  console.log(users.value=users.value.users);
-});
-
-const detalleUser = (index) => {
-  setTimeout(() => {
-   grupoItem.value="";
-  },'5000');
-
-    itemUser.value = users.value.Sli((item) => item.id === index);
-  grupoItem.value = itemUser.value;
-
-  console.log(grupoItem.value);
-};
-
- const deleteItem=(ID)=>{
-if(checkedItem.value==ID){
-users.value.splice(
-  users.value.find((item, index) => {
-    if (item.id == ID)
-      return index
-  }), 1
-);
-}else{
-  alert('por favor selecione el item que quiere borrar');
+onMounted(async () => 
+{
+    const response = await fetch('https://dummyjson.com/users');
+    users.value = await response.json();
+    users.value=users.value.users;
 }
-console.log(checkedItem.value);
-};
+);
+
+ const detalleUser =computed( 
+    {
+        get()
+        {
+            if (checkedItem.value === 0) 
+            {
+                Swal.fire(
+                {
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!',
+                }).then((result) => 
+                {
+                     if (result.isConfirmed) 
+                        {
+                            Swal.fire({
+                            title: 'Deleted!',
+                            text: 'Your file has been deleted.',
+                            icon: 'success',
+                            });
+                            users.value.shift();
+                        }
+                    });
+                    } else 
+                    {
+                        Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!',
+                        }).then((result) => 
+                        {
+                            if (result.isConfirmed) {
+                                Swal.fire({
+                                title: 'Deleted!',
+                                text: 'Your file has been deleted.',
+                                icon: 'success',
+                                });
+                                users.value.splice(checkedItem.value,1);
+                            }
+                });
+            }
+        },
+    });
+   const detailsUser=(index)=>
+    {
+alert(users.value.find(item=>item.id===index).firstName)
+    }
 </script>
 
 <template>
@@ -61,7 +94,7 @@ console.log(checkedItem.value);
             <div id="dropdownAction" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownActionButton">
                     <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reward</a>
+                        <a @click="detalleUser" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reward</a>
                     </li>
                     <li>
                         <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Promote</a>
@@ -115,10 +148,10 @@ console.log(checkedItem.value);
             </tr>
         </thead>
         <tbody>
-            <tr v-for="user in users" :key="user.id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <tr v-for="(user, index) in users" :key="user.id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <td class="w-4 p-4">
                     <div class="flex items-center">
-                        <input id="checkbox-table-search-1" :value="user.id" v-model="checkedItem" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input id="checkbox-table-search-1" :value="index" v-model="checkedItem" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
                     </div>
                 </td>
@@ -141,7 +174,7 @@ console.log(checkedItem.value);
                     </div>
                 </td>
                 <td class="px-6 py-4">
-                    <a @click="deleteItem(user.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
+                    <a @click="detailsUser(user.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
                 </td>
             </tr>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
