@@ -4,7 +4,8 @@ const users = ref(null);
 const capturar = ref();
 const itemUser = ref([]);
 const grupoItem = ref([]);
- const checkedItem = ref([])
+ const checkedItem = ref([]);
+ const ruta=ref("/user/");
   //https://jsonplaceholder.typicode.com/users
 onMounted(async () => 
 {
@@ -13,8 +14,7 @@ onMounted(async () =>
     users.value=users.value.users;
 }
 );
-
- const detalleUser =computed( 
+const detalleUser =computed( 
     {
         get()
         {
@@ -39,6 +39,7 @@ onMounted(async () =>
                             icon: 'success',
                             });
                             users.value.shift();
+                            document.getElementById("checkbox-table-search-1").checked = false;
                         }
                     });
                     } else 
@@ -60,6 +61,7 @@ onMounted(async () =>
                                 icon: 'success',
                                 });
                                 users.value.splice(checkedItem.value,1);
+                                
                             }
                 });
             }
@@ -67,7 +69,7 @@ onMounted(async () =>
     });
    const detailsUser=(index)=>
     {
-alert(users.value.find(item=>item.id===index).firstName)
+        alert(users.value.find(item=>item.id===index).firstName)
     }
 </script>
 
@@ -94,7 +96,7 @@ alert(users.value.find(item=>item.id===index).firstName)
             <div id="dropdownAction" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownActionButton">
                     <li>
-                        <a @click="detalleUser" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reward</a>
+                        <a  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reward</a>
                     </li>
                     <li>
                         <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Promote</a>
@@ -104,7 +106,7 @@ alert(users.value.find(item=>item.id===index).firstName)
                     </li>
                 </ul>
                 <div class="py-1">
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >Delete User</a>
+                    <a @click="detalleUser" class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" >Delete User</a>
                 </div>
             </div>
         </div>
@@ -161,7 +163,7 @@ alert(users.value.find(item=>item.id===index).firstName)
                 <td  class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                     <img class="w-10 h-10 rounded-full" v-bind:src="user.image" alt="Jese image">
                     <div class="ps-3">
-                        <div class="text-base font-semibold">{{ user.firstName }}</div>
+                        <div class="text-base font-semibold">{{ user.firstName }} {{ user.lastName }}</div>
                         <div class="font-normal text-gray-500">{{ user.email }}</div>
                     </div>  
                 </td>
@@ -174,7 +176,7 @@ alert(users.value.find(item=>item.id===index).firstName)
                     </div>
                 </td>
                 <td class="px-6 py-4">
-                    <a @click="detailsUser(user.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
+                    <router-link aria-current="page" v-bind:to="'user/'+user.firstName" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</router-link>
                 </td>
             </tr>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
