@@ -67,10 +67,7 @@ const detalleUser =computed(
             }
         },
     });
-   const detailsUser=(index)=>
-    {
-        alert(users.value.find(item=>item.id===index).firstName)
-    }
+  
 </script>
 
 <template>
