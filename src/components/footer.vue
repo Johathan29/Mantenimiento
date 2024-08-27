@@ -3,11 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faPaw } from '@fortawesome/free-solid-svg-icons'
 import { faHouse } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
-import moment from "moment";
+
 function obtenerFechaHoy()
 {
-  var  data = moment(Date()).format('YYYY');
-  return data;
+  var  data = new Date();
+  return data.getFullYear();
 }
 </script>
 <template>
