@@ -4,11 +4,13 @@ import App from './App.vue';
 import About from './About.vue';
 import Home from './components/Home.vue';
 import Mascotas from './Mascotas.vue';
+import Details from './Details.vue'
 import PathNotFound from './PathNotFound.vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
 const routes = [
   { path: '/', component: Home },
-  { path: '/about', component: About },
+  { path: '/user', component: About },
+  { path: '/user/:id', component: Details },
   { path: '/mascotas', component: Mascotas },
   { path: '/:pathMatch(.*)*', component: PathNotFound },
 ];
