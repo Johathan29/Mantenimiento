@@ -3,7 +3,7 @@ import { ref, computed, onMounted} from 'vue';
 const users = ref(null);
 const url=window.location;
 const id=ref(0);
-const test=ref();
+const breadcrum=ref();
 id.value=url.hash[7];
 const ruta=ref()
 ruta.value=url.hash[2]+url.hash[3]+url.hash[4]+url.hash[5];
@@ -15,8 +15,7 @@ onMounted(async () =>
     const response = await fetch('https://dummyjson.com/users');
     users.value = await response.json();
     users.value=users.value.users;
-    test.value= users.value.find(item=>item.id===id.value)
-   console.log(test.value);
+    breadcrum.value= users.value.find(item=>item.id===parseInt(id.value)).firstName;
 }
 );
 const datails =computed( 
@@ -57,7 +56,7 @@ const datails =computed(
         <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
         </svg>
-        <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Flowbite</span>
+        <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">{{breadcrum}}</span>
       </div>
     </li>
   </ol>
