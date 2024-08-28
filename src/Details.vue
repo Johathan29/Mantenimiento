@@ -33,7 +33,7 @@ const datails =computed(
 
 <template>
 <nav class="flex p-2 bg-[#77889930] " aria-label="Breadcrumb" style="background: #77889930;">
-    <div class="lg:container md:mx-auto px-5">
+    <div class="max-w-screen-xl md:mx-28 px-5">
   <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
     <li class="inline-flex items-center">
       <a href="/" class="inline-flex capitalize items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
@@ -63,11 +63,11 @@ const datails =computed(
   </div>
 </nav>
 <section>
-    <div class="lg:container md:mx-auto px-5 my-3">
+    <div class="max-w-screen-xl md:mx-auto px-5 my-3">
         <div v-for="items in users" >
-            <div v-if="items.id ==id" class="w-72 h-2/6 p-5 max-h-[29rem] rounded-lg border-2 bg-[#1f2937]">
+            <div v-if="items.id ==id" class="w-full h-2/6 p-5 max-h-[29rem] rounded-lg border-2 bg-[#1f2937]" style="">
                <h1 class="text-white text-[1.5rem]" > {{items.firstName}}</h1>
-               <img v-bind:src="items.image" class="w-72 opacity-[.08]"/>
+               <img v-bind:src="items.image" class="w-72 "/>
             </div>
             
         </div>
