@@ -5,10 +5,12 @@ import About from './About.vue';
 import Home from './components/Home.vue';
 import Mascotas from './Mascotas.vue';
 import PathNotFound from './PathNotFound.vue';
+import AboutViewVue from './src/AboutView.vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 const routes = [
   { path: '/', component: Home },
-  { path: '/about', component: About },
+  { path: '/about', component: AboutViewVue },
   { path: '/mascotas', component: Mascotas },
   { path: '/:pathMatch(.*)*', component: PathNotFound },
 ];
