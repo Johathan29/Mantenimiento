@@ -85,5 +85,6 @@ import { faHouse } from '@fortawesome/free-solid-svg-icons'
 a.router-link-active.router-link-exact-active{
     border-radius: 0.375rem;
     background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+    color: #fff;
 }
 </style>

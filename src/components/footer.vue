@@ -25,7 +25,7 @@ function obtenerFechaHoy()
             </a>
           </div>
           <nav class=" w-1/2 ">
-            <ul class="font-medium block flex-col p-4 md:p-0 mt-4 ">
+            <ul class="font-medium text-justify block flex-col p-4 md:p-0 mt-4 ">
                 <li>
                   <router-link class="  px-3 py-2 text-sm font-medium text-gray-300  hover:text-white" aria-current="page" to="/">
                     <FontAwesomeIcon :icon="faHouse" class="mb-0"/> Home
