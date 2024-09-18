@@ -1,11 +1,13 @@
-<script setup>
+<script setup >
 import { ref, computed, onMounted } from 'vue';
+
 const users = ref(null);
 const capturar = ref();
 const itemUser = ref([]);
 const grupoItem = ref([]);
  const checkedItem = ref([]);
  const ruta=ref("/user/");
+
   //https://jsonplaceholder.typicode.com/users
 onMounted(async () => 
 {
@@ -14,6 +16,7 @@ onMounted(async () =>
     users.value=users.value.users;
 }
 );
+
 const detalleUser =computed( 
     {
         get()
@@ -67,7 +70,7 @@ const detalleUser =computed(
             }
         },
     });
-  
+
 </script>
 
 <template>
@@ -179,6 +182,7 @@ const detalleUser =computed(
            
         </tbody>
     </table>
+   
       </div>
     </section>
     

@@ -1,3 +1,6 @@
+const response = await fetch('https://dummyjson.com/users');
+const animales = await response.json();
+
 var animalNames = [
   {
     id: 1,
@@ -17,7 +20,7 @@ var animalNames = [
     Ubicacion: 'Esta en belen  por los lados de  la udem',
     Rasgos: 'Es pequeño  y el pelo lo tiene negro',
     Imagen:
-      'http://static.consumer.es/www/imgs/2013/07/adoptar-gatos-cachorros-felinos-animales-mascotas-adopcion-acogida-art.jpg',
+      '/src/assets/img/gatocomuneuropeo-97.webp',
   },
   {
     id: 3,
@@ -27,7 +30,7 @@ var animalNames = [
     Ubicacion: 'en un lote por la autipista medellin bogota',
     Rasgos: 'Es blanco y  esta  muy delgado',
     Imagen:
-      'http://www.pulso-digital.com/wp-content/uploads/2014/07/CABALLOS-ENFERMOS-PARA-SACRIFICAR.jpg',
+      '/src/assets/img/caballos-e1626738224231.jpg',
   },
   {
     id: 2,
@@ -37,7 +40,7 @@ var animalNames = [
     Ubicacion: 'Esta en aranjuez por el parque',
     Rasgos: 'Es un perro criollo y tiene un ojo spr herido',
     Imagen:
-      'http://www.cuidadosdemascotas.com/wp-content/uploads/2015/06/perro_herido_cuidados_mascotas-300x225.jpg',
+    '/src/assets/img/1200px-Chesapeake_Bay_Retriever1.jpg',
   },
   {
     id: 5,
@@ -47,7 +50,7 @@ var animalNames = [
     Ubicacion: 'Parque del poblado',
     Rasgos: 'Es una gata blanca y tiene 6 gaticos cachorros',
     Imagen:
-      'https://lh4.googleusercontent.com/-PKoAqrneSVg/TyPbkz9VqDI/AAAAAAAAAZg/QycSgXbOPUM/s800/Familia%2520de%2520gatos%2520Korat%2520%2528Gato%2520de%2520la%2520suerte%252C%2520Gat%2520Korat%252C%2520Si-sawaat%252C%2520Gat%2520de%2520la%2520Sort%252C%2520Korat-Katze%252C%2520Gatto%2520Korat%2529.jpg',
+      '/src/assets/img/gatocomuneuropeo-97.webp',
   },
   {
     id: 6,

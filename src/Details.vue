@@ -4,9 +4,9 @@ const users = ref(null);
 const url=window.location;
 const id=ref(0);
 const breadcrum=ref();
-id.value=url.hash[7];
+id.value=url.pathname[6];
 const ruta=ref()
-ruta.value=url.hash[2]+url.hash[3]+url.hash[4]+url.hash[5];
+ruta.value=url.pathname[1]+url.pathname[2]+url.pathname[3]+url.pathname[4];
 console.log(id.value)
 
   //https://jsonplaceholder.typicode.com/users
@@ -32,9 +32,9 @@ const datails =computed(
 </script>
 
 <template>
-<nav class="flex p-2 bg-[#77889930] " aria-label="Breadcrumb" style="background: #77889930;">
-    <div class="lg:container md:mx-auto px-5">
-  <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+<nav class=" p-2 bg-[#77889930] " aria-label="Breadcrumb" style="background: #77889930;">
+    <div class="max-w-screen-xl md:mx-auto px-5">
+  <ol class="flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
     <li class="inline-flex items-center">
       <a href="/" class="inline-flex capitalize items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
         <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -63,11 +63,17 @@ const datails =computed(
   </div>
 </nav>
 <section>
-    <div class="lg:container md:mx-auto px-5 my-3">
+    <div class="max-w-screen-xl md:mx-auto px-5 my-3">
         <div v-for="items in users" >
-            <div v-if="items.id ==id" class="w-72 h-2/6 p-5 max-h-[29rem] rounded-lg border-2 bg-[#1f2937]">
-               <h1 class="text-white text-[1.5rem]" > {{items.firstName}}</h1>
-               <img v-bind:src="items.image" class="w-72 opacity-[.08]"/>
+            <div v-if="items.id ==id" class="w-full h-56 p-5 max-h-[29rem] rounded-lg border-2 bg-[#1f2937]" v-bind:style="['background:linear-gradient(0deg, rgb(31 41 55) 0%, rgb(31 41 55 / 75%) 0%), url('+items.image +') no-repeat center / cover;    background-size: 16rem;']">
+               <div class="flex justify-center  items-baseline">
+                  <h1 class="text-white text-[1.5rem] mr-2" > {{items.firstName}} {{ items.lastName }}</h1>
+                  <p class="text-sm text-white"> Edad: {{ items.age }}</p>
+                </div>
+                
+                <p class="text-sm text-white"> Email: {{ items.email }}</p>
+                <p class="text-sm text-white"> Phone: {{ items.phone }}</p>
+               <!--<img v-bind:src="items.image" class="w-72 opacity-[.08]"/>-->
             </div>
             
         </div>
