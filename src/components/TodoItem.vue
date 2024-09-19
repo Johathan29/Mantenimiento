@@ -1,7 +1,6 @@
+
 <template>
-
-
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 
                 <th scope="row" class=" items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                   {{ todo.id }}
@@ -23,7 +22,7 @@
                 </td>
                 <td class="px-6 py-4 flex justify-around items-center">
                     <router-link  title=" " v-bind:to="'user/'+todo.id" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                        <i class="fa-solid fa-eye"></i>
+                        <FontAwesomeIcon :icon="faEye" class="mb-0"/>
                         <span class="tooltiptext">Ver detalle</span>
                     </router-link>
                     <a  v-on:click="removeTodo" class="font-medium text-blue-600  hover:cursor-pointer"  title="">

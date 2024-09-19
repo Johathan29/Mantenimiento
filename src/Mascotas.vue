@@ -1,6 +1,11 @@
 <script setup>
 import HelloWorld from './components/Header.vue';
 import data from './Data';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faPaw } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt} from '@fortawesome/free-solid-svg-icons'
+import { faSquare } from '@fortawesome/free-solid-svg-icons'
+import { faSquarePen } from '@fortawesome/free-solid-svg-icons';
 import { onMounted } from 'vue'
 import { 
     initAccordions, 
@@ -43,7 +48,7 @@ const id=ref(0);
 const breadcrum=ref();
 id.value=url.pathname[6];
 const ruta=ref()
-ruta.value=url.pathname[1]+url.pathname[2]+url.pathname[3]+url.pathname[4]+url.pathname[5]+url.pathname[6]+url.pathname[7]+url.pathname[8];
+ruta.value=url.hash[2]+url.hash[3]+url.hash[4]+url.hash[5]+url.hash[6]+url.hash[7]+url.hash[8]+url.hash[9];
 let convertir = ref([]);
 const contador = () => {
   letra;
@@ -157,78 +162,66 @@ const auto = (id) => {
       <h2 class=" p-5 text-[2rem]">Listado de Mascotas</h2>
     </div>
   </div>
-    <div class="max-w-screen-xl md:mx-auto px-5">
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-        <figure v-for="items in animalNames" class="h-auto max-w-full rounded-lg border">
-                <figcaption class="flex items-center justify-center ">
-                      <img class="rounded-full w-36 h-36" v-bind:src="items.Imagen" alt="profile picture">
-                      <div class="space-y-0.5 font-medium dark:text-white text-left rtl:text-right ms-3">
-                          <div>{{ items.Nombre }}</div>
-                          <div class="text-sm text-gray-500 dark:text-gray-400 ">{{ items.Tipo }}</div>
-                      </div>
-                  </figcaption>      
-                <blockquote class="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400 leading-[0.8rem]">
-                      <h3 class="text-lg font-semibold text-gray-900 dark:text-white"></h3>
-                      <p class="my-4">If you care for your time, I hands down would go with this."</p>
-                      <span> </span>
-                    <p class="my-4">Observacion: {{ items.Observacion }}</p>
-                    <p class="my-4">Ubicacion: {{ items.Ubicacion }}</p>
-                    <p class="my-4">Rasgos: {{ items.Rasgos }}</p>
-                </blockquote>
-                <button
-                      @click="add(items.id)"
-                      :disabled="auto(items.id)"
-                      :class="['text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800']"
-                    >
-                      Favorito
-                    </button>
-            </figure>
-        </div>
-    </div>
   </section>
-  <section>
-    <div class="max-w-screen-xl md:mx-auto px-5">
-      <h3>My favorite</h3>
-
-      <template v-for="(item, index) in favoritoAnimales" :key="item.Id">
-        <div class="card" style="width: 18rem">
-          <img v-bind:src="item.Imagen" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">{{ item.Nombre }} {{ item.Id }}</h5>
-            <p class="my-4">
-              {{ item.Tipo }}
-            </p>
-            <div class="d-flex" style="justify-content: space-around">
-              <a @click="Delete(index)" class="btn btn-danger">Eliminar</a>
-              <a @click="Update(item.Id)" class="btn btn-warning">Modificar</a>
-            </div>
-          </div>
-          
+   <section class="bg-[#2675d914]">
+    <div class="max-w-screen-xl md:mx-28">
+      <div class="flex flex-wrap p-5 ">
+        <div v-for="items in animalNames" :class="['hover:shadow-2xl max-w-sm bg-white border m-2 border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700',items.Tipo=='Gato'?'bg-sky-100':'' || items.Tipo=='Perro'?'bg-blue-400':'']">
+          <a href="#">
+              <img class="rounded-t-lg  " v-bind:src="items.Imagen" alt="" />
+          </a>
+        <div class="p-5 ">
+          <a href="#">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ items.Nombre }}</h5>
+          </a>
+          <span class="mb-3 font-normal text-gray-700 dark:text-gray-400"> {{ items.Tipo }}</span>
+                <p class="text-left mb-3 font-normal text-gray-700 dark:text-gray-400">Observacion: {{ items.Observacion }}</p>
+                <p class="text-left mb-3 font-normal text-gray-700 dark:text-gray-400">Ubicacion: {{ items.Ubicacion }}</p>
+                <p class="text-left mb-3 font-normal text-gray-700 dark:text-gray-400">Rasgos: {{ items.Rasgos }}</p>
+          <p class="text-left mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+          <button @click="add(items.id)"
+                   :disabled="auto(items.id)"
+                   :class="['inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800',auto(items.id)?'cursor-not-allowed opacity-[0.3]': '']">
+                                Favorito
+              <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+              </svg>
+           </button>
         </div>
-
-        <hr />
-      </template>
-      <ul class="max-w-full divide-y divide-gray-200 dark:divide-gray-700">
+      </div>
+    </div>
+  </div>
+</section>
+  <section>
+    <div class="bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 mb-3 text-white">
+        <div class="lg:container md:mx-auto px-5">
+         <h3 class="p-5 text-[1.6rem]">Mis favoritos</h3>
+        </div>
+      </div>
+    <div class="max-w-screen-xl md:mx-auto px-5">
+     <ul class="max-w-full divide-y divide-gray-200 dark:divide-gray-700">
         <li class="p-4" v-for="(item, index) in favoritoAnimales" :key="item.Id">
-            <div class="flex items-center space-x-4 rtl:space-x-reverse">
-              <div class="flex-shrink-0">
-                  <img class="w-8 h-8 rounded-full" v-bind:src="item.Imagen"  alt="Neil image">
+            <div class="flex items-center  w-full  rtl:space-x-reverse">
+              <div class="flex-shrink-0 z-40">
+                  <img class="w-36 h-36 rounded-full" v-bind:src="item.Imagen"  alt="Neil image">
               </div>
-              <div class="flex-1 min-w-0">
-                  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+              <div :class="['h-[7rem] rounded-r-[12px] flex flex-1 min-w-0 m-[-2rem] z-30 w-full', item.Tipo=='Gato'?'bg-sky-100':'' || item.Tipo=='Perro'?'bg-blue-400':''] ">
+                  <p class="inline-flex m-[3rem] items-center  text-sm font-medium text-gray-900 truncate dark:text-white">
                     {{ item.Nombre }}
                   </p>
-                  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                  <p class="inline-flex items-center text-sm text-gray-500 truncate dark:text-gray-400">
                     {{ item.Tipo }}
                   </p>
-              </div>
-              <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                  <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                   $320
               </div>
-              <div class="d-flex" style="justify-content: space-around">
-                <a @click="Delete(index)" class="focus:outline-none cursor-pointer text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar</a>
+              <div class="inline-flex items-center " >
+               <a @click="Delete(index)" class="z-50 focus:outline-none cursor-pointer text-red-600  hover:text-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-[14px] px-2  dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"><FontAwesomeIcon :icon="faTrashAlt" class="mb-0"/></a>
+              <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"  class="block focus:outline-none cursor-pointer text-yellow-400  hover:text-yellow-500 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-[14px]  px-2  dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"><FontAwesomeIcon :icon="faSquarePen" class="mb-0"/></button>
                 <a @click="Update(item.Id)" class="focus:outline-none cursor-pointer text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Modificar</a>
               </div>
+              </div>
+              
               
             </div>
             

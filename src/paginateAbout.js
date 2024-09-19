@@ -58,14 +58,14 @@ export default {
     updateUrl(){
       
       const url=window.location;
-      const breadCrumUrl=url.pathname[1]+url.pathname[2]+url.pathname[3]+url.pathname[4]
-      return breadCrumUrl
+      const breadCrumUrl=url.hash[2]+url.hash[3]+url.hash[4]+url.hash[5];
+      return breadCrumUrl;
      
     },
     breadCrumUrl(){
       
       const url=window.location;
-      return url.pathname[4]
+      return url.hash[4]
      
     }
   }

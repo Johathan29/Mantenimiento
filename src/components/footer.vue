@@ -24,8 +24,8 @@ function obtenerFechaHoy()
               </span>
             </a>
           </div>
-          <nav class=" w-1/2 ">
-            <ul class="font-medium text-justify block flex-col p-4 md:p-0 mt-4 ">
+          <nav class="md:w-1/2 sm:w-full text-left ">
+            <ul class="font-medium block flex-col p-4 md:p-0 mt-4 ">
                 <li>
                   <router-link class="  px-3 py-2 text-sm font-medium text-gray-300  hover:text-white" aria-current="page" to="/">
                     <FontAwesomeIcon :icon="faHouse" class="mb-0"/> Home
@@ -44,8 +44,8 @@ function obtenerFechaHoy()
             </ul>
           </nav>
         </div>
-         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-        <div class="sm:flex sm:items-center sm:justify-between">
+         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-2" />
+        <div class="sm:flex sm:items-center sm:justify-between py-2">
           <span class="text-sm text-white sm:text-center dark:text-gray-400">
             ©{{  obtenerFechaHoy() }}, All Rights Reserved.
           </span>
