@@ -1,5 +1,6 @@
+import { faEye } from '@fortawesome/free-solid-svg-icons'
 export default {
-  name: 'todo-item',
+  name: 'todoitem',
   props: ['todo'],
   methods: {
     removeTodo() {
