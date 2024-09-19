@@ -161,7 +161,7 @@ const auto = (id) => {
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
         <figure v-for="items in animalNames" class="h-auto max-w-full rounded-lg border">
                 <figcaption class="flex items-center justify-center ">
-                      <img class="rounded-full w-36 h-36"v-bind:src="items.Imagen" alt="profile picture">
+                      <img class="rounded-full w-36 h-36" v-bind:src="items.Imagen" alt="profile picture">
                       <div class="space-y-0.5 font-medium dark:text-white text-left rtl:text-right ms-3">
                           <div>{{ items.Nombre }}</div>
                           <div class="text-sm text-gray-500 dark:text-gray-400 ">{{ items.Tipo }}</div>

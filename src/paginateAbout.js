@@ -1,10 +1,11 @@
 //import AppHeader from './components/AppHeader.vue';
 //import TodoInput from '../components/TodoInput.vue';
 import TodoItem from './components/TodoItem.vue';
-import Pagination from './components/Pagination.vue'
-
-const response = await fetch('https://dummyjson.com/users');
-const users = await response.json();
+import Pagination from './components/Pagination.vue';
+import {ref} from 'vue';
+const response=ref([]);
+response.value = await fetch('https://dummyjson.com/users');
+const users = await response.value.json();
 
 export default {
   name: 'app',
