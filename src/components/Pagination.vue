@@ -32,5 +32,5 @@
 
 
 </style>
-<script src="./pagination.js"></script>
+<script src="./Pagination.js"></script>
 
