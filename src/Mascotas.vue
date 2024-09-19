@@ -48,7 +48,7 @@ const id=ref(0);
 const breadcrum=ref();
 id.value=url.pathname[6];
 const ruta=ref()
-ruta.value=url.pathname[1]+url.pathname[2]+url.pathname[3]+url.pathname[4]+url.pathname[5]+url.pathname[6]+url.pathname[7]+url.pathname[8];
+ruta.value=url.hash[3]+url.hash[4]+url.hash[5]+url.hash[6]+url.hash[7]+url.hash[8]+url.hash[9]+url.hash[10];
 let convertir = ref([]);
 const contador = () => {
   letra;
