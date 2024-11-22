@@ -31,16 +31,16 @@
   </div>
 </nav>
    <div class="relative ">
-  <div class=" bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 mb-3 text-white">
+  <div class="">
     <div class="lg:container md:mx-auto px-5">
-      <h2 class=" p-5 text-[2rem]">Listado de Usuarios</h2>
+      <h2 class=" p-5 text-[2rem] text-teal-600 font-bold">Listado de usuarios</h2>
     </div>
   </div>
   </div>
-   <div class="lg:container md:mx-auto px-5 mt-[-11px]">
+   <div class="lg:container md:mx-auto  mt-[0px]">
       <div class="w-full flex justify-center overflow-x-auto ">
         <table class="text-sm w-full   text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <thead class="text-xs text-white uppercase bg-teal-600 w-full ">
             <tr>
                  <th scope="col" class="px-6 py-3">
                     ID

@@ -12,7 +12,8 @@ export default {
       return this.currentPage >= 1 ? false : true;
     },
     showNextLink() {
-      return this.currentPage <= (this.totalPages() - 1) ? false : true;
+      const stock=(this.totalPages() - 1);
+      return this.currentPage < stock ? false : true;
     },
     
   }

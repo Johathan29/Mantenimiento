@@ -1,4 +1,8 @@
-
+<script lang="ts" setup >
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faEye } from '@fortawesome/free-solid-svg-icons'
+import { faDeleteLeft} from '@fortawesome/free-solid-svg-icons'
+</script>
 <template>
     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 
@@ -25,8 +29,8 @@
                         <FontAwesomeIcon :icon="faEye" class="mb-0"/>
                         <span class="tooltiptext">Ver detalle</span>
                     </router-link>
-                    <a  v-on:click="removeTodo" class="font-medium text-blue-600  hover:cursor-pointer"  title="">
-                        <i class="fa-solid fa-delete-left bg-red"></i>
+                    <a  v-on:click="removeTodo()" class="font-medium text-blue-600  hover:cursor-pointer"  title="">
+                        <FontAwesomeIcon :icon="faDeleteLeft" class="mb-0"/>
                         <span class="tooltiptextDelete">Eliminar usuario </span>
                     
                     </a>
@@ -38,5 +42,20 @@
       
 </template>
 
-<script src="./todoItem.js"></script>
+<script  lang="ts">
+export default {
+  name: 'todoitem',
+  props: ['todo'],
+
+  methods: {
+    removeTodo() {
+      this.$emit('todo:remove', this.todo.id);
+    },
+    
+  
+}
+
+}
+
+</script>
 <style src="./todoItem.css"></style>
