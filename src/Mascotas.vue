@@ -1,136 +1,4 @@
-<script setup>
-import HelloWorld from './components/Header.vue';
-import data from './Data';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faPaw } from '@fortawesome/free-solid-svg-icons'
-import { faTrashAlt} from '@fortawesome/free-solid-svg-icons'
-import { faSquare } from '@fortawesome/free-solid-svg-icons'
-import { faSquarePen } from '@fortawesome/free-solid-svg-icons';
-import { onMounted } from 'vue'
-import { 
-    initAccordions, 
-    initCarousels, 
-    initCollapses, 
-    initDials, 
-    initDismisses, 
-    initDrawers, 
-    initDropdowns, 
-    initModals, 
-    initPopovers, 
-    initTabs, 
-    initTooltips } from 'flowbite'
 
-// initialize components based on data attribute selectors
-onMounted(() => {
-    initAccordions();
-    initCarousels();
-    initCollapses();
-    initDials();
-    initDismisses();
-    initDrawers();
-    initDropdowns();
-    initModals();
-    initPopovers();
-    initTabs();
-    initTooltips();
-})
-
-import { ref, computed } from 'vue';
-const counter = ref(0);
-const classes = ref('card  d-none');
-const valorId = ref([]);
-const animalNames = ref();
-const dataupdate = ref([]);
-const letra = 'siete';
-const favoritoAnimales = ref([]);
-const url=window.location;
-const id=ref(0);
-const breadcrum=ref();
-id.value=url.pathname[6];
-const ruta=ref()
-ruta.value=url.hash[2]+url.hash[3]+url.hash[4]+url.hash[5]+url.hash[6]+url.hash[7]+url.hash[8]+url.hash[9];
-let convertir = ref([]);
-const contador = () => {
-  letra;
-  counter.value++;
-};
-animalNames.value = data.value;
-const animales = () => {
-  let nombre = '';
-  let tipo = '';
-};
-const add = (id) => {
-  const idmascosta = ref();
-  const nombre = ref();
-  const tipo = ref();
-  const imagen = ref();
-  const mascota = ref([]);
-  valorId.value.push(animalNames.value.find((animal) => animal.id === id).id);
-  idmascosta.value = animalNames.value.find((animal) => animal.id === id).id;
-  nombre.value = animalNames.value.find((animal) => animal.id === id).Nombre;
-  tipo.value = animalNames.value.find((animal) => animal.id === id).Tipo;
-  imagen.value = animalNames.value.find((animal) => animal.id === id).Imagen;
-  mascota.value = {
-    Id: idmascosta.value,
-    Nombre: nombre.value,
-    Tipo: tipo.value,
-    Imagen: imagen.value,
-  };
-
-  return favoritoAnimales.value.push(mascota.value);
-};
-const Delete = (index) => {
-  if (index === 0) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: 'Deleted!',
-          text: 'Your file has been deleted.',
-          icon: 'success',
-        });
-        favoritoAnimales.value.shift();
-        valorId.value.shift();
-      }
-    });
-  } else {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: 'Deleted!',
-          text: 'Your file has been deleted.',
-          icon: 'success',
-        });
-        favoritoAnimales.value.splice(index,1);
-    valorId.value.splice(index);
-      }
-    });
-   
-  }
-};
-const Update = (index) => {
-  dataupdate.value = favoritoAnimales.value.find((item) => item.Id === index);
-};
-const auto = (id) => {
-  const valorVerificar = valorId.value.find((item) => item === id);
-  return valorVerificar ? true : false;
-};
-</script>
 
 <template>
   <section>
@@ -230,7 +98,139 @@ const auto = (id) => {
     </div>
   </section>
 </template>
+<script setup>
+import HelloWorld from './components/Header.vue';
+import data from './Data';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faPaw } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt} from '@fortawesome/free-solid-svg-icons'
+import { faSquare } from '@fortawesome/free-solid-svg-icons'
+import { faSquarePen } from '@fortawesome/free-solid-svg-icons';
+import { onMounted } from 'vue'
+import { 
+    initAccordions, 
+    initCarousels, 
+    initCollapses, 
+    initDials, 
+    initDismisses, 
+    initDrawers, 
+    initDropdowns, 
+    initModals, 
+    initPopovers, 
+    initTabs, 
+    initTooltips } from 'flowbite'
 
+// initialize components based on data attribute selectors
+onMounted(() => {
+    initAccordions();
+    initCarousels();
+    initCollapses();
+    initDials();
+    initDismisses();
+    initDrawers();
+    initDropdowns();
+    initModals();
+    initPopovers();
+    initTabs();
+    initTooltips();
+})
+
+import { ref, computed } from 'vue';
+const counter = ref(0);
+const classes = ref('card  d-none');
+const valorId = ref([]);
+const animalNames = ref();
+const dataupdate = ref([]);
+const letra = 'siete';
+const favoritoAnimales = ref([]);
+const url=window.location;
+const id=ref(0);
+const breadcrum=ref();
+id.value=url.pathname[6];
+const ruta=ref()
+ruta.value=url.pathname[1]+url.pathname[2]+url.pathname[3]+url.pathname[4]+url.pathname[5]+url.pathname[6]+url.pathname[7]+url.pathname[8];
+let convertir = ref([]);
+const contador = () => {
+  letra;
+  counter.value++;
+};
+animalNames.value = data.value;
+const animales = () => {
+  let nombre = '';
+  let tipo = '';
+};
+const add = (id) => {
+  const idmascosta = ref();
+  const nombre = ref();
+  const tipo = ref();
+  const imagen = ref();
+  const mascota = ref([]);
+  valorId.value.push(animalNames.value.find((animal) => animal.id === id).id);
+  idmascosta.value = animalNames.value.find((animal) => animal.id === id).id;
+  nombre.value = animalNames.value.find((animal) => animal.id === id).Nombre;
+  tipo.value = animalNames.value.find((animal) => animal.id === id).Tipo;
+  imagen.value = animalNames.value.find((animal) => animal.id === id).Imagen;
+  mascota.value = {
+    Id: idmascosta.value,
+    Nombre: nombre.value,
+    Tipo: tipo.value,
+    Imagen: imagen.value,
+  };
+
+  return favoritoAnimales.value.push(mascota.value);
+};
+const Delete = (index) => {
+  if (index === 0) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'Your file has been deleted.',
+          icon: 'success',
+        });
+        favoritoAnimales.value.shift();
+        valorId.value.shift();
+      }
+    });
+  } else {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'Your file has been deleted.',
+          icon: 'success',
+        });
+        favoritoAnimales.value.splice(index,1);
+    valorId.value.splice(index);
+      }
+    });
+   
+  }
+};
+const Update = (index) => {
+  dataupdate.value = favoritoAnimales.value.find((item) => item.Id === index);
+};
+const auto = (id) => {
+  const valorVerificar = valorId.value.find((item) => item === id);
+  return valorVerificar ? true : false;
+};
+</script>
 <style scoped>
 .col-md-6 {
   height: 33rem;

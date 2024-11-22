@@ -1,13 +1,18 @@
 <script setup>
 import { ref, computed, onMounted} from 'vue';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faEye } from '@fortawesome/free-solid-svg-icons'
+import { faEdit} from '@fortawesome/free-solid-svg-icons'
 const users = ref(null);
 const url=window.location;
 const id=ref(0);
 const breadcrum=ref();
-id.value=url.hash[7];
+id.value=url.hash.split('/');
+id.value=parseInt(id.value[2]);
 const ruta=ref()
 ruta.value=url.hash[2]+url.hash[3]+url.hash[4]+url.hash[5];
-console.log(id.value)
+console.log(id.value);
+const firstName=ref();
 
 import { 
     initAccordions, 
@@ -42,7 +47,9 @@ onMounted(async () =>
     const response = await fetch('https://dummyjson.com/users');
     users.value = await response.json();
     users.value=users.value.users;
-    breadcrum.value= users.value.find(item=>item.id===parseInt(id.value)).firstName;
+    const userregistered=users.value.find(item=>item.id===id.value);
+    breadcrum.value= userregistered.firstName;
+    firstName.value=userregistered.email;
 }
 );
 const datails =computed( 
@@ -54,7 +61,11 @@ const datails =computed(
     });
    const detailsUser=(index)=>
     {
-        alert(users.value.find(item=>item.id===index).firstName)
+        alert(users.value.find(item=>item.id===index).firstName);
+    }
+    const update=(index)=>
+    {
+      alert(index)
     }
 </script>
 
@@ -102,8 +113,9 @@ const datails =computed(
 
 
 <!-- Modal toggle -->
-<button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-  Toggle modal
+<div class="max-w-screen-xl md:mx-auto px-5 my-3">
+<button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block text-white top-[10rem] right-[2rem]  hover:bg-blue-800 focus:outline-none hover:opacity-[1] opacity-[0.3] font-medium hover:bg-transparent rounded-lg text-sm   text-center  absolute" type="button" >
+  <FontAwesomeIcon :icon="faEdit" class="mb-0"/>
 </button>
 
 <!-- Main modal -->
@@ -128,7 +140,7 @@ const datails =computed(
                 <form class="space-y-4" action="#">
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                        <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
+                        <input type="email" name="firstName" id="email" :value="firstName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
                     </div>
                     <div>
                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
@@ -152,7 +164,7 @@ const datails =computed(
         </div>
     </div>
 </div> 
-
+</div>
 </section>
 
 
