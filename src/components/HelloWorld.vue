@@ -30,6 +30,8 @@ export default defineComponent( {
     const datos=data.value;
     console.log(datos);
     const options = {
+      type:'loop',
+      autoplay:'playing',
       rewind: true,
       gap   : '1rem',
       list:data.value,
