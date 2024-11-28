@@ -13,7 +13,11 @@ const ruta=ref()
 ruta.value=url.hash[2]+url.hash[3]+url.hash[4]+url.hash[5];
 console.log(id.value);
 const firstName=ref();
-
+const datos=[{
+  Id:Number,
+  Email:'',
+  FirstName:'',
+}];
 import { 
     initAccordions, 
     initCarousels, 
@@ -50,6 +54,8 @@ onMounted(async () =>
     const userregistered=users.value.find(item=>item.id===id.value);
     breadcrum.value= userregistered.firstName;
     firstName.value=userregistered.email;
+    datos.push(datos.Email=userregistered.email,datos.FirstName=userregistered.firstName,datos.Id=userregistered.id);
+    console.log(datos)
 }
 );
 const datails =computed( 
@@ -65,6 +71,7 @@ const datails =computed(
     }
     const update=(index)=>
     {
+      userregistered.push(userregistered.firstName='firstName')
       alert(index)
     }
 </script>
@@ -138,9 +145,13 @@ const datails =computed(
             <!-- Modal body -->
             <div class="p-4 md:p-5">
                 <form class="space-y-4" action="#">
+                  <div>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your name</label>
+                        <input type="text" name="firstName" id="name" :value="datos.FirstName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
+                    </div>
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                        <input type="email" name="firstName" id="email" :value="firstName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
+                        <input type="email" name="email" id="email" :value="datos.Email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
                     </div>
                     <div>
                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
@@ -155,7 +166,7 @@ const datails =computed(
                         </div>
                         <a href="#" class="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>
                     </div>
-                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login to your account</button>
+                    <button type="button" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" @click="update(datos.Id)">Login to your account</button>
                     <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
                         Not registered? <a href="#" class="text-blue-700 hover:underline dark:text-blue-500">Create account</a>
                     </div>
