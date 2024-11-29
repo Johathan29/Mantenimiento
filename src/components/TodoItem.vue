@@ -17,7 +17,7 @@ import { faDeleteLeft} from '@fortawesome/free-solid-svg-icons'
                     </div>  
                 </td>
                 <td class="px-6 py-4">
-                    React Developer
+                    {{ todo.company.title }}
                 </td>
                 <td class="px-6 py-4">
                     <div class="flex items-center">
