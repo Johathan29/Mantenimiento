@@ -19,7 +19,7 @@ import Header from './components/Header.vue';
       </div>
     </div>
   </header>
-  <div>
+  <div class="overflow-x-none">
     <router-view></router-view>
   </div>
 </template>
