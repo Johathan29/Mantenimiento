@@ -120,7 +120,7 @@ const datails =computed(
 
 
 <!-- Modal toggle -->
-<div class="max-w-screen-xl md:mx-auto px-5 my-3">
+<div class="max-w-screen-xl md:mx-auto px-5 relative bottom-[33rem]">
 <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block text-white top-[10rem] right-[2rem]  hover:bg-blue-800 focus:outline-none hover:opacity-[1] opacity-[0.3] font-medium hover:bg-transparent rounded-lg text-sm   text-center  absolute" type="button" >
   <FontAwesomeIcon :icon="faEdit" class="mb-0"/>
 </button>

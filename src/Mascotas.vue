@@ -73,7 +73,7 @@
               <div class="flex-shrink-0 z-40">
                   <img class="w-36 h-36 rounded-full" v-bind:src="item.Imagen"  alt="Neil image">
               </div>
-              <div :class="['h-[7rem] rounded-r-[12px] flex flex-1 min-w-0 m-[-2rem] z-30 w-full', item.Tipo=='Gato'?'bg-sky-100':'' || item.Tipo=='Perro'?'bg-blue-400':''] ">
+              <div :class="['h-[7rem] gap-16  rounded-r-[12px] flex flex-1 min-w-0 m-[-2rem] z-30 w-full', item.Tipo=='Gato'?'bg-sky-100':'' || item.Tipo=='Perro'?'bg-blue-400':''] ">
                   <p class="inline-flex m-[3rem] items-center  text-sm font-medium text-gray-900 truncate dark:text-white">
                     {{ item.Nombre }}
                   </p>
@@ -81,7 +81,7 @@
                     {{ item.Tipo }}
                   </p>
                   <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                  $320
+                  {{ item.Rasgos }}
               </div>
               <div class="inline-flex items-center " >
                <a @click="Delete(index)" class="z-50 focus:outline-none cursor-pointer text-red-600  hover:text-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-[14px] px-2  dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"><FontAwesomeIcon :icon="faTrashAlt" class="mb-0"/></a>
@@ -165,17 +165,20 @@ const add = (id) => {
   const nombre = ref();
   const tipo = ref();
   const imagen = ref();
+  const rasgos = ref();
   const mascota = ref([]);
   valorId.value.push(animalNames.value.find((animal) => animal.id === id).id);
   idmascosta.value = animalNames.value.find((animal) => animal.id === id).id;
   nombre.value = animalNames.value.find((animal) => animal.id === id).Nombre;
   tipo.value = animalNames.value.find((animal) => animal.id === id).Tipo;
   imagen.value = animalNames.value.find((animal) => animal.id === id).Imagen;
+  rasgos.value=animalNames.value.find((animal) => animal.id === id).Rasgos;
   mascota.value = {
     Id: idmascosta.value,
     Nombre: nombre.value,
     Tipo: tipo.value,
     Imagen: imagen.value,
+    Rasgos: rasgos.value,
   };
 
   return favoritoAnimales.value.push(mascota.value);
