@@ -1,79 +1,7 @@
-<script setup>
-import { ref, computed, onMounted} from 'vue';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faEye } from '@fortawesome/free-solid-svg-icons'
-import { faEdit} from '@fortawesome/free-solid-svg-icons'
-const users = ref(null);
-const url=window.location;
-const id=ref(0);
-const breadcrum=ref();
-id.value=url.hash.split('/');
-id.value=parseInt(id.value[2]);
-const ruta=ref()
-ruta.value=url.hash[2]+url.hash[3]+url.hash[4]+url.hash[5];
-console.log(id.value);
-const firstName=ref();
-const datos=[{
-  Id:Number,
-  Email:'',
-  FirstName:'',
-}];
-import { 
-    initAccordions, 
-    initCarousels, 
-    initCollapses, 
-    initDials, 
-    initDismisses, 
-    initDrawers, 
-    initDropdowns, 
-    initModals, 
-    initPopovers, 
-    initTabs, 
-    initTooltips } from 'flowbite'
+<script >
+export default {
 
-// initialize components based on data attribute selectors
-onMounted(() => {
-    initAccordions();
-    initCarousels();
-    initCollapses();
-    initDials();
-    initDismisses();
-    initDrawers();
-    initDropdowns();
-    initModals();
-    initPopovers();
-    initTabs();
-    initTooltips();
-})
-  //https://jsonplaceholder.typicode.com/users
-onMounted(async () => 
-{
-    const response = await fetch('https://dummyjson.com/users');
-    users.value = await response.json();
-    users.value=users.value.users;
-    const userregistered=users.value.find(item=>item.id===id.value);
-    breadcrum.value= userregistered.firstName;
-    firstName.value=userregistered.email;
-    datos.push(datos.Email=userregistered.email,datos.FirstName=userregistered.firstName,datos.Id=userregistered.id);
-    console.log(datos)
 }
-);
-const datails =computed( 
-    {
-        get()
-        {
-        users.value.find(item=>item.id===id.value);
-        }
-    });
-   const detailsUser=(index)=>
-    {
-        alert(users.value.find(item=>item.id===index).firstName);
-    }
-    const update=(index)=>
-    {
-      userregistered.push(userregistered.firstName='firstName')
-      alert(index)
-    }
 </script>
 
 <template>
@@ -146,9 +74,11 @@ const datails =computed(
             <div class="p-4 md:p-5">
                 <form class="space-y-4" action="#">
                   <div>
+                    {{ firstname }}
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your name</label>
-                        <input type="text" name="firstName" id="name" :value="datos.FirstName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
+                        <input  name="firstname"  @input="event => firstname = event.target.value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
                     </div>
+                  
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                         <input type="email" name="email" id="email" :value="datos.Email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
@@ -166,7 +96,7 @@ const datails =computed(
                         </div>
                         <a href="#" class="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>
                     </div>
-                    <button type="button" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" @click="update(datos.Id)">Login to your account</button>
+                    <button type="button" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" @click="update(datos.Id,firstname)">Login to your account</button>
                     <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
                         Not registered? <a href="#" class="text-blue-700 hover:underline dark:text-blue-500">Create account</a>
                     </div>
@@ -180,6 +110,87 @@ const datails =computed(
 
 
 </template>
+<script setup>
+import { ref, computed, onMounted} from 'vue';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faEye } from '@fortawesome/free-solid-svg-icons'
+import { faEdit} from '@fortawesome/free-solid-svg-icons'
+import { 
+    initAccordions, 
+    initCarousels, 
+    initCollapses, 
+    initDials, 
+    initDismisses, 
+    initDrawers, 
+    initDropdowns, 
+    initModals, 
+    initPopovers, 
+    initTabs, 
+    initTooltips } from 'flowbite'
+const users = ref(null);
+const url=window.location;
+const id=ref(0);
+const breadcrum=ref();
+id.value=url.hash.split('/');
+const ruta=ref()
+ruta.value=id.value[1];
+id.value=parseInt(id.value[2]);
+const userregistered=ref([]);
+const datos=ref([]);
+datos.value=[{
+  Id:Number,
+  Email:'',
+  FirstName:'',
+}];
+
+
+// initialize components based on data attribute selectors
+onMounted(() => {
+    initAccordions();
+    initCarousels();
+    initCollapses();
+    initDials();
+    initDismisses();
+    initDrawers();
+    initDropdowns();
+    initModals();
+    initPopovers();
+    initTabs();
+    initTooltips();
+})
+  //https://jsonplaceholder.typicode.com/users
+onMounted(async () => 
+{
+    const response = await fetch('https://dummyjson.com/users');
+    users.value = await response.json();
+    users.value=users.value.users;
+    userregistered.value=users.value.find(item=>item.id===id.value);
+    datos.value.push(datos.value.Email=userregistered.value.email,datos.value.FirstName=userregistered.value.firstName,datos.value.Id=userregistered.value.id);
+    breadcrum.value=datos.value.FirstName;
+    console.log(datos.value);
+
+}
+);
+const datails =computed( 
+    {
+        get()
+        {
+        users.value.find(item=>item.id===id.value);
+        },
+        
+
+    });
+   const detailsUser=(index)=>
+    {
+        alert(users.value.find(item=>item.id===index).firstName);
+    }
+    const update=(index,firstname)=>
+    {
+      userregistered.value.push(userregistered.value.firstName=firstname)
+      datos.value.push(datos.value.FirstName=firstname);
+      alert(firstname);
+    }
+</script>
 <style>
 th {
     width: 135px!important;

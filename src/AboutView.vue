@@ -42,9 +42,7 @@
         <table class="text-sm w-full   text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-white uppercase bg-teal-600 w-full ">
             <tr>
-                 <th scope="col" class="px-6 py-3">
-                    ID
-                </th>
+                
                 <th scope="col" class="px-6 py-3">
                     Name
                 </th>

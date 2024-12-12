@@ -6,9 +6,7 @@ import { faDeleteLeft} from '@fortawesome/free-solid-svg-icons'
 <template>
     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 
-                <th scope="row" class=" items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                  {{ todo.id }}
-                </th>
+               
                 <td  class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                     <img class="w-10 h-10 rounded-full" v-bind:src="todo.image" alt="Jese image">
                     <div class="ps-3">
@@ -21,10 +19,10 @@ import { faDeleteLeft} from '@fortawesome/free-solid-svg-icons'
                 </td>
                 <td class="px-6 py-4">
                     <div class="flex items-center">
-                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Online
+                        <div :class="['h-2.5 w-2.5 rounded-full', todo.role=='admin'?'bg-green-500' : 'bg-red-500','me-2']"></div> Online
                     </div>
                 </td>
-                <td class="px-6 py-4 flex justify-around items-center">
+                <td class="px-6 py-4 flex justify-around items-center gap-2">
                     <router-link  title=" " v-bind:to="'user/'+todo.id" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                         <FontAwesomeIcon :icon="faEye" class="mb-0"/>
                         <span class="tooltiptext">Ver detalle</span>
