@@ -1,40 +1,43 @@
-<script setup>
-import { ref } from 'vue'
-
-defineProps({
-  msg: String,
-})
-
-const count = ref(0)
-</script>
-
 <template>
-  <h1>{{ msg }}</h1>
-
-  <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
-  </div>
-
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
-      >create-vue</a
-    >, the official Vue + Vite starter
-  </p>
-  <p>
-    Install
-    <a href="https://github.com/vuejs/language-tools" target="_blank">Volar</a>
-    in your IDE for a better DX
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+  
+  <Splide :options="options" aria-label="My Favorite Images" class="w-full h-[444px]">
+   
+    <SplideSlide v-for="item in options.list.slice(0,5)" >
+     
+        <img v-bind:src="item.Imagen" v-bind:alt="item.Nombre" class="w-full object-cover h-[100%]">
+      <div class="container absolute bottom-14">
+        <h2 class=" text-white p-">{{item.Nombre}}</h2>
+    
+     </div>
+    </SplideSlide>
+  
+  </Splide>
 </template>
 
-<style scoped>
-.read-the-docs {
-  color: #888;
-}
-</style>
+<script>
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import { defineComponent } from 'vue';
+import data from '../Data';
+//import SplideTrack from '@splidejs/vue-splide/src/js/components/SplideTrack/SplideTrack.vue';
+export default defineComponent( {
+  components: {
+    Splide,
+    SplideSlide,
+    
+  },
+
+  setup() {
+    const datos=data.value;
+    console.log(datos);
+    const options = {
+      type:'loop',
+      autoplay:'playing',
+      rewind: true,
+      //gap   : '1rem',
+      list:data.value,
+    };
+
+    return { options };
+  },
+} );
+</script>

@@ -7,6 +7,7 @@ import Mascotas from './Mascotas.vue';
 import Details from './Details.vue'
 import PathNotFound from './PathNotFound.vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
+import VueSplide from '@splidejs/vue-splide';
 const routes = [
   { path: '/', component: Home },
   { path: '/user', component: About },
@@ -19,7 +20,7 @@ const router = createRouter({
   routes,
 });
 const app = createApp(App);
-
+app.use(VueSplide);
 app.use(router);
 
 app.mount('#app');

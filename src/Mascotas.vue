@@ -18,7 +18,7 @@
         <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
         </svg>
-        <router-link aria-current="page" to="" class="ms-1 capitalize text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">{{ ruta }}</router-link>
+        <router-link aria-current="page" to="" class="ms-1 capitalize text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">{{ id[1] }}</router-link>
       </div>
     </li>
     
@@ -73,7 +73,7 @@
               <div class="flex-shrink-0 z-40">
                   <img class="w-36 h-36 rounded-full" v-bind:src="item.Imagen"  alt="Neil image">
               </div>
-              <div :class="['h-[7rem] rounded-r-[12px] flex flex-1 min-w-0 m-[-2rem] z-30 w-full', item.Tipo=='Gato'?'bg-sky-100':'' || item.Tipo=='Perro'?'bg-blue-400':''] ">
+              <div :class="['h-[7rem] gap-16  rounded-r-[12px] flex flex-1 min-w-0 m-[-2rem] z-30 w-full', item.Tipo=='Gato'?'bg-sky-100':'' || item.Tipo=='Perro'?'bg-blue-400':''] ">
                   <p class="inline-flex m-[3rem] items-center  text-sm font-medium text-gray-900 truncate dark:text-white">
                     {{ item.Nombre }}
                   </p>
@@ -81,7 +81,7 @@
                     {{ item.Tipo }}
                   </p>
                   <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                  $320
+                  {{ item.Rasgos }}
               </div>
               <div class="inline-flex items-center " >
                <a @click="Delete(index)" class="z-50 focus:outline-none cursor-pointer text-red-600  hover:text-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-[14px] px-2  dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"><FontAwesomeIcon :icon="faTrashAlt" class="mb-0"/></a>
@@ -146,7 +146,8 @@ const favoritoAnimales = ref([]);
 const url=window.location;
 const id=ref(0);
 const breadcrum=ref();
-id.value=url.pathname[6];
+id.value=url.hash.split('/');
+console.log(id.value);
 const ruta=ref()
 ruta.value=url.pathname[1]+url.pathname[2]+url.pathname[3]+url.pathname[4]+url.pathname[5]+url.pathname[6]+url.pathname[7]+url.pathname[8];
 let convertir = ref([]);
@@ -164,17 +165,20 @@ const add = (id) => {
   const nombre = ref();
   const tipo = ref();
   const imagen = ref();
+  const rasgos = ref();
   const mascota = ref([]);
   valorId.value.push(animalNames.value.find((animal) => animal.id === id).id);
   idmascosta.value = animalNames.value.find((animal) => animal.id === id).id;
   nombre.value = animalNames.value.find((animal) => animal.id === id).Nombre;
   tipo.value = animalNames.value.find((animal) => animal.id === id).Tipo;
   imagen.value = animalNames.value.find((animal) => animal.id === id).Imagen;
+  rasgos.value=animalNames.value.find((animal) => animal.id === id).Rasgos;
   mascota.value = {
     Id: idmascosta.value,
     Nombre: nombre.value,
     Tipo: tipo.value,
     Imagen: imagen.value,
+    Rasgos: rasgos.value,
   };
 
   return favoritoAnimales.value.push(mascota.value);
