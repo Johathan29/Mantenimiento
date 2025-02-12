@@ -8,7 +8,7 @@ import { faDeleteLeft} from '@fortawesome/free-solid-svg-icons'
                 
                
                 <td  class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                    <img class="w-10 h-10 rounded-full" v-bind:src="todo.image" alt="Jese image">
+                    <img class="w-10 h-10 rounded-full" v-bind:src="todo.image" v-bind:alt="todo.firstName">
                     <div class="ps-3">
                         <div class="text-base font-semibold">{{ todo.firstName }} {{ todo.lastName }}</div>
                         <div class="font-normal text-gray-500">{{ todo.email }}</div>
