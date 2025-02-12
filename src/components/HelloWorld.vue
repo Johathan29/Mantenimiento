@@ -1,10 +1,10 @@
 <template>
   
-  <Splide :options="options" aria-label="My Favorite Images">
+  <Splide :options="options" aria-label="My Favorite Images" class="w-full h-[444px]">
    
     <SplideSlide v-for="item in options.list.slice(0,5)" >
      
-        <img v-bind:src="item.Imagen" alt="Sample 1" class="w-auto h-[100%]">
+        <img v-bind:src="item.Imagen" v-bind:alt="item.Nombre" class="w-full object-cover h-[100%]">
       <div class="container absolute bottom-14">
         <h2 class=" text-white p-">{{item.Nombre}}</h2>
     
@@ -33,7 +33,7 @@ export default defineComponent( {
       type:'loop',
       autoplay:'playing',
       rewind: true,
-      gap   : '1rem',
+      //gap   : '1rem',
       list:data.value,
     };
 
