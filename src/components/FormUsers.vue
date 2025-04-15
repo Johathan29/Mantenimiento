@@ -1,8 +1,8 @@
 <script setup>
 import { ref, computed, onMounted} from 'vue';
 const users=ref([]);
-const active=ref('');
-active.value=false;
+//const active=ref('');
+//active.value=false;
 onMounted(async () => 
 {
   const response = await fetch('https://dummyjson.com/users');
@@ -25,7 +25,7 @@ const seanding=(email,password)=>
 </script>
 
 <template>
-<div >
+<div v-if="active==false">
 <form class="max-w-sm mx-auto" >
 
   <div class="mb-5">
@@ -46,7 +46,7 @@ const seanding=(email,password)=>
   <button type="button" @click="SendToParent(email,password)" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
 </form>
 </div>
-<div >
+<div v-else>
 </div>
 <h1>{{userId}}</h1>
 
@@ -69,7 +69,7 @@ data()
         send:'buscando errores',
         login:[''],
         getData:[''],
-        
+        active:false,
         };
 },  
 async mounted() {
@@ -86,9 +86,17 @@ methods:
     },
  SendToParent(email,password)
     {
-            this.login=this.getData.find(item=> item.email===email && item.password===password ? item : '')
-            this.$emit('emitter', this.login);
+        this.login=this.getData.find(item=> item.email===email && item.password===password ? item : '');
            
+        if(this.login)
+        {
+            this.active=true; 
+            this.$emit('emitter', this.login);
+
+        }
+       
+       
+        
     },
   
 },

@@ -47,11 +47,11 @@ const detalleUser = () => {
         </span>
     </button>
 </div>-->
-<section class="absolute z-50 right-[4rem]" >
-<div v-if="messager=='johathan'">
-<h3 >{{messager}}</h3>
-</div>
-<FormUsers  @emitter="captureData" v-else/>
+<section class="absolute hidden z-50 right-[4rem]" >
+
+<FormUsers  @emitter="captureData" />
+
+<h3 >{{messager.firstName}}</h3>
 
 </section>
 <HelloWorld></HelloWorld>
@@ -62,8 +62,9 @@ const detalleUser = () => {
 <script  >
 import FormUsers from '../components/FormUsers.vue';
 export default{
+  name:'Home',
 props:{
-name:'Home',
+
 userId: Number, 
 
 },
