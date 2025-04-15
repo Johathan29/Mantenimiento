@@ -1,8 +1,9 @@
 <script setup>
 import data from '../Data';
 import fetch from '../AboutView.vue';
+import FormUsers from '../components/FormUsers.vue';
 import { ref } from 'vue';
-import { Splide, SplideSlide } from '@splidejs/vue-splide';
+//import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import HelloWorld from './HelloWorld.vue';
 const valores = ref([]);
 console.log(data.value);
@@ -12,6 +13,7 @@ console.log(valores.value.map((item) => item));
 const detalleUser = () => {
   console.log('users.value');
 };
+
 </script>
 <template>
   <!--<div id="animation-carousel" class="relative w-full" data-carousel="slide">
@@ -45,9 +47,43 @@ const detalleUser = () => {
         </span>
     </button>
 </div>-->
+<section class="absolute z-50 right-[4rem]" >
+<div v-if="messager=='johathan'">
+<h3 >{{messager}}</h3>
+</div>
+<FormUsers  @emitter="captureData" v-else/>
+
+</section>
 <HelloWorld></HelloWorld>
+
   <fetch> </fetch>
 </template>
-<style>
 
-</style>
+<script  >
+import FormUsers from '../components/FormUsers.vue';
+export default{
+props:{
+name:'Home',
+userId: Number, 
+
+},
+data(){
+return{
+userId:1,
+messager:'johathan',
+  }
+},
+methods:{
+captureData(mess)
+{
+
+this.messager=mess;
+
+  }
+},
+components:{
+FormUsers
+}
+
+}
+</script>

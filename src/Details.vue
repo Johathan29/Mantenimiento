@@ -1,12 +1,92 @@
-<script >
-export default {
+<script setup>
+
+import { ref, computed, onMounted} from 'vue';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faEye } from '@fortawesome/free-solid-svg-icons'
+import { faEdit} from '@fortawesome/free-solid-svg-icons'
+import { 
+    initAccordions, 
+    initCarousels, 
+    initCollapses, 
+    initDials, 
+    initDismisses, 
+    initDrawers, 
+    initDropdowns, 
+    initModals, 
+    initPopovers, 
+    initTabs, 
+    initTooltips } from 'flowbite'
+const users = ref(null);
+const url=window.location;
+const id=ref(0);
+const breadcrum=ref();
+id.value=url.hash.split('/');
+const ruta=ref()
+ruta.value=id.value[1];
+id.value=parseInt(id.value[2]);
+const userregistered=ref([]);
+const datos=ref([]);
+datos.value=[
+  {
+    Id:Number,
+    Email:'',
+    FirstName:'',
+  }
+];
+
+
+// initialize components based on data attribute selectors
+onMounted(() => 
+{
+    initAccordions();
+    initCarousels();
+    initCollapses();
+    initDials();
+    initDismisses();
+    initDrawers();
+    initDropdowns();
+    initModals();
+    initPopovers();
+    initTabs();
+    initTooltips();
+})
+  //https://jsonplaceholder.typicode.com/users
+onMounted(async () => 
+{
+  const response = await fetch('https://dummyjson.com/users');
+  users.value = await response.json();
+  users.value=users.value.users;
+  userregistered.value=users.value.find(item=>item.id===id.value);
+  datos.value.push(datos.value.Email=userregistered.value.email,datos.value.FirstName=userregistered.value.firstName,datos.value.Id=userregistered.value.id);
+  breadcrum.value=datos.value.FirstName;
+  console.log(datos.value);
 
 }
-</script>
+);
+const datails =computed( 
+    {
+        get()
+        {
+        users.value.find(item=>item.id===id.value);
+        },
+        
 
+    });
+   const detailsUser=(index)=>
+    {
+        alert(users.value.find(item=>item.id===index).firstName);
+    }
+    const update=(index,firstname)=>
+    {
+      userregistered.value.push(userregistered.value.firstName=firstname)
+      datos.value.push(datos.value.FirstName=firstname);
+     
+    }
+
+</script>
 <template>
 <nav class="flex p-2 bg-[#77889930] " aria-label="Breadcrumb" style="background: #77889930;">
-    <div class="max-w-screen-xl md:mx-28 px-5">
+    <div class="max-w-screen-xl mx-auto px-5">
   <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
     <li class="inline-flex items-center">
       <a href="/" class="inline-flex capitalize items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
@@ -29,7 +109,7 @@ export default {
         <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
         </svg>
-        <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">{{breadcrum}}</span>
+        <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">{{firstNames}}</span>
       </div>
     </li>
   </ol>
@@ -39,8 +119,10 @@ export default {
     <div class="max-w-screen-xl md:mx-auto px-5 my-3">
         <div v-for="items in users" >
             <div v-if="items.id ==id" class="w-full h-2/6 p-5 max-h-[29rem] rounded-lg border-2 bg-[#1f2937] brightness-50" style="">
-               <h1 class="text-white text-[1.5rem]" > {{items.firstName}}</h1>
+               <h1 class="capitalize text-white text-[1.5rem] flex items-center gap-1" > {{items.firstName}}<div :class="['h-2 w-2 rounded-full relative ', items.role==='admin'?'bg-green-500' : 'bg-red-500','me-4']"></div> </h1>
+               <div class="p-3 border-[1px] border-white w-max rounded-full bg-white">
                <img v-bind:src="items.image" class="w-72  "/>
+               </div>
             </div>
             
         </div>
@@ -110,87 +192,7 @@ export default {
 
 
 </template>
-<script setup>
-import { ref, computed, onMounted} from 'vue';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faEye } from '@fortawesome/free-solid-svg-icons'
-import { faEdit} from '@fortawesome/free-solid-svg-icons'
-import { 
-    initAccordions, 
-    initCarousels, 
-    initCollapses, 
-    initDials, 
-    initDismisses, 
-    initDrawers, 
-    initDropdowns, 
-    initModals, 
-    initPopovers, 
-    initTabs, 
-    initTooltips } from 'flowbite'
-const users = ref(null);
-const url=window.location;
-const id=ref(0);
-const breadcrum=ref();
-id.value=url.hash.split('/');
-const ruta=ref()
-ruta.value=id.value[1];
-id.value=parseInt(id.value[2]);
-const userregistered=ref([]);
-const datos=ref([]);
-datos.value=[{
-  Id:Number,
-  Email:'',
-  FirstName:'',
-}];
 
-
-// initialize components based on data attribute selectors
-onMounted(() => {
-    initAccordions();
-    initCarousels();
-    initCollapses();
-    initDials();
-    initDismisses();
-    initDrawers();
-    initDropdowns();
-    initModals();
-    initPopovers();
-    initTabs();
-    initTooltips();
-})
-  //https://jsonplaceholder.typicode.com/users
-onMounted(async () => 
-{
-    const response = await fetch('https://dummyjson.com/users');
-    users.value = await response.json();
-    users.value=users.value.users;
-    userregistered.value=users.value.find(item=>item.id===id.value);
-    datos.value.push(datos.value.Email=userregistered.value.email,datos.value.FirstName=userregistered.value.firstName,datos.value.Id=userregistered.value.id);
-    breadcrum.value=datos.value.FirstName;
-    console.log(datos.value);
-
-}
-);
-const datails =computed( 
-    {
-        get()
-        {
-        users.value.find(item=>item.id===id.value);
-        },
-        
-
-    });
-   const detailsUser=(index)=>
-    {
-        alert(users.value.find(item=>item.id===index).firstName);
-    }
-    const update=(index,firstname)=>
-    {
-      userregistered.value.push(userregistered.value.firstName=firstname)
-      datos.value.push(datos.value.FirstName=firstname);
-      alert(firstname);
-    }
-</script>
 <style>
 th {
     width: 135px!important;
