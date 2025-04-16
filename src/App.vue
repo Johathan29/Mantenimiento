@@ -2,6 +2,13 @@
 import Header from './components/Header.vue';
 import Footer from './components/footer.vue';
 import FormUsers from './components/FormUsers.vue'
+import { onMounted } from 'vue'
+import { initFlowbite } from 'flowbite'
+
+// initialize components based on data attribute selectors
+onMounted(() => {
+    initFlowbite();
+})
 </script>
 <template>
   <Header />
@@ -13,8 +20,8 @@ import FormUsers from './components/FormUsers.vue'
 <!-- Dropdown menu -->
 <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600">
     <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-      <div>Bonnie Green</div>
-      <div class="font-medium truncate">name@flowbite.com</div>
+      <span class="font-[ui-serif] text-[19px] text-[#575353]">{{messager.firstName}}</span>
+      <div class="font-medium truncate">{{messager.email}}</div>
     </div>
     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
       <li>
@@ -31,8 +38,6 @@ import FormUsers from './components/FormUsers.vue'
       <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
     </div>
 </div>
-
-<h3 >{{messager.firstName}}</h3>
 </section>
   <div>
     <router-view></router-view>

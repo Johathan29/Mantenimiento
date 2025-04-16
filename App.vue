@@ -1,5 +1,7 @@
 <script setup>
 import Header from './components/Header.vue';
+import { onMounted } from 'vue'
+
 </script>
 <template>
   <header id="header">

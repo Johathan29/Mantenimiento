@@ -6,6 +6,7 @@ import Home from './components/Home.vue';
 import Mascotas from './Mascotas.vue';
 import PathNotFound from './PathNotFound.vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
+
 const routes = [
   { path: '/', component: Home },
   { path: '/about', component: About },
