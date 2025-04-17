@@ -12,3 +12,6 @@
 body{
     overflow-x: hidden;
 }
+.splide__list{
+    height: 24rem!important;
+}
