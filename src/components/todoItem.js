@@ -5,6 +5,7 @@ export default {
   props: ['todo'],
   methods: {
     removeTodo() {
+      
       this.$emit('todo:remove', this.todo.id);
     },
     faEye(){
@@ -13,5 +14,7 @@ export default {
   },
   return:{
     FontAwesomeIcon,
+    
   }
 }
+
