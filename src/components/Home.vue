@@ -2,6 +2,7 @@
 import data from '../Data';
 import fetch from '../AboutView.vue';
 import FormUsers from '../components/FormUsers.vue';
+import Registra from '../components/Registrar.vue';
 import { ref } from 'vue';
 //import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import HelloWorld from './HelloWorld.vue';
@@ -57,10 +58,13 @@ const detalleUser = () => {
 <HelloWorld></HelloWorld>
 
   <fetch> </fetch>
+  <Registra/>
 </template>
 
 <script  >
+
 import FormUsers from '../components/FormUsers.vue';
+
 export default{
   name:'Home',
 props:{
@@ -68,6 +72,7 @@ props:{
 userId: Number, 
 
 },
+
 data(){
 return{
 userId:1,

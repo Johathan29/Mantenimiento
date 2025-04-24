@@ -19,7 +19,7 @@ import { faDeleteLeft} from '@fortawesome/free-solid-svg-icons'
                 </td>
                 <td class="px-6 py-4">
                     <div class="flex items-center">
-                        <div :class="['h-2.5 w-2.5 rounded-full', todo.role=='admin'?'bg-green-500' : 'bg-red-500','me-2']"></div> Online
+                        <div :class="['h-2.5 w-2.5 rounded-full', todo.role=='admin'?'bg-green-500' : 'bg-red-500','me-2']" id="state"></div> Online
                     </div>
                 </td>
                 <td class="px-6 py-4 flex justify-around items-center gap-2">

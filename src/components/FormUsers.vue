@@ -25,13 +25,13 @@ const seanding=(email,password)=>
 </script>
 
 <template>
-<div v-if="active==false">
+<div v-if="active==false" class="max-w-screen-xl md:mx-auto">
 <form class="max-w-sm mx-auto" >
 
   <div class="mb-5">
     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
     <input type="email"   name="email" @input="event => email = event.target.value"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
-    <span :class="[email===''? 'hidden' : 'show']">No se encontro usuario</span>
+    <span :class="[activeMg==false ? 'hidden' : 'show text-red-500 text-[12px] font-bold']">Verificar su email, esta incorrecto</span>
   </div>
   <div class="mb-5">
     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
@@ -55,12 +55,10 @@ const seanding=(email,password)=>
 <script  >
 
 export default{
-props:{
 name:'FormUsers',
-
+props:{
 userId: Number,
 send:String,
-
 
 },
 data()
@@ -70,6 +68,7 @@ data()
         login:[''],
         getData:[''],
         active:false,
+        activeMg:false,
         };
 },  
 async mounted() {
@@ -86,24 +85,33 @@ methods:
     },
  SendToParent(email,password)
     {
-        this.login=this.getData.find(item=> item.email===email && item.password===password ? item : '');
+      this.login=this.getData.find(item=> item.email===email && item.password===password ? item : '');
            
-        if(this.login)
-        {
-            this.active=true; 
-            this.$emit('emitter', this.login);
-
-        }
-       
-       
+      if(this.login)
+      {
         
+        this.active=true; 
+        this.$emit('emitter', this.login);
+
+      }
+      else 
+        {
+          if(email){
+            this.activeMg=false;
+          } 
+          else
+          {
+          this.activeMg=true;
+          }
+           
+      }
+      
     },
-  
-},
+  },
 mounted()
     {
         this.getDataUser();
-        this.SendToParent();
+       
     }
 }
 </script>
