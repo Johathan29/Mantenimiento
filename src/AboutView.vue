@@ -59,12 +59,12 @@
           </thead>
           <tbody>
             <todo-item
-              v-for="todo in visibleTodos"
+              v-for="(todo,index) in visibleTodos"
               v-bind:visibleTodos="visibleTodos"
               v-bind:currentPage="currentPage"
               v-bind:todo="todo"
               v-on:todo:remove="removeTodo"
-              :key="todo.id">
+              :key="todo.id" >
             </todo-item>
           </tbody>
         </table>

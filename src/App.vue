@@ -83,7 +83,7 @@ onMounted(() => {
     </div>
     </section>
   <div>
-    <router-view></router-view>
+    <router-view @array="messager"></router-view>
   </div>
   <Footer/>
 </template>
@@ -99,11 +99,14 @@ messager:'',
 },
 methods:{
  
-  captureData(mess)
+  captureData()
     {
-      this.messager=mess;
-
+      this.messager=JSON.parse(localStorage.getItem('usuario'));
+ 
     }
+},
+mounted(){
+  this.captureData();
 },
 components:{
 FormUsers

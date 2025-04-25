@@ -55,7 +55,6 @@ return{
         },
     
        SendDataUser(first_name,last_name){
-            
            fetch('https://jsonplaceholder.typicode.com/posts',{
                 method: 'POST',
                 body: JSON.stringify({
@@ -72,13 +71,13 @@ return{
             console.log(this.setData);
             
         },
-                 async getDataUser()
-    {
-       fetch('https://jsonplaceholder.typicode.com/posts/')
-  .then((response) => response.json())
-  .then((json) => console.log(json))
+        async getDataUser()
+            {
+            fetch('https://jsonplaceholder.typicode.com/posts/')
+        .then((response) => response.json())
+        .then((json) => console.log(json))
 
-    },
+            },
     
     },
     mounted(){

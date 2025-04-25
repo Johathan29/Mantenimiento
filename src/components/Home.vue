@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import data from '../Data';
 import fetch from '../AboutView.vue';
 import FormUsers from '../components/FormUsers.vue';
@@ -58,12 +58,10 @@ const detalleUser = () => {
 <HelloWorld></HelloWorld>
 
   <fetch> </fetch>
-  <Registra/>
+  
 </template>
 
-<script  >
-
-import FormUsers from '../components/FormUsers.vue';
+<script  lang="ts">
 
 export default{
   name:'Home',

@@ -12,8 +12,9 @@ import VueSplide from '@splidejs/vue-splide';
 const routes = [
   { path: '/', component: Home },
   { path: '/user', component: About },
-  { path: '/:id', component: Setting },
-  { path: '/user/:id', component: Details },
+  { path: '/:username', component: Setting },
+  { path: '/user/:iduser&name=:firstname',
+  name: 'profile',  component: Details },
   { path: '/mascotas', component: Mascotas },
   { path: '/:pathMatch(.*)*', component: PathNotFound },
 ];

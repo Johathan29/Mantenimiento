@@ -2,11 +2,10 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import { faDeleteLeft} from '@fortawesome/free-solid-svg-icons'
+import { counter } from '@fortawesome/fontawesome-svg-core';
 </script>
 <template>
-    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                
-               
+    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" >
                 <td  class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                     <img class="w-10 h-10 rounded-full" v-bind:src="todo.image" alt="Jese image">
                     <div class="ps-3">
@@ -23,7 +22,8 @@ import { faDeleteLeft} from '@fortawesome/free-solid-svg-icons'
                     </div>
                 </td>
                 <td class="px-6 py-4 flex justify-around items-center gap-2">
-                    <router-link  title=" " v-bind:to="'user/'+todo.id" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+
+                    <router-link  title=" " v-bind:to="{name:'profile', params: {iduser:counters,firstname:todo.firstName } }" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                         <FontAwesomeIcon :icon="faEye" class="mb-0"/>
                         <span class="tooltiptext">Ver detalle</span>
                     </router-link>
@@ -43,16 +43,34 @@ import { faDeleteLeft} from '@fortawesome/free-solid-svg-icons'
 <script  lang="ts">
 export default {
   name: 'todoitem',
-  props: ['todo'],
-
+  props: ['todo',],
+data(){
+return{
+    wordToword:'',
+    counters:0,
+    usuario:[],
+}
+},
   methods: {
     removeTodo() {
       this.$emit('todo:remove', this.todo.id);
     },
     
-  
-}
-
+    counterWord(){
+        let index=0;
+        this.usuario=localStorage.getItem('usuario');
+        this.usuario=JSON.parse(this.usuario);
+           while (index <= this.todo.firstName.length) {
+            this.wordToword=0;
+             this.counters=this.wordToword+""+this.todo.id;
+             index++
+           }
+        }
+},
+mounted(){
+        this.counterWord();
+    }
+    
 }
 
 </script>
