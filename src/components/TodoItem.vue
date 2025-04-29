@@ -27,7 +27,7 @@ import { counter } from '@fortawesome/fontawesome-svg-core';
                         <FontAwesomeIcon :icon="faEye" class="mb-0"/>
                         <span class="tooltiptext">Ver detalle</span>
                     </router-link>
-                    <a  v-on:click="removeTodo()" class="font-medium text-blue-600  hover:cursor-pointer"  title="">
+                    <a  v-on:click="removeTodo()" v-if="usuario.role=='admin'" class="font-medium text-blue-600  hover:cursor-pointer"  title="">
                         <FontAwesomeIcon :icon="faDeleteLeft" class="mb-0"/>
                         <span class="tooltiptextDelete">Eliminar usuario </span>
                     

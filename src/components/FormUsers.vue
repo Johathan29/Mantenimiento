@@ -11,7 +11,7 @@ onMounted(async () =>
 
 }
 );
-const seanding=(email,password)=>
+/*const seanding=(email,password)=>
 {
   //  email='emily.johnson@x.dummyjson.com',password='emilyspass';
   const confirmarUser=users.value.users.find(item=> item.email===email && item.password===password ? item : '');
@@ -21,7 +21,7 @@ const seanding=(email,password)=>
   confirmarUser;
   //active.value=true;
   }
-}
+}*/
 </script>
 
 <template>
@@ -91,7 +91,7 @@ methods:
       {
         localStorage.setItem('usuario',JSON.stringify(this.login));
         this.active=true; 
-     
+        location.reload();
 
       }
       else 
@@ -106,6 +106,7 @@ methods:
           }
            
       }
+      
       
     },
   },
