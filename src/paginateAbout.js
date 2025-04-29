@@ -20,7 +20,8 @@ export default {
       nextId: 13,
       currentPage: 0,
       pageSize: 5,
-      visibleTodos: []
+      visibleTodos: [],
+      userId:'',
     };
   },
   components: {
@@ -48,7 +49,9 @@ export default {
       this.updateVisibleTodos();
     },
     updateVisibleTodos() {
-      this.visibleTodos = this.todos.slice(this.currentPage * this.pageSize, (this.currentPage * this.pageSize) + this.pageSize);
+      this.userId=JSON.parse(localStorage.getItem('usuario')).id;
+      const allFilter= this.todos.filter((todo) => todo.id !==JSON.parse(localStorage.getItem('usuario')).id);
+      this.visibleTodos = allFilter.slice(this.currentPage * this.pageSize, (this.currentPage * this.pageSize) + this.pageSize);
 
       // if we have 0 visible todos, go back a page
       if (this.visibleTodos.length == 0 && this.currentPage > 0) {

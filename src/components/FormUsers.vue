@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted} from 'vue';
 const users=ref([]);
 //const active=ref('');
@@ -11,7 +11,7 @@ onMounted(async () =>
 
 }
 );
-const seanding=(email,password)=>
+/*const seanding=(email,password)=>
 {
   //  email='emily.johnson@x.dummyjson.com',password='emilyspass';
   const confirmarUser=users.value.users.find(item=> item.email===email && item.password===password ? item : '');
@@ -21,7 +21,7 @@ const seanding=(email,password)=>
   confirmarUser;
   //active.value=true;
   }
-}
+}*/
 </script>
 
 <template>
@@ -30,7 +30,7 @@ const seanding=(email,password)=>
 
   <div class="mb-5">
     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-    <input type="email"   name="email" @input="event => email = event.target.value"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
+    <input type="email"   name="email" v-model="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
     <span :class="[activeMg==false ? 'hidden' : 'show text-red-500 text-[12px] font-bold']">Verificar su email, esta incorrecto</span>
   </div>
   <div class="mb-5">
@@ -43,7 +43,7 @@ const seanding=(email,password)=>
     </div>
     <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
   </div>
-  <button type="button" @click="SendToParent(email,password)" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+  <button type="submit" @click="SendToParent(email,password)" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
 </form>
 </div>
 <div v-else>
@@ -52,7 +52,7 @@ const seanding=(email,password)=>
 
 </template>
 
-<script  >
+<script lang="ts" >
 
 export default{
 name:'FormUsers',
@@ -89,14 +89,15 @@ methods:
            
       if(this.login)
       {
-        
+        localStorage.setItem('usuario',JSON.stringify(this.login));
         this.active=true; 
-        this.$emit('emitter', this.login);
+        location.reload();
 
       }
       else 
         {
           if(email){
+            
             this.activeMg=false;
           } 
           else
@@ -105,6 +106,7 @@ methods:
           }
            
       }
+      
       
     },
   },

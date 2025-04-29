@@ -55,7 +55,7 @@ onMounted(() => {
   </div>
 </div>
 </div>
-<div :class="[messager=='' ? 'absolute -z-10 right-[4rem]' : 'absolute z-50 right-[4rem]']">
+<div :class="[messager=='' ? 'absolute -z-10 right-[4rem]' : 'absolute z-50 md:right-[25.27rem] right-[1.2rem] ']">
   <img id="avatarButton"  type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="w-10 h-10 rounded-full cursor-pointer" :src="messager.image" alt="User dropdown">
 
     <!-- Dropdown menu -->
@@ -64,7 +64,7 @@ onMounted(() => {
         <span class="font-[ui-serif] text-[19px] text-[#575353]">{{messager.firstName}}</span>
         <div class="font-medium truncate">{{messager.email}}</div>
       </div>
-      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
+      <ul class="py-2 text-sm text-left text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
         <li>
           <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
         </li>
@@ -77,13 +77,13 @@ onMounted(() => {
         </li>
       </ul>
       <div class="py-1">
-        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+        <button @click="singOut()" class="block px-4 py-2 w-full text-left text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</button>
       </div>
     </div>
     </div>
     </section>
   <div>
-    <router-view></router-view>
+    <router-view @array="messager"></router-view>
   </div>
   <Footer/>
 </template>
@@ -98,12 +98,18 @@ messager:'',
   }
 },
 methods:{
- 
-  captureData(mess)
+  singOut(){
+    localStorage.removeItem('usuario');
+    location.reload(true);
+  },
+  captureData()
     {
-      this.messager=mess;
-
+      this.messager=JSON.parse(localStorage.getItem('usuario'));
+ 
     }
+},
+mounted(){
+  this.captureData();
 },
 components:{
 FormUsers
