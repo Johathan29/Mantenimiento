@@ -50,9 +50,12 @@ export default {
           this.visibleTodos=dataToFilter;
         }
     },
-    addTodo(text) {
-      this.todos.push({id: this.nextId, text: text});
+
+    
+    addTodo(email,password,repet_password,firstname,lastname,floating_phone,age,username,phone,image,gender) {
+      this.todos.push({id: 31, email: email});
       this.nextId++;
+      console.log(this.todos)
       this.updateVisibleTodos();
     },
     removeTodo(id) {
