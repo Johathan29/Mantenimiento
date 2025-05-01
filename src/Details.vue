@@ -1,9 +1,10 @@
-<script setup>
+<script lang="ts" setup >
 
 import { ref, computed, onMounted} from 'vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import { faEdit} from '@fortawesome/free-solid-svg-icons'
+
 import { 
     initAccordions, 
     initCarousels, 
@@ -16,16 +17,19 @@ import {
     initPopovers, 
     initTabs, 
     initTooltips } from 'flowbite'
+import { And } from 'typeorm';
 const users = ref(null);
 const url=window.location;
-const id=ref(0);
+const id=ref();
 const breadcrum=ref();
-id.value=url.hash.split('/');
+id.value=url.hash.split('/')
+breadcrum.value=url.hash.split('/')
+console.log(breadcrum.value)
 const ruta=ref()
 ruta.value=id.value[1];
 id.value=parseInt(id.value[2]);
-const userregistered=ref([]);
-const datos=ref([]);
+const userregistered=ref(Object);
+const datos=ref({});
 const usuario=ref([])
 datos.value=[
   {
@@ -87,7 +91,8 @@ const datails =computed(
 
 </script>
 <template>
-<nav class="p-2 bg-[#fff] " aria-label="Breadcrumb" >
+  <BreadCrum :name="breadCrumUrl" ></BreadCrum>
+<!--<nav class="p-2 bg-[#fff] " aria-label="Breadcrumb" >
     <div class="max-w-screen-xl mx-auto px-[3rem]">
   <ol class="flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
     <li class="inline-flex items-center">
@@ -116,7 +121,7 @@ const datails =computed(
     </li>
   </ol>
   </div>
-</nav>
+</nav>-->
 <section>
   <div class="py-[4rem] bg-[#0798ca30]">
     <div class="max-w-screen-xl md:mx-auto px-5 ">
@@ -170,20 +175,30 @@ const datails =computed(
 </dl>
 
   </div>
-  <h2 id="accordion-color-heading-2">
+  <h2 id="accordion-company">
     <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right border-r-0 border-l-0 border-t-0 !border-b-2 border-gray-200 focus:ring-4 focus:ring-blue-200 gap-3 " data-accordion-target="#accordion-color-body-2" aria-expanded="false" aria-controls="accordion-color-body-2">
-      <span>Is there a Figma file available?</span>
+      <span>Company</span>
       <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
       </svg>
     </button>
   </h2>
-  <div id="accordion-color-body-2" class="hidden" aria-labelledby="accordion-color-heading-2">
-    <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700">
-      <p class="mb-2  dark:text-gray-400">Flowbite is first conceptualized and designed using the Figma software so everything you see in the library has a design equivalent in our Figma file.</p>
-      <p class=" dark:text-gray-400">Check out the <a href="https://flowbite.com/figma/" class="text-blue-600 dark:text-blue-500 hover:underline">Figma design system</a> based on the utility classes from Tailwind CSS and components from Flowbite.</p>
-    </div>
-  </div>
+  <div id="accordion-color-body-2" class="hidden" aria-labelledby="accordion-company">
+    <dl class="w-full text-gray-900 divide-y divide-gray-200 border-b-[1px] border-[#d6d1d1]">
+      <div class="flex flex-col pb-3">
+            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Company Name</dt>
+            <dd class="text-lg font-semibold">{{userregistered.company!=='' ? userregistered.company : "lll"}}</dd>
+        </div>
+      <div class="flex flex-col pb-3">
+            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Department Name</dt>
+            <dd class="text-lg font-semibold">{{userregistered.company}}</dd>
+        </div>
+        <div class="flex flex-col pb-3">
+            <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Position in the Company</dt>
+            <dd class="text-lg font-semibold">{{userregistered.company}}</dd>
+        </div>
+    </dl>
+</div>
   <h2 id="accordion-color-heading-3">
     <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right border-r-0 border-l-0 border-t-0 !border-b-2 border-gray-200 focus:ring-4 focus:ring-blue-200 gap-3 " data-accordion-target="#accordion-color-body-3" aria-expanded="false" aria-controls="accordion-color-body-3">
       <span>What are the differences between Flowbite and Tailwind UI?</span>
@@ -277,6 +292,47 @@ const datails =computed(
 
 </template>
 
+<script lang="ts" >
+import BreadCrum from './components/Breadcrum.vue'
+export default{
+name:'Datails',
+props:{
+
+
+},
+data()
+{
+    return{
+      breadCrumUrl:'',
+      clearUrl:''
+        };
+},  
+async mounted() {
+
+},
+methods:
+{
+  updateUrl(){
+    const url=window.location;
+    this.breadCrumUrl=url.hash.split("/");
+    console.log(this.breadCrumUrl.length)
+     return this.breadCrumUrl;
+    },
+    /*breadCrumUrl(){
+      
+      const url=window.location;
+      return url.hash[4]
+     
+    }*/
+  },
+  mounted(){
+    this.updateUrl()
+  },
+  components:{
+    BreadCrum
+  }
+}
+</script>
 <style>
 th {
     width: 135px!important;

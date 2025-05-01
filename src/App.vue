@@ -2,7 +2,7 @@
 import Header from './components/Header.vue';
 import Footer from './components/footer.vue';
 import FormUsers from './components/FormUsers.vue'
-import Registrar from './components/Registrar.vue'
+import Registrar from './page/Registrar.vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {} from '@fortawesome/free-regular-svg-icons'
 
@@ -82,9 +82,10 @@ onMounted(() => {
     </div>
     </div>
     </section>
-  <div>
+  <div class="h-full">
     <router-view @array="messager"></router-view>
   </div>
+  
   <Footer/>
 </template>
 

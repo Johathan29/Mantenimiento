@@ -2,6 +2,7 @@
 //import TodoInput from '../components/TodoInput.vue';
 import TodoItem from './components/TodoItem.vue';
 import Pagination from './components/Pagination.vue';
+import BreadCrum from './components/Breadcrum.vue'
 import {ref} from 'vue';
 const response=ref([]);
 response.value = await fetch('https://dummyjson.com/users');
@@ -15,8 +16,8 @@ export default {
    
     return {
       todos: users.users,
-         
-      
+      breadCrumUrl:'',
+      searchUser:'',
       nextId: 13,
       currentPage: 0,
       pageSize: 5,
@@ -26,14 +27,29 @@ export default {
   },
   components: {
     
-    
+    BreadCrum,
     TodoItem,
     Pagination
   },
   beforeMount: function() {
     this.updateVisibleTodos();
   },
+  
   methods: {
+    search(item){
+      this.searchUser=item;
+      
+      const dataToFilter=this.todos.filter((todo) => todo.firstName==item);
+      if(item.length==0) 
+        {
+          this.updateVisibleTodos();
+        }
+      else
+        {
+          
+          this.visibleTodos=dataToFilter;
+        }
+    },
     addTodo(text) {
       this.todos.push({id: this.nextId, text: text});
       this.nextId++;
@@ -61,15 +77,18 @@ export default {
     updateUrl(){
       
       const url=window.location;
-      const breadCrumUrl=url.hash[2]+url.hash[3]+url.hash[4]+url.hash[5];
-      return breadCrumUrl;
-     
+     this.breadCrumUrl=url.hash.split("/");
+     console.log(this.breadCrumUrl)
+     return this.breadCrumUrl;
     },
-    breadCrumUrl(){
+    /*breadCrumUrl(){
       
       const url=window.location;
       return url.hash[4]
      
-    }
+    }*/
+  },
+  mounted(){
+    this.updateUrl()
   }
 }

@@ -6,6 +6,7 @@ import Home from './components/Home.vue';
 import Mascotas from './Mascotas.vue';
 import Details from './Details.vue'
 import Contacts from './page/contacts.vue'
+import Registrar from './page/Registrar.vue'
 import Setting from './Setting.vue'
 import PathNotFound from './PathNotFound.vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
@@ -13,9 +14,10 @@ import VueSplide from '@splidejs/vue-splide';
 const routes = [
   { path: '/', component: Home },
   { path: '/users', component: About },
-  { path: '/:username', component: Setting },
+  { path: '/user/:username', component: Setting },
+  { path: '/registrar', component: Registrar.vue },
   { path: '/contacts', component: Contacts },
-  { path: '/user/:iduser&name=:firstname',
+  { path: '/users/:iduser&name=:firstname',
   name: 'profile',  component: Details },
   { path: '/mascotas', component: Mascotas },
   { path: '/:pathMatch(.*)*', component: PathNotFound },
