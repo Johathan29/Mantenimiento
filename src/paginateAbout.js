@@ -3,14 +3,33 @@
 import TodoItem from './components/TodoItem.vue';
 import Pagination from './components/Pagination.vue';
 import BreadCrum from './components/Breadcrum.vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { faDeleteLeft} from '@fortawesome/free-solid-svg-icons'
 import {ref} from 'vue';
+import { 
+  initAccordions, 
+  initCarousels, 
+  initCollapses, 
+  initDials, 
+  initDismisses, 
+  initDrawers, 
+  initDropdowns, 
+  initModals, 
+  initPopovers, 
+  initTabs, 
+  initTooltips } from 'flowbite'
+
+
 const response=ref([]);
 response.value = await fetch('https://dummyjson.com/users');
 const users = await response.value.json();
 
 export default {
   name: 'app',
-
+props:{
+  faDeleteLeft:faDeleteLeft
+},
   
   data() {
    
@@ -23,10 +42,12 @@ export default {
       pageSize: 5,
       visibleTodos: [],
       userId:'',
+      delete:faUserPlus    
     };
   },
+
   components: {
-    
+    FontAwesomeIcon,
     BreadCrum,
     TodoItem,
     Pagination
@@ -68,17 +89,22 @@ export default {
       this.updateVisibleTodos();
     },
     updateVisibleTodos() {
-      this.userId=JSON.parse(localStorage.getItem('usuario')).id;
-      const allFilter= this.todos.filter((todo) => todo.id !==JSON.parse(localStorage.getItem('usuario')).id);
-      this.visibleTodos = allFilter.slice(this.currentPage * this.pageSize, (this.currentPage * this.pageSize) + this.pageSize);
-
+      if(JSON.parse(localStorage.getItem('usuario'))){
+        this.userId=JSON.parse(localStorage.getItem('usuario')).id;
+        const allFilter= this.todos.filter((todo) => todo.id !==JSON.parse(localStorage.getItem('usuario')).id);
+        this.visibleTodos = allFilter.slice(this.currentPage * this.pageSize, (this.currentPage * this.pageSize) + this.pageSize);
+  
+      }else{
+        this.visibleTodos = this.todos.slice(this.currentPage * this.pageSize, (this.currentPage * this.pageSize) + this.pageSize);
+      }
+      
       // if we have 0 visible todos, go back a page
       if (this.visibleTodos.length == 0 && this.currentPage > 0) {
         this.updatePage(this.currentPage -1);
       }
     },
     updateUrl(){
-      
+      this.delete=faUserPlus;
       const url=window.location;
      this.breadCrumUrl=url.hash.split("/");
      console.log(this.breadCrumUrl)
@@ -92,6 +118,17 @@ export default {
     }*/
   },
   mounted(){
-    this.updateUrl()
+    this.updateUrl();
+    initAccordions();
+  initCarousels();
+  initCollapses();
+  initDials();
+  initDismisses();
+  initDrawers();
+  initDropdowns();
+  initModals();
+  initPopovers();
+  initTabs();
+  initTooltips();
   }
 }

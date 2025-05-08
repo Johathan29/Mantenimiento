@@ -6,6 +6,7 @@ import Home from './components/Home.vue';
 import Mascotas from './Mascotas.vue';
 import Details from './Details.vue'
 import Contacts from './page/contacts.vue'
+import Alert from './page/alert.vue'
 import Registrar from './page/Registrar.vue'
 import Setting from './Setting.vue'
 import PathNotFound from './PathNotFound.vue';
@@ -17,6 +18,7 @@ const routes = [
   { path: '/user/:username', component: Setting },
   { path: '/registrar', component: Registrar.vue },
   { path: '/contacts', component: Contacts },
+  { path: '/alert', component: Alert },
   { path: '/users/:iduser&name=:firstname',
   name: 'profile',  component: Details },
   { path: '/mascotas', component: Mascotas },

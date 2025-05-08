@@ -55,7 +55,7 @@ onMounted(() => {
   </div>
 </div>
 </div>
-<div :class="[messager=='' ? 'absolute -z-10 right-[4rem]' : 'absolute z-50 md:right-[25.27rem] right-[1.2rem] ']">
+<div :class="[messager=='' ? 'absolute -z-10 right-[4rem]' : 'absolute z-50 md:right-[25.27rem] right-[1.2rem] ']" >
   <img id="avatarButton"  type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="w-10 h-10 rounded-full cursor-pointer" :src="messager.image" alt="User dropdown">
 
     <!-- Dropdown menu -->
