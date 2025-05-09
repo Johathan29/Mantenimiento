@@ -42,7 +42,8 @@ props:{
       pageSize: 5,
       visibleTodos: [],
       userId:'',
-      delete:faUserPlus    
+      delete:faUserPlus ,
+      useradmin:''   
     };
   },
 
@@ -89,7 +90,8 @@ props:{
       this.updateVisibleTodos();
     },
     updateVisibleTodos() {
-      if(JSON.parse(localStorage.getItem('usuario'))){
+      this.useradmin=JSON.parse(localStorage.getItem('usuario'));
+      if(this.useradmin){
         this.userId=JSON.parse(localStorage.getItem('usuario')).id;
         const allFilter= this.todos.filter((todo) => todo.id !==JSON.parse(localStorage.getItem('usuario')).id);
         this.visibleTodos = allFilter.slice(this.currentPage * this.pageSize, (this.currentPage * this.pageSize) + this.pageSize);

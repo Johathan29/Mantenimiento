@@ -20,7 +20,7 @@ import {
 import { And } from 'typeorm';
 
 //const datos=ref({});
-const usuario=ref([])
+
 /*datos.value=[
   {
     Id:Number,
@@ -108,7 +108,7 @@ onMounted(async () =>
         <div  class="">
             <div  class=" flex gap-12 flex-wrap w-full justify-between p-5  rounded-lg border-2 border-[#e5e7eb6b] " style="">
               <div class="brightness-50 w-1/5">
-                  <h1 class="capitalize text-white text-[1.5rem] flex items-center gap-1" > {{userregistered.firstName}}<div :class="['h-2 w-2 rounded-full relative ', userregistered.role==='admin'?'bg-green-500' : 'bg-red-500','me-4']"></div> </h1>
+                  <h1 class="capitalize text-white text-[1.5rem] flex items-center gap-1" > {{userregistered.firstName}}<div :class="['h-2 w-2 rounded-full relative ', userregistered.id===User.id ? 'bg-green-500' : 'bg-red-500','me-4']"></div> </h1>
                   <div class="p-3 border-[1px] border-white w-max rounded-full bg-white">
                       <img v-bind:src="userregistered.image" class="w-72  "/>
                       <p class="text-black font-[serif]">{{ userregistered.role }}</p>
@@ -142,36 +142,40 @@ onMounted(async () =>
             <!-- Modal body -->
             <div class="p-4 md:p-5">
                 <form class="space-y-4" action="#">
-                  <div>
-                    {{ firstname }}
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your name</label>
-                        <input  name="firstname"  @input="event => firstname = event.target.value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
-                    </div>
-                  
-                    <div>
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                        <input type="email" name="email" id="email" :value="datos.Email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
-                    </div>
-                    <div>
-                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-                        <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
-                    </div>
-                    <div class="flex justify-between">
-                        <div class="flex items-start">
-                            <div class="flex items-center h-5">
-                                <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
-                            </div>
-                            <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
-                        </div>
-                        <a href="#" class="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>
-                    </div>
+                  <div class="grid gap-6 mb-6 md:grid-cols-2 text-left ">
+            <div class="">
+                <label for="first_name" class="block mb-2 text-sm font-medium text-[#0f49c5] dark:text-white">First name<sup class="top-[0px] text-sm font-medium text-red-500 dark:text-white">*</sup></label>
+                <input type="text" id="first_name" name="first_name" @input="event => first_name = event.target.value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="John" required />
+            </div>
+            <div>
+                <label for="last_name" class="block mb-2 text-sm font-medium text-[#0f49c5] dark:text-white">Last name<sup class="top-[0px] text-sm font-medium text-red-500 dark:text-white">*</sup></label>
+                <input type="text" id="last_name" name="last_name" @input="event => last_name = event.target.value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Doe" required />
+            </div>  
+           
+        </div>
+        <div class="grid gap-6 mb-6 md:grid-cols-2 text-left"> 
+            <div>
+                <label for="phone" class="block mb-2 text-sm font-medium text-[#0f49c5] dark:text-white">Phone number<sup class="top-[0px] text-sm font-medium text-red-500 dark:text-white">*</sup></label>
+                <input type="tel" id="phone" @input="event => phone = event.target.value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required />
+            </div>
+            <div>
+                <label for="email" class="block mb-2 text-sm font-medium text-[#0f49c5] dark:text-white">Email address<sup class="top-[0px] text-sm font-medium text-red-500 dark:text-white">*</sup></label>
+                <input type="email" id="email" name="email" @input="event => email = event.target.value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="john.doe@company.com" required />
+            </div> 
+        </div>
+        <div class="grid gap-6 mb-6 md:grid-cols-2 text-left">
+            <div>
+                <label for="Age" class="block mb-2 text-sm font-medium text-[#0f49c5] dark:text-white">Age<sup class="top-[0px] text-sm font-medium text-red-500 dark:text-white">*</sup></label>
+                <input type="number" id="Age" name="password" @input="event => Age = event.target.value" 
+                :class="[confirm_password!==false ? 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ':'bg-gray-50 border border-red-500 text-red-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ']" placeholder="•••••••••" required />
+            </div> 
+            
+        </div>
                     <button type="button" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" 
                     @click="update(datos.Id,firstname)">
                       Actualizar perfil
                     </button>
-                    <div class="text-sm font-medium  dark:text-gray-300">
-                        Not registered? <a href="#" class="text-blue-700 hover:underline dark:text-blue-500">Create account</a>
-                    </div>
+                   
                 </form>
             </div>
         </div>
@@ -226,11 +230,11 @@ onMounted(async () =>
     <dl class="w-full text-gray-900 divide-y divide-gray-200 border-b-[1px] border-[#d6d1d1]">
       <div class="flex flex-col pb-3">
             <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Company Name</dt>
-            <dd class="text-lg font-semibold"></dd>
+            <dd class="text-lg font-semibold" v-for="name in userregistered">{{name.name }}</dd>
         </div>
       <div class="flex flex-col pb-3">
             <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400">Department Name</dt>
-            <dd class="text-lg font-semibold" v-for="address in userregistered.company">{{company.department}}</dd>
+            <dd class="text-lg font-semibold" v-for="address in userregistered">{{address.department}}</dd>
         </div>
         <div class="flex flex-col pb-3">
           
@@ -296,6 +300,7 @@ data()
       User:'',
       userjson:'',
       userId:0,
+      usuario:{},
       datos:[],
       userregistered:{}
         };
@@ -310,7 +315,7 @@ methods:
     this.userjson=localStorage.getItem('usuario');
     this.User=JSON.parse(this.userjson);
     this.breadCrumUrl=url.hash.split("/");
-    console.log(this.User)
+    console.log(this.User.id)
      return this.breadCrumUrl;
     },
     /*breadCrumUrl(){
@@ -340,9 +345,7 @@ methods:
         console.log(userregistere)
       this.userregistered=userregistere;
         this.datos.push(this.datos.Email=this.userregistered.email,this.datos.FirstName=this.userregistered.firstName,this.datos.Id=this.userregistered.id);
-
-        //this.usuario.value=JSON.parse(localStorage.getItem('usuario'));
-        console.log(this.userregistered);
+        console.log(this.userregistered.firstName);
     }
   },
   mounted(){

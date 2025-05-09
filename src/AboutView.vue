@@ -4,7 +4,7 @@
 <div class="py-[4rem] bg-[#0798ca30]">
     <div class="max-w-screen-xl md:mx-auto px-5 ">
         <h1 class=" md:flex block items-center gap-[3rem] text-left text-[2rem] text-[#18489b] font-[emoji]">
-          <span class="md:w-[25%] w-full border-r-[2px] border-gray-300">
+          <span :class="[breadCrumUrl[1]!==''?'md:w-[25%] w-full border-r-[2px] border-gray-300':'md:w-[25%] w-full ']">
             User List
           </span> 
           <div class="relative z-0  mb-2 group md:w-[75%] w-full " v-if="breadCrumUrl[1]!==''">
@@ -18,9 +18,9 @@
     </div>
     
    <div class="max-w-screen-xl md:mx-auto  mt-[2rem]">
-      <div class="border-b-[1px] border-[#d1d5db] my-[2rem]">
+      <div :class="[breadCrumUrl[1]==='users'?'border-b-[1px] border-[#d1d5db] my-[2rem]':'hidden']" >
                       <!-- Modal toggle -->
-            <a data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="block w-max text-blue-700 hover:text-blue-800 hover:cursor-pointer focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+            <a data-modal-target="crud-modal" data-modal-toggle="crud-modal" :class="[useradmin.role=='admin'?'block w-max text-blue-700 hover:text-blue-800 hover:cursor-pointer focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800':'hidden']" type="button">
               <FontAwesomeIcon :icon="delete" class="mb-0"/>
               <span class="tooltiptextCreate">Create new User </span>
             </a>

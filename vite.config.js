@@ -7,4 +7,17 @@ export default defineConfig({
   build: {
     target: "ES2022" 
   },
+  /*resolve:
+    { 
+      alias:
+        {
+          'crypto': 'crypto-browserify',
+          'buffer':'buffer/',
+          'stream': 'readable-stream'
+        }
+    },
+  optimizeDeps:{ 
+    include:['@noble/secp256k1'],
+    exclude:['chunk-PASC5ASQS']
+}*/
 })

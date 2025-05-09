@@ -5,21 +5,28 @@ import { faDeleteLeft} from '@fortawesome/free-solid-svg-icons'
 import { counter } from '@fortawesome/fontawesome-svg-core';
 </script>
 <template>
-    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" >
-                <td  class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" >
+         <router-link  title=" " v-bind:to="{name:'profile', params: {iduser:counters,firstname:todo.firstName } }" class="hover:underline">
+            <td  class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                     <img class="w-10 h-10 rounded-full" v-bind:src="todo.image" alt="Jese image">
                     <div class="ps-3">
                         <div class="text-base font-semibold">{{ todo.firstName }} {{ todo.lastName }}</div>
                         <div class="font-normal text-gray-500">{{ todo.email }}</div>
-                    </div>  
+                    </div>     
                 </td>
+            </router-link>
                 <td class="px-6 py-4">
+                    <router-link  title=" " v-bind:to="{name:'profile', params: {iduser:counters,firstname:todo.firstName } }" class="hover:underline">
                     {{ todo.company.title }}
+                    </router-link>
                 </td>
                 <td class="px-6 py-4">
+                    <router-link  title=" " v-bind:to="{name:'profile', params: {iduser:counters,firstname:todo.firstName } }" class="hover:underline">
                     <div class="flex items-center">
                         <div :class="['h-2.5 w-2.5 rounded-full', todo.role=='admin'?'bg-green-500' : 'bg-red-500','me-2']" id="state"></div> Online
                     </div>
+                    </router-link>
                 </td>
                 <td class="px-6 py-4 flex justify-around items-center gap-2">
 
@@ -33,8 +40,9 @@ import { counter } from '@fortawesome/fontawesome-svg-core';
                     
                     </a>
                 </td>
+         
             </tr>
-           
+    
        
            
       

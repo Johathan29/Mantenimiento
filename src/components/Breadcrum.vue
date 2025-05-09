@@ -18,7 +18,7 @@
               <div v-if="name?.[name?.length - 1]==item ">
               <span aria-current="page" 
                             
-                           class="ms-1 capitalize text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
+                           class="ms-1 capitalize text-sm font-medium text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
                 {{item.replace(/[^a-zA-Z]+name=/g,'')}} 
                 
               </span>

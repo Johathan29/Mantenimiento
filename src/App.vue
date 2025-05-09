@@ -113,7 +113,7 @@ mounted(){
   this.captureData();
 },
 components:{
-FormUsers
+FormUsers,
 }
 };
 </script>
