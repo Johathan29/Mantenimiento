@@ -55,7 +55,7 @@ onMounted(async () =>
 <script lang="ts" >
 
 export default{
-name:'FormUsers',
+name:'Form user',
 props:{
 userId: Number,
 send:String,

@@ -1,7 +1,7 @@
 <template>
      <Breadcrum :name="breadCrumUrl"></Breadcrum>
     <div class="py-[4rem] bg-[#0798ca30]">
-    <div class="max-w-screen-xl md:mx-auto px-5 ">
+    <div class="max-w-screen-xl md:mx-auto px-[3rem] ">
         <h1 class=" md:flex block items-center gap-[3rem] text-left text-[2rem] text-[#18489b] font-[emoji]">
             Register
 
@@ -35,6 +35,24 @@
                 <input type="email" id="email" name="email" @input="event => email = event.target.value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="john.doe@company.com" required />
             </div> 
         </div>
+        <div class="grid gap-6 mb-6 md:grid-cols-2 text-left"> 
+            <div>
+                <label for="Gender" class="block mb-2 text-sm font-medium text-[#0f49c5] dark:text-white">Gender <sup class="top-[0px] text-sm font-medium text-red-500 dark:text-white">*</sup></label>
+                <div class="flex gap-2 items-center">
+                        <input type="radio" name="gender" id="one" value="F" v-model="picked" />
+                        <label for="one">One</label>
+
+                        <input type="radio" name="gender" id="two" value="Two" v-model="picked" />
+                        <label for="two">Two</label>
+
+                </div>
+            </div>
+            <div>
+                
+                <label for="email" class="block mb-2 text-sm font-medium text-[#0f49c5] dark:text-white">Age<sup class="top-[0px] text-sm font-medium text-red-500 dark:text-white">*</sup></label>
+                <input type="Number"  min="0" v-model="age" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="john.doe@company.com" required />
+            </div> 
+        </div>
         <div class="grid gap-6 mb-6 md:grid-cols-2 text-left">
             <div>
                 <label for="password" class="block mb-2 text-sm font-medium text-[#0f49c5] dark:text-white">Password<sup class="top-[0px] text-sm font-medium text-red-500 dark:text-white">*</sup></label>
@@ -63,9 +81,9 @@
 </template>
 <script>
 import Breadcrum from '../components/Breadcrum.vue';
-import  sha256  from  'crypto-js/sha256' ; 
-import hmacSHA512  from  'crypto-js/hmac-sha512' ; 
-import  Base64  from  'crypto-js/enc-base64' ;
+//import  sha256  from  'crypto-js/sha256' ; 
+//import hmacSHA512  from  'crypto-js/hmac-sha512' ; 
+//import  Base64  from  'crypto-js/enc-base64' ;
 
  
 import { 
@@ -80,18 +98,21 @@ import {
   initPopovers, 
   initTabs, 
   initTooltips } from 'flowbite'
-  import crypto from 'crypto';
+ // import crypto from 'crypto';
 export default{
     name:'Registrar',
     data(){
-return{
-    getData:'',
-    setData:'',
-    confirm:true,
-    confirm_password:'',
-     algorithm : 'aes-256-cbc',
-     breadCrumUrl:''
-}
+         return{
+            getData:'',
+            setData:[],
+            confirm:true,
+            confirm_password:'',
+            algorithm : 'aes-256-cbc',
+            breadCrumUrl:'',
+            fetch:[],
+            titulo:'registrar'
+            
+            }
     },
     
     methods:{
@@ -99,24 +120,33 @@ return{
             this.confirm=confirm;
         },
     
-       SendDataUser(first_name,last_name,email,phone,password,confirm_password){
-           fetch('https://jsonplaceholder.typicode.com/posts',{
+     async  SendDataUser(first_name,last_name,email,phone,password,confirm_password){
+          this.setData= await fetch('https://dummyjson.com/users/add',{
                 method: 'POST',
                 body: JSON.stringify({
-                    id: 102,
-                    title: first_name,
-                    body: last_name,
-                    userId: 11
+                    firstName: first_name,
+                    lastName: last_name,
+                    age: 28,
+                    gender: "female",
+                    email: email,
+                    phone: phone,
+                    username: first_name,
+                    password:confirm_password
                     
                 }),
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                 },
             }).then((response) => response.json()).then((json) => this.setData=json);
+            this.getData.push(this.setData);
+            console.log(this.getData);
             this.confirm_password=password==confirm_password ? true : false;
             
                if(this.confirm_password==true){
-                console.log(first_name,last_name,email,phone,this.confirm_password);
+               /* const clave_privada=''
+                const  hashDigest  =  sha256 (this.confirm_password) ; 
+                const  hmacDigest  =  Base64.stringify ( hmacSHA512 (hashDigest , clave_privada ) ) ;
+                console.log(hmacDigest);*/
                }
             else{
                 console.log('incorrect password');
@@ -126,17 +156,16 @@ return{
        },
        async encrypt_data() {
        
-
-            const secret = 'abcdefg';
-            const hash = crypto.createHmac('sha256', secret).update('I love cupcakes').digest('hex');
-            console.log(hash);
+         this.fetch = await fetch('https://dummyjson.com/users');
+this.fetch=  this.fetch.json();
+           
          
       },
         async getDataUser()
             {
-            fetch('https://jsonplaceholder.typicode.com/posts/')
-        .then((response) => response.json())
-        .then((json) => console.log(json))
+                const response = await fetch('https://dummyjson.com/users');
+        const users = await response.json();
+        this.getData=users.users;
 
             },
             updateUrl(){
@@ -144,9 +173,7 @@ return{
 const nonce='' 
 const ruta='' 
 const clave_privada='' ;  // ... 
-const  hashDigest  =  sha256 ( nonce  +  mensaje ) ; 
-const  hmacDigest  =  Base64.stringify ( hmacSHA512 (  hashDigest , clave_privada ) ) ;  
-console.log(hmacDigest);
+
 const url=window.location;
 this.breadCrumUrl=url.hash.split("/");
 console.log(this.breadCrumUrl);

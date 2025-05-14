@@ -58,7 +58,7 @@ methods:
       const url=window.location;
       this.homeurl=url.hash
       return this.homeurl;
-      console.log(this.homeurl);
+      
     },
   },
 mounted()

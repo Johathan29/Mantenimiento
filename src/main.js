@@ -26,8 +26,10 @@ const routes = [
 ];
 const router = createRouter({
   history: createWebHashHistory(),
+  
   routes,
 });
+
 const app = createApp(App);
 app.use(VueSplide);
 app.use(router);
