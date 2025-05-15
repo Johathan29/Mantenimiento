@@ -165,7 +165,10 @@
         
       </div>
     </div>
-    <div style="width:100%;"><canvas id="acquisitions"></canvas></div>
+    <div class="max-w-screen-xl md:mx-auto ">
+ <div style="width:100%;" class="py-[4rem]"><canvas id="acquisitions" class="bg-[#f8f8ff] p-[3rem] rounded-lg"></canvas></div>
+    </div>
+   
 </template>
 <script src="./paginateAbout.js"></script>
 <style>

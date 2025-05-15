@@ -87,39 +87,45 @@ props:{
     
   },
    function() {
-    this.newarray=[{label:[],data:[]}];
-    const data = [
-     { label: [2010], data: 10 ,backgroundColor: 'rgba(255, 99, 132, 0.2)'},
-     { label: [2011], data: 20,backgroundColor:  'rgba(255, 159, 64, 0.2)' },
-     { label: [2012], data: 15,backgroundColor: 'rgba(255, 205, 86, 0.2)' },
-     { label: [2013], data: 25,backgroundColor:'rgba(75, 192, 192, 0.2)' },
-     { label: [2014], data: 22,backgroundColor: 'rgba(54, 162, 235, 0.2)' },
-     { label: [2015], data: 30,backgroundColor:'rgba(153, 102, 255, 0.2)',
-      },
-     { label: [2016], data: 28,backgroundColor:'rgba(201, 203, 207, 0.2)'
-    , },
-   ];
    
-   console.log(data.map(item=>item.label))
-    const numbers = [1,1,1,2,2,2,3,3,4,4,5,6,7,8];
-    const specimens = data.filter((number, i) => i == 0 ? true : numbers[i - 1] != number);
-    const counterSpecimens = specimens.map(spec => {
-        return {number: spec};
-    });
-    
-    counterSpecimens.map((countSpec, i) =>{
-        const actualSpecLength = numbers.filter(number => number === countSpec.number).length;
-        countSpec.count = actualSpecLength;
-    })
-    console.log(counterSpecimens)
-    const labels = ["2010","2011","2012","2013","2014","2015","2016"]
+    const data = 
+      {
+        year: [2010,2011,2012,2013,2014,2015,2016],
+        infordata:[
+         { label: 'Enero', data: [20,29,19,20,29,19,70],backgroundColor:  'rgba(255, 99, 132, 0.2)', },
+     
+      { label: 'Febrero', data: [15,20,29,19,20,29,75],backgroundColor: 'rgba(255, 159, 64, 0.2)',
+      },
+      { label: 'Marzo', data: [25,20,29,19,20,29,76],backgroundColor:'rgba(255, 205, 86, 0.2)' },
+      
+      { label: "Abril", data: [22,20,29,19,20,29,77],backgroundColor: 'rgba(75, 192, 192, 0.2)' },
+      
+       { label: "Mayo", data: [30,20,29,19,20,29,78],backgroundColor:'rgba(54, 162, 235, 0.2)'
+      
+      },
+      { label: "Junio", data: [28,20,29,19,20,29,79],backgroundColor:'rgba(153, 102, 255, 0.2)'
+        , },
+        { label: "Julio", data: [10,29,19,20,29,19,70] ,backgroundColor: 'rgba(201, 203, 207, 0.2)'},
+      
+    ],
+  }
+  
+console.log()
     new Chart(
       document.getElementById('acquisitions'),
       {
     type: 'bar',
         data: {
-          labels:labels,
-          datasets:[ { label: [2010], data: [10] ,backgroundColor: [
+          labels:data.year,
+          datasets:data.infordata,
+        /*
+          data.map(item => item.data
+          ),
+                
+              
+        
+          /*datasets:[ 
+            { label: [2010], data: [10] ,backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             
           ],},
@@ -152,16 +158,13 @@ props:{
           { label: [2016], data: [28],bbackgroundColor: [
             
             'rgba(201, 203, 207, 0.2)'
-          ],},]
-            
-          
-        
-          
-        },
+          ],                                                                                                                                                                                                                                                                                                                 },] 
+        },*/
         options: {
     indexAxis: 'x',
   }
       }
+    }
     )
   },
     search(item){
@@ -225,6 +228,7 @@ props:{
       return url.hash[4]
      
     }*/
+    
   },
   mounted(){
    this.function();

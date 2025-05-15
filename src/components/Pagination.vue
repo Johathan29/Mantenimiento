@@ -12,7 +12,7 @@
       <a  :class="['flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 border border-e-0   border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white',item==currentPage+1 ? 'bg-gray-700 text-white' : ' bg-gray-800 cursor-pointer']" v-on:click="updatePage(item-1)">{{ item  }}</a>
     </li>
    
-    <li>
+    <li class="mb-[0.3rem]">
       <button  
       v-bind:disabled="showNextLink()" 
       v-on:click="updatePage(currentPage + 1)"  

@@ -25,11 +25,11 @@ export default {
     },
     data(){
         return{
-        todos: users     
+        todos: ["johathan"]     
     }
     },
     mounted(){
-
+this.usersAll();
     },
   }
   
