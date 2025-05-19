@@ -6,9 +6,18 @@ export default {
         todos:['a'],
        users:[],
     },
+    data(){
+      return{
+        
+      todos: ["johathan"]     
+  }
+  },
     methods: {
-        usersAll() {
-       return this.todos
+      async usersAll() {
+          const response = await fetch('https://dummyjson.com/users');
+        const users= await response.json();
+        return this.users=users.users
+       
       },
    
       totalPages() {
@@ -23,11 +32,7 @@ export default {
       },
       
     },
-    data(){
-        return{
-        todos: ["johathan"]     
-    }
-    },
+    
     mounted(){
 this.usersAll();
     },

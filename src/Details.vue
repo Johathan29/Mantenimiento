@@ -111,6 +111,7 @@ onMounted(async () =>
                   <h1 class="capitalize text-white text-[1.5rem] flex items-center gap-1" > {{userregistered.firstName}}<div :class="['h-2 w-2 rounded-full relative ', userregistered.id===User.id ? 'bg-green-500' : 'bg-red-500','me-4']"></div> </h1>
                   <div class="p-3 border-[1px] border-white w-max rounded-full bg-white">
                       <img v-bind:src="userregistered.image" class="w-72  "/>
+                      <h1>{{  }}</h1>
                       <p class="text-black font-[serif]">{{ userregistered.role }}</p>
                   </div>
               </div>
@@ -285,6 +286,7 @@ onMounted(async () =>
 
 <script lang="ts" >
 import BreadCrum from './components/Breadcrum.vue'
+import Conexion from './components/Endpoints'
 export default{
 name:'Datails',
 props:{
@@ -311,6 +313,8 @@ async mounted() {
 methods:
 { 
   updateUrl(){
+    const endpoint= Conexion.methods.usersAll();
+     endpoint
     const url=window.location;
     this.userjson=localStorage.getItem('usuario');
     this.User=JSON.parse(this.userjson);
@@ -326,26 +330,27 @@ methods:
     }*/
      update(index,firstname)
     {
+      
       this.userregistered.push(this.userregistered.firstName=firstname)
      this.datos.push(this.datos.FirstName=firstname);
      
     },
-    async endpoind()
+     endpoind()
     {
 
       const url=window.location;
       const id = url.hash.split('/')
       const ruta=id[1];
       this.userId=parseInt(id[2]);
-        const response = await fetch('https://dummyjson.com/users');
-        const users= await response.json();
-        const resultuser=users.users;
 
-        const userregistere=resultuser.find(item=>item.id===this.userId);
+        const resultuser= Conexion.methods.usersAll();
+console.log(resultuser)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+       /* const userregistere=resultuser.find(item=>item.id===this.userId);
         console.log(userregistere)
       this.userregistered=userregistere;
         this.datos.push(this.datos.Email=this.userregistered.email,this.datos.FirstName=this.userregistered.firstName,this.datos.Id=this.userregistered.id);
-        console.log(this.userregistered.firstName);
+        console.log(this.userregistered.firstName);*/
     }
   },
   mounted(){
@@ -353,7 +358,8 @@ methods:
     this.endpoind();
   },
   components:{
-    BreadCrum
+    BreadCrum,
+    Conexion
   }
 }
 </script>

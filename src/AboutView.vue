@@ -85,7 +85,7 @@
       </div>
       <div class="text-xs text-[#646161] flex gap-4 items-center bg-[#0798ca30] p-4 w-full text-left">
             <label class="text-[14px] font-bold w-auto ">filter category:</label>
-            <select name="" id="" v-model="selected" @change="endPoint(selected)" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 ">
+            <select name="" id="" v-model="selected" @change="SelectFilter(selected)" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 ">
               <option value="" selected disabled >Order by</option>
               <option value="asc" >A-z</option>
               <option value="desc" >Z-a</option>
@@ -118,7 +118,7 @@
             </div>
           </div>
       <div class="w-full flex justify-center overflow-x-auto ">
-        <table class="text-sm w-full   text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <table class="text-sm w-full  border-x-[#d8ecf5] border-[2px] border-b-[#d8ecf5] text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-[#646161] uppercase bg-[#0798ca30] w-full ">
             
             <tr>
@@ -166,7 +166,7 @@
       </div>
     </div>
     <div class="max-w-screen-xl md:mx-auto ">
- <div style="width:100%;" class="py-[4rem]"><canvas id="acquisitions" class="bg-[#f8f8ff] p-[3rem] rounded-lg"></canvas></div>
+ <div style="width:100%;" class="py-[4rem]"><canvas id="acquisitions" class="bg-[#f8f8ff] p-[3rem] rounded-lg" aria-label="Hello ARIA World" role="img"></canvas></div>
     </div>
    
 </template>

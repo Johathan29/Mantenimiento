@@ -6,7 +6,7 @@ import { counter } from '@fortawesome/fontawesome-svg-core';
 </script>
 <template>
 
-        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" >
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-[#d8ecf3] dark:hover:bg-gray-600" >
          <router-link  title=" " v-bind:to="{name:'profile', params: {iduser:counters,firstname:todo.firstName } }" class="hover:underline">
             <td  class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                     <img class="w-10 h-10 rounded-full" v-bind:src="todo.image" alt="Jese image">
