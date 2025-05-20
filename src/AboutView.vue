@@ -5,7 +5,7 @@
     <div class="max-w-screen-xl md:mx-auto px-5 ">
         <h1 class=" md:flex block items-center gap-[3rem] text-left text-[2rem] text-[#18489b] font-[emoji]">
           <span :class="[breadCrumUrl[1]!==''?'md:w-[25%] w-full border-r-[2px] border-gray-300':'md:w-[25%] w-full ']">
-            User List
+            Users List
           </span> 
           <div class="relative z-0  mb-2 group md:w-[75%] w-full " v-if="breadCrumUrl[1]!==''">
                 <input type="search" name="search_users" v-model="search_users" @keyup="search(search_users)" @input="event => search_users = event.target.value"  id="search_users" class="block pt-[3px] px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
@@ -165,7 +165,9 @@
         
       </div>
     </div>
-    <div class="max-w-screen-xl md:mx-auto ">
+   
+    <div class="max-w-screen-xl md:mx-auto "> <hr class="my-[2rem] "/>
+      <h1 class="text-left text-[2rem] text-[#18489b] font-[emoji]">sers graph </h1>
  <div style="width:100%;" class="py-[4rem]"><canvas id="acquisitions" class="bg-[#f8f8ff] p-[3rem] rounded-lg" aria-label="Hello ARIA World" role="img"></canvas></div>
     </div>
    

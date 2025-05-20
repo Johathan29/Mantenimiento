@@ -14,10 +14,15 @@ export default {
   },
     methods: {
       async usersAll() {
-          const response = await fetch('https://dummyjson.com/users');
+          const response = await fetch('https://dummyjson.com/users?limit=208');
         const users= await response.json();
         return this.users=users.users
        
+      },
+     async endpointAll(){
+      const response= await fetch('https://dummyjson.com/users?limit=208');
+      const users = await response.json();
+      return this.users=users.users
       },
    
       totalPages() {
@@ -34,7 +39,8 @@ export default {
     },
     
     mounted(){
-this.usersAll();
+      this.endpointAll();
+      this.usersAll();
     },
   }
   

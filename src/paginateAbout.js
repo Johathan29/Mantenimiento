@@ -26,20 +26,15 @@ import {
     const response=ref([]);
     response.value = await fetch('https://dummyjson.com/users?limit=208');
     const users = await response.value.json();
- 
-const categoryTitle=users.users.map(item=> item.company.title)
-const items = new Set(categoryTitle);
-const title = Array.from(items);
-  console.log(title);
-  
+    const categoryTitle=users.users.map(item=> item.company.title)
+    const items = new Set(categoryTitle);
+    const title = Array.from(items);
 export default {
   name: 'app',
-props:{
-  faDeleteLeft:faDeleteLeft
-},
-  
+  props:{
+    faDeleteLeft:faDeleteLeft
+  },
   data() {
-   
     return {
       users:[],
       todos: users.users,
@@ -53,10 +48,10 @@ props:{
       delete:faUserPlus ,
       useradmin:'',
       categoryTitle:title ,
-      newarray:[] 
+      newarray:[],
+      chart:'' 
     };
   },
-
   components: {
     FontAwesomeIcon,
     BreadCrum,
@@ -67,7 +62,6 @@ props:{
   beforeMount: function() {
     this.updateVisibleTodos();
   },
-  
   methods: {
     async SelectFilter(item)
     {
@@ -75,8 +69,7 @@ props:{
         response.value = await fetch('https://dummyjson.com/users?limit=208&sortBy=firstName&order='+item+'');
         const users = await response.value.json();
         this.todos=users.users;
-        this.updateVisibleTodos();
-        
+        this.updateVisibleTodos();    
     },
     async searchcategoryTitle(item)
     {
@@ -84,20 +77,22 @@ props:{
       response.value = await fetch('https://dummyjson.com/users/filter?key=company.title&value='+item+'');
       const users = await response.value.json();
       this.todos=users.users;
-      this.updateVisibleTodos();
-  
+      this.updateVisibleTodos(); 
+      this.CanvasInterface(this.todos);
   },
-   CanvasInterface() {
+   CanvasInterface(items) {
     var title=this.todos.map(item => ({
       label:item.company.title
       }))
-   var repetidos = {};
-     const data = this.todos.map((numero)=>({
-      label:numero.role,
-      data:repetidos[numero.role] = (repetidos[numero.role] || 0) + 1
+    var repetidos = {};
+    const  ctx=document.getElementById('acquisitions');
+    if(items===''){
+    var data = this.todos.map((numero)=>({
+    label:numero.role,
+    data:repetidos[numero.role] = (repetidos[numero.role] || 0) + 1
     }));
-    new Chart(
-      document.getElementById('acquisitions'),
+    this.chart = new Chart(ctx,
+     
       {
     type: 'bar',
         data: {
@@ -121,10 +116,56 @@ props:{
        
         options: {
     indexAxis: 'x',
+    interaction: {
+      mode: 'y'
+  }
   }
       }
     }
     )
+  Chart.update();
+    }else
+    {  
+     var data = this.todos.map((numero)=>({
+      label:numero.role,
+      data:repetidos[numero.role] = (repetidos[numero.role] || 0) + 1
+    }));
+    this.chart = new Chart(ctx,
+     
+      {
+    type: 'bar',
+        data: {
+          labels:["Admin", "Moderator","User"],
+          datasets:[
+            {
+              label:"admin",
+              data:[repetidos.admin]
+            },
+            {
+              label:"moderator",
+              data:[0,repetidos.moderator]
+            }
+            ,
+            {
+              label:"user",
+              data:[0,0,repetidos.user]
+            }
+          ]
+          ,
+       
+        options: {
+    indexAxis: 'x',
+    interaction: {
+      mode: 'y'
+  }
+  }
+      }
+    }
+    )
+  
+    }
+   
+   
   },
     search(item){
       this.searchUser=item;

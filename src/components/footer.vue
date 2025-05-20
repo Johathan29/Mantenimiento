@@ -27,13 +27,13 @@ function obtenerFechaHoy()
           <nav class="md:w-1/2 sm:w-full text-left ">
             <ul class="font-medium block flex-col p-4 md:p-0 mt-4 ">
                 <li>
-                  <router-link class="  px-3 py-2 text-sm font-medium text-gray-300  hover:text-white" aria-current="page" to="/">
+                  <router-link class="flex gap-2 items-center px-3 py-2 text-sm font-medium text-gray-300  hover:text-white" aria-current="page" to="/">
                     <FontAwesomeIcon :icon="faHouse" class="mb-0"/> Home
                   </router-link>
                 </li>
                 <li>
-                  <router-link class=" px-3 py-2 text-sm font-medium text-gray-300  hover:text-white" aria-current="page" to="/user">
-                  <FontAwesomeIcon :icon="faUser" class="mb-0"/> Usuarios
+                  <router-link class=" px-3 py-2 text-sm font-medium text-gray-300  hover:text-white" aria-current="page" to="/users">
+                  <FontAwesomeIcon :icon="faUser" class="mb-0"/> Users
                   </router-link>
                 </li>
                 <li>

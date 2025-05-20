@@ -34,7 +34,7 @@ import { counter } from '@fortawesome/fontawesome-svg-core';
                         <FontAwesomeIcon :icon="faEye" class="mb-0"/>
                         <span class="tooltiptext">Ver detalle</span>
                     </router-link>
-                    <a  v-on:click="removeTodo()" v-if="usuario.role=='admin'" class="font-medium text-blue-600  hover:cursor-pointer"  title="">
+                    <a  v-on:click="removeTodo()" v-if="usuario['role']=='admin'" class="font-medium text-blue-600  hover:cursor-pointer"  title="">
                         <FontAwesomeIcon :icon="faDeleteLeft" class="mb-0"/>
                         <span class="tooltiptextDelete">Eliminar usuario </span>
                     
@@ -50,35 +50,34 @@ import { counter } from '@fortawesome/fontawesome-svg-core';
 
 <script  lang="ts">
 export default {
-  name: 'todoitem',
-  props: ['todo',],
-data(){
-return{
-    wordToword:'',
-    counters:0,
-    usuario:[],
-}
-},
+    name: 'todoitem',
+    props: ['todo',],
+    data(){
+    return{
+        wordToword:'',
+        counters:0,
+        usuario:[],
+        }
+    },
   methods: {
     removeTodo() {
       this.$emit('todo:remove', this.todo.id);
     },
-    
     counterWord(){
         let index=0;
         this.usuario=localStorage.getItem('usuario');
         this.usuario=JSON.parse(this.usuario);
-           while (index <= this.todo.firstName.length) {
+        while (index <= this.todo.firstName.length) {
             this.wordToword=0;
              this.counters=this.wordToword+""+this.todo.id;
              index++
            }
         }
-},
-mounted(){
+    },
+    mounted(){
         this.counterWord();
-    }
-    
+        }
+        
 }
 
 </script>
