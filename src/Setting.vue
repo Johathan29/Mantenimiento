@@ -52,16 +52,16 @@ onMounted(() =>
 })
   //https://jsonplaceholder.typicode.com/users
 onMounted(async () => 
-{
-  const response = await fetch('https://dummyjson.com/users');
-  users.value = await response.json();
-  users.value=users.value.users;
-  userregistered.value=users.value.find(item=>item.id===id.value);
-  datos.value.push(datos.value.Email=userregistered.value.email,datos.value.FirstName=userregistered.value.firstName,datos.value.Id=userregistered.value.id);
-  breadcrum.value=datos.value.FirstName;
-  console.log(datos.value);
+    {
+    const response = await fetch('https://dummyjson.com/users');
+    users.value = await response.json();
+    users.value=users.value.users;
+    userregistered.value=users.value.find(item=>item.id===id.value);
+    datos.value.push(datos.value.Email=userregistered.value.email,datos.value.FirstName=userregistered.value.firstName,datos.value.Id=userregistered.value.id);
+    breadcrum.value=datos.value.FirstName;
+    console.log(datos.value);
 
-}
+    }
 );
 const datails =computed( 
     {
@@ -85,17 +85,28 @@ const datails =computed(
 
 </script>
 <template>
+    <section>
+        <div class="py-[4rem] bg-[#0798ca30]">
+    <div class="max-w-screen-xl md:mx-auto px-5 ">
+        <h1 class="text-left text-[2rem] text-[#18489b] font-[emoji]">Setting in Profile</h1>
+      </div>
+</div>
+    </section>
   <section>
     <div class="max-w-screen-xl md:mx-auto px-5 my-3">
-        <div v-for="items in users" >
-            <div v-if="items.id ==id" class="w-full h-2/6 p-5 max-h-[29rem] rounded-lg border-2 bg-[#1f2937] brightness-50" style="">
-               <h1 class="capitalize text-white text-[1.5rem] flex items-center gap-1" > {{items.firstName}}<div :class="['h-2 w-2 rounded-full relative ', items.role==='admin'?'bg-green-500' : 'bg-red-500','me-4']"></div> </h1>
-               <div class="p-3 border-[1px] border-white w-max rounded-full bg-white">
-               <img v-bind:src="items.image" class="w-72  "/>
-               </div>
-            </div>
+        <div  class="">
+            <div  class=" flex gap-12 w-full  p-5  rounded-lg border-2 border-[#e5e7eb6b] " style="">
+              <div class="brightness-50">
+                  <h1 class="capitalize text-white text-[1.5rem] flex items-center gap-1" > {{userregistered.firstName}}<div :class="['h-2 w-2 rounded-full relative ', userregistered.role==='admin'?'bg-green-500' : 'bg-red-500','me-4']"></div> </h1>
+                  <div class="p-3 border-[1px] border-white w-max rounded-full bg-white">
+                      <img v-bind:src="userregistered.image" class="w-72  "/>
+                      <p class="text-black font-[serif]">{{ userregistered.role }}</p>
+                  </div>
+              </div>
+
             
         </div>
+    </div>
     </div>
 
 
@@ -126,7 +137,7 @@ const datails =computed(
             <div class="p-4 md:p-5">
                 <form class="space-y-4" action="#">
                   <div>
-                    {{ firstname }}
+                    
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your name</label>
                         <input  name="firstname"  @input="event => firstname = event.target.value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
                     </div>

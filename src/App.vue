@@ -2,7 +2,7 @@
 import Header from './components/Header.vue';
 import Footer from './components/footer.vue';
 import FormUsers from './components/FormUsers.vue'
-import Registrar from './components/Registrar.vue'
+import Registrar from './page/Registrar.vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {} from '@fortawesome/free-regular-svg-icons'
 
@@ -55,7 +55,7 @@ onMounted(() => {
   </div>
 </div>
 </div>
-<div :class="[messager=='' ? 'absolute -z-10 right-[4rem]' : 'absolute z-50 md:right-[25.27rem] right-[1.2rem] ']">
+<div :class="[messager=='' ? 'absolute -z-10 right-[4rem]' : 'absolute z-50 md:right-[25.27rem] right-[1.2rem] ']" >
   <img id="avatarButton"  type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="w-10 h-10 rounded-full cursor-pointer" :src="messager.image" alt="User dropdown">
 
     <!-- Dropdown menu -->
@@ -82,9 +82,10 @@ onMounted(() => {
     </div>
     </div>
     </section>
-  <div>
+  <div class="h-full">
     <router-view @array="messager"></router-view>
   </div>
+  
   <Footer/>
 </template>
 
@@ -112,7 +113,7 @@ mounted(){
   this.captureData();
 },
 components:{
-FormUsers
+FormUsers,
 }
 };
 </script>

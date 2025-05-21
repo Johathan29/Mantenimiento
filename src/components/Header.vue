@@ -2,6 +2,7 @@
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faPaw } from '@fortawesome/free-solid-svg-icons'
+import {faUsers } from '@fortawesome/free-solid-svg-icons'
 import { faHouse } from '@fortawesome/free-solid-svg-icons'
 </script>
 <template>
@@ -17,7 +18,7 @@ import { faHouse } from '@fortawesome/free-solid-svg-icons'
         <button
             data-collapse-toggle="navbar-default"
             type="button"
-            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:bg-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-[#111827] dark:focus:ring-gray-600"
             aria-controls="navbar-default"
             aria-expanded="false">
             <span class="sr-only">Open main menu</span>
@@ -36,29 +37,29 @@ import { faHouse } from '@fortawesome/free-solid-svg-icons'
             </svg>
           </button>
       <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-      <ul class="font-medium flex flex-col text-left p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+      <ul class="font-medium flex flex-col text-left p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-[#111827]">
         <li>
-          <router-link class="px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page" to="/">
+          <router-link class="px-3 py-2 text-sm font-medium text-gray-300 hover:bg-[#111827] hover:rounded-[0.375rem] hover:text-white" aria-current="page" to="/">
             <FontAwesomeIcon :icon="faHouse" class="mb-0"/> Home
           </router-link>
         </li>
         <li>
-          <router-link class=" px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page" to="/users">
-           <FontAwesomeIcon :icon="faPaw" class="mb-0"/> Users
+          <router-link class=" px-3 py-2 text-sm font-medium text-gray-300 hover:bg-[#111827] hover:rounded-[0.375rem] hover:text-white" aria-current="page" to="/users">
+           <FontAwesomeIcon :icon="faUsers" class="mb-0"/> Users
           </router-link>
         </li>
         <li>
-          <router-link class=" px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page" to="/mascotas">
+          <router-link class=" px-3 py-2 text-sm font-medium text-gray-300 hover:bg-[#111827] hover:rounded-[0.375rem] hover:text-white" aria-current="page" to="/mascotas">
            <FontAwesomeIcon :icon="faPaw" class="mb-0"/> Mascotas
           </router-link>
         </li>
         <li>
-          <router-link class=" px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page" to="/mascotas">
+          <router-link class=" px-3 py-2 text-sm font-medium text-gray-300 hover:bg-[#111827] hover:rounded-[0.375rem] hover:text-white" aria-current="page" to="/mascotas">
            <FontAwesomeIcon :icon="faPaw" class="mb-0"/> Mascotas
           </router-link>
         </li>
         <li>
-         <router-link class=" px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white" aria-current="page" to="/contacts">
+         <router-link class=" px-3 py-2 text-sm font-medium text-gray-300 hover:bg-[#111827] hover:rounded-[0.375rem] hover:text-white" aria-current="page" to="/contacts">
            <FontAwesomeIcon :icon="faPaw" class="mb-0"/> Contacts
           </router-link>
         </li>
