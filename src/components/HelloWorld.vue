@@ -6,10 +6,9 @@
    
     <SplideSlide v-for="item in options.list.slice(0,5)" >
      
-        <img v-bind:src="item.Imagen" alt="Sample 1" class="w-full object-cover h-[100%]">
-      <div class="container absolute bottom-14">
-        <h2 class=" text-white "  :style="{ 'font-size': fontSize + 'rem' }">{{item.Nombre}}</h2>
-    
+      <img v-bind:src="item.Imagen" :alt="item.Nombre" class="w-full object-cover h-[38rem]">
+      <div class="container absolute bottom-14 bg-[#6260600]">
+        <h2 class="text-white "  :style="{ 'font-size': fontSize + 'rem' }">{{item.Nombre}}</h2>
      </div>
     </SplideSlide>
   

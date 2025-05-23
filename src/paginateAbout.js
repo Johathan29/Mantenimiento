@@ -6,6 +6,7 @@ import Pagination from './components/Pagination.vue';
 import BreadCrum from './components/Breadcrum.vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
 import { faDeleteLeft} from '@fortawesome/free-solid-svg-icons'
 import Chart from 'chart.js/auto'
 import {ref} from 'vue';
@@ -21,6 +22,7 @@ import {
   initPopovers, 
   initTabs, 
   initTooltips } from 'flowbite';
+import { Any } from 'typeorm';
 
 
     const response=ref([]);
@@ -44,9 +46,12 @@ export default {
       currentPage: 0,
       pageSize: 10,
       visibleTodos: [],
+      login:{},
       userId:'',
       delete:faUserPlus ,
+      faCircleCheck:faCircleCheck,
       useradmin:'',
+      Message:false,
       categoryTitle:title ,
       newarray:[],
       chart:'' 
@@ -70,6 +75,14 @@ export default {
         const users = await response.value.json();
         this.todos=users.users;
         this.updateVisibleTodos();    
+    },
+    MessageBoxPassword(repeat_password,floating_password){
+      //let Message=false;
+      if(repeat_password===floating_password){
+        this.Message=true
+      }else{
+        this.Message=false
+      }
     },
     async searchcategoryTitle(item)
     {
@@ -181,10 +194,28 @@ export default {
           this.visibleTodos=dataToFilter;
         }
     },
-    addTodo(email,password,repet_password,firstname,lastname,floating_phone,age,username,phone,image,gender) {
-      this.todos.push({id: 31, email: email});
-      this.nextId++;
-      console.log(this.todos)
+    async addUser(email,floating_password,repeat_password,floating_first_name,floating_last_name,floating_phone,floating_username) {
+    
+      this.login = await fetch('https://dummyjson.com/user/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: floating_first_name,
+          lastName: floating_last_name,
+          email: email,
+          phone: floating_phone,
+          username: floating_username,
+          password:repeat_password,
+          gener:'Ferme'
+          }),
+        })
+        .then(res => res.json())
+      
+      const datauser= this.login;
+      
+      this.todos.push(this.login);
+      //this.nextId++;
+   console.log(datauser)
       this.updateVisibleTodos();
     },
     removeTodo(id) {
@@ -197,9 +228,11 @@ export default {
       this.updateVisibleTodos();
     },
     updateVisibleTodos() {
+     
       this.useradmin=JSON.parse(localStorage.getItem('usuario'));
+      
       if(this.useradmin){
-        this.userId=JSON.parse(localStorage.getItem('usuario')).id;
+        
         const allFilter= this.todos.filter((todo) => todo.id !==JSON.parse(localStorage.getItem('usuario')).id);
         this.visibleTodos = allFilter.slice(this.currentPage * this.pageSize, (this.currentPage * this.pageSize) + this.pageSize);
   
@@ -218,7 +251,7 @@ export default {
       const url=window.location;
      this.breadCrumUrl=url.hash.split("/");
      console.log(this.breadCrumUrl)
-    
+     this.userId=this.todos.find((todo) => todo.id==JSON.parse(localStorage.getItem('usuario')).id);
  
     return this.breadCrumUrl,this.pageSize;
     },
