@@ -7,6 +7,7 @@ import BreadCrum from './components/Breadcrum.vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { faDeleteLeft} from '@fortawesome/free-solid-svg-icons'
 import Chart from 'chart.js/auto'
 import {ref} from 'vue';
@@ -22,15 +23,15 @@ import {
   initPopovers, 
   initTabs, 
   initTooltips } from 'flowbite';
-import { Any } from 'typeorm';
 
 
-    const response=ref([]);
-    response.value = await fetch('https://dummyjson.com/users?limit=208');
-    const users = await response.value.json();
-    const categoryTitle=users.users.map(item=> item.company.title)
-    const items = new Set(categoryTitle);
-    const title = Array.from(items);
+
+const response=ref([]);
+response.value = await fetch('https://dummyjson.com/users?limit=208');
+const users = await response.value.json();
+const categoryTitle=users.users.map(item=> item.company.title)
+const items = new Set(categoryTitle);
+const title = Array.from(items);
 export default {
   name: 'app',
   props:{
@@ -50,11 +51,25 @@ export default {
       userId:'',
       delete:faUserPlus ,
       faCircleCheck:faCircleCheck,
+      faCircleXmark:faCircleXmark,
       useradmin:'',
-      Message:false,
+      MessageString:false,
+      MessageEmail:false,
+      MessageCompany:false,
+      MessagePhone:false,
+      MessageLastName:false,
+      MessageUserName:false,
+      MessageFirstName:false,
+      MessagePassword:false,
+      MessageNumber:false,
       categoryTitle:title ,
       newarray:[],
-      chart:'' 
+      chart:'',
+      uppercase:false,
+      number:false,
+      signos:false
+
+
     };
   },
   components: {
@@ -76,13 +91,48 @@ export default {
         this.todos=users.users;
         this.updateVisibleTodos();    
     },
+    ValidityNumber(item,items){
+      const counter= !isNaN(item)
+      if(counter===true && item.length<=4 && items.length<=4){
+        this.MessageNumber=true
+        console.log("number"+ item.length)
+}
+
+else{
+ 
+console.log("string")
+}
+     /* if(item.length<=4 && items.length<=4)
+      {
+        if(counter===true ){
+                console.log("number")
+        }
+ 
+      else{
+        console.log("string")
+      }
+    }else{
+      console.log("sobre paso el limite de digitos")
+    }
+     */
+  
+    },
     MessageBoxPassword(repeat_password,floating_password){
       //let Message=false;
+      const arraypassword=repeat_password
+      var uppercase = /[A-Z]/g;
+      var number =/[0-9]/g
+      var signos=/[!@#$%^&*)(+=._-]/g
+      this.uppercase=uppercase.test(arraypassword);
+      this.number=number.test(arraypassword);
+      this.signos=signos.test(arraypassword);
+      //
       if(repeat_password===floating_password){
-        this.Message=true
-      }else{
-        this.Message=false
+        this.MessageString=true
+      }else {
+        this.MessageString=false
       }
+    
     },
     async searchcategoryTitle(item)
     {
@@ -196,7 +246,33 @@ export default {
     },
     async addUser(email,floating_password,repeat_password,floating_first_name,floating_last_name,floating_phone,floating_username) {
     
-      this.login = await fetch('https://dummyjson.com/user/add', {
+     console.log(email+","+floating_password+","+repeat_password+","+floating_first_name+","+floating_last_name+","+floating_phone+","+floating_username)
+     if(email===undefined || floating_password===''|| repeat_password==='' || floating_first_name===''|| floating_last_name===""||floating_phone===undefined || floating_username===''){ 
+        if(email===undefined){
+            this.MessageEmail=true;
+            }else{
+              this.MessageEmail=false;
+            } if(floating_username==='')
+          {
+            this.MessageUserName=true
+          }else{
+            this.MessageUserName=false
+          }if(floating_password==='' || repeat_password===''){
+          this.MessagePassword=true
+          }else{
+            this.MessagePassword=false
+          }if(floating_first_name===''){
+            this.MessageFirstName=true
+          }else{
+            this.MessageFirstName=false
+          }if(floating_last_name===''){
+            this.MessageLastName=true
+          }else{
+            this.MessageLastName=false
+          }
+        }
+      else{
+    this.login = await fetch('https://dummyjson.com/user/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -211,12 +287,12 @@ export default {
         })
         .then(res => res.json())
       
-      const datauser= this.login;
-      
+      //const datauser= this.login;
       this.todos.push(this.login);
       //this.nextId++;
-   console.log(datauser)
+      
       this.updateVisibleTodos();
+    }
     },
     removeTodo(id) {
       let todos = this.todos;
@@ -264,6 +340,7 @@ export default {
     
   },
   mounted(){
+    this.MessageBoxPassword()
    this.CanvasInterface();
     this.updateUrl();
     initAccordions();
