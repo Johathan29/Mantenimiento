@@ -17,22 +17,30 @@
         <div class="grid gap-6 mb-6 md:grid-cols-2 text-left ">
             <div class="">
                 <label for="first_name" class="block mb-2 text-sm font-medium text-[#0f49c5] dark:text-white">First name<sup class="top-[0px] text-sm font-medium text-red-500 dark:text-white">*</sup></label>
-                <input type="text" id="first_name" name="first_name" @input="event => first_name = event.target.value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="John" required />
+                <input type="text" id="first_name" name="first_name"  @input="event => first_name = event.target.value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg   block w-full p-2.5 focus:ring-[0px]" placeholder="John" required />
+                <span :class="[MessageFirstName===true ? 'block text-[12px] text-red-500 flex gap-2 items-center': 'hidden']">
+                    <FontAwesomeIcon :icon="faCircleXmark" class="mb-0"/>
+                    The field First Name is empty  
+                </span>
             </div>
             <div>
                 <label for="last_name" class="block mb-2 text-sm font-medium text-[#0f49c5] dark:text-white">Last name<sup class="top-[0px] text-sm font-medium text-red-500 dark:text-white">*</sup></label>
-                <input type="text" id="last_name" name="last_name" @input="event => last_name = event.target.value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Doe" required />
+                <input type="text" id="last_name" name="last_name" @input="event => last_name = event.target.value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg   block w-full p-2.5 focus:ring-[0px]" placeholder="Doe" required />
             </div>  
            
         </div>
         <div class="grid gap-6 mb-6 md:grid-cols-2 text-left"> 
             <div>
                 <label for="phone" class="block mb-2 text-sm font-medium text-[#0f49c5] dark:text-white">Phone number<sup class="top-[0px] text-sm font-medium text-red-500 dark:text-white">*</sup></label>
-                <input type="tel" id="phone" @input="event => phone = event.target.value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required />
+                <input type="tel" id="phone" @input="event => phone = event.target.value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg   block w-full p-2.5 " placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required />
             </div>
             <div>
                 <label for="email" class="block mb-2 text-sm font-medium text-[#0f49c5] dark:text-white">Email address<sup class="top-[0px] text-sm font-medium text-red-500 dark:text-white">*</sup></label>
-                <input type="email" id="email" name="email" @input="event => email = event.target.value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="john.doe@company.com" required />
+                <input type="email" id="email" name="email" @input="event => email = event.target.value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg   block w-full p-2.5 " placeholder="john.doe@company.com" required />
+                <span :class="[MessageEmail===true ? 'block text-[12px] text-red-500 flex gap-2 items-center': 'hidden']">
+                    <FontAwesomeIcon :icon="faCircleXmark" class="mb-0"/>
+                    The field Email is empty  
+                </span>
             </div> 
         </div>
         <div class="grid gap-6 mb-6 md:grid-cols-2 text-left"> 
@@ -50,19 +58,22 @@
             <div>
                 
                 <label for="email" class="block mb-2 text-sm font-medium text-[#0f49c5] dark:text-white">Age<sup class="top-[0px] text-sm font-medium text-red-500 dark:text-white">*</sup></label>
-                <input type="Number"  min="0" v-model="age" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="john.doe@company.com" required />
+                <input type="Number"  min="0" v-model="age" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg   block w-full p-2.5 " placeholder="john.doe@company.com" required />
             </div> 
         </div>
         <div class="grid gap-6 mb-6 md:grid-cols-2 text-left">
             <div>
                 <label for="password" class="block mb-2 text-sm font-medium text-[#0f49c5] dark:text-white">Password<sup class="top-[0px] text-sm font-medium text-red-500 dark:text-white">*</sup></label>
-                <input type="password" id="password" name="password" @input="event => password = event.target.value" 
-                :class="[confirm_password!==false ? 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ':'bg-gray-50 border border-red-500 text-red-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ']" placeholder="•••••••••" required />
+                <div class="flex items-center ">
+                    <input v-bind:type="viewPassword===true ? 'password' : 'text'" id="password" name="password" @input="event => password = event.target.value" 
+                :class="[confirm_password!==false ? 'z-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg border-r-[0px] focus:ring-[0px] block w-full p-2.5 ':'z-10 bg-gray-50 border border-red-500 text-red-500 text-sm rounded-lg   block w-full p-2.5 focus:ring-[0px]']" placeholder="•••••••••" required />
+                    <input id="passwordview" type="checkbox"  name="check_password" @click="viewPasswords(check_password)" @input="event => check_password = event.target.checked" class=" border-l-[0px] w-4 h-[2.6rem] border border-gray-300 focus:ring-[0px] rounded-r-lg bg-gray-50 " required />
+                </div>
             </div> 
             <div >
                 <label for="confirm_password" class="block mb-2 text-sm font-medium text-[#0f49c5] dark:text-white">Confirm password<sup class="top-[0px] text-sm font-medium text-red-500 dark:text-white">*</sup></label>
-                <input type="password" id="confirm_password" name="confirm_password" @input="event => confirm_password = event.target.value" 
-                :class="[confirm_password!==false ? 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ':'bg-gray-50 border border-red-500 text-red-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ']" placeholder="•••••••••" required />
+                <input  id="confirm_password" name="confirm_password" @input="event => confirm_password = event.target.value" 
+                :class="[confirm_password!==false ? 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg   block w-full p-2.5 focus:ring-[0px]':'bg-gray-50 border border-red-500 text-red-500 text-sm rounded-lg   block w-full p-2.5 focus:ring-[0px]']" placeholder="•••••••••" required />
             </div> 
         </div>
         <div class="flex items-start mb-2">
@@ -84,7 +95,7 @@ import Breadcrum from '../components/Breadcrum.vue';
 //import  sha256  from  'crypto-js/sha256' ; 
 //import hmacSHA512  from  'crypto-js/hmac-sha512' ; 
 //import  Base64  from  'crypto-js/enc-base64' ;
-
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
  
 import { 
   initAccordions, 
@@ -110,19 +121,40 @@ export default{
             algorithm : 'aes-256-cbc',
             breadCrumUrl:'',
             fetch:[],
-            titulo:'registrar'
+            titulo:'registrar',
+            faCircleXmark:faCircleXmark,
+            MessageEmail:false,
+            MessageCompany:false,
+            MessagePhone:false,
+            MessageLastName:false,
+            MessageUserName:false,
+            MessageFirstName:false,
+            MessagePassword:false,
+            viewPassword:false,
             
             }
     },
     
     methods:{
+        viewPasswords(item){
+            this.viewPassword=item
+        },
         confirmaRegistred(confirm){
             this.confirm=confirm;
         },
     
      async  SendDataUser(first_name,last_name,email,phone,password,confirm_password){
-          this.setData= await fetch('https://dummyjson.com/users/add',{
+          if(first_name===undefined){
+            this.MessageFirstName=true
+          }else{
+            this.MessageFirstName=false
+          }
+        
+        this.setData= await fetch('https://dummyjson.com/users/add',{
                 method: 'POST',
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
                 body: JSON.stringify({
                     firstName: first_name,
                     lastName: last_name,
@@ -134,9 +166,7 @@ export default{
                     password:confirm_password
                     
                 }),
-                headers: {
-                    'Content-type': 'application/json; charset=UTF-8',
-                },
+               
             }).then((response) => response.json()).then((json) => this.setData=json);
             this.getData.push(this.setData);
             console.log(this.getData);
@@ -185,6 +215,7 @@ return this.breadCrumUrl;
         Breadcrum
     },
     mounted(){
+        
         this.updateUrl();
         this.encrypt_data();
        this.getDataUser()
@@ -204,3 +235,31 @@ return this.breadCrumUrl;
 }
 
 </script>
+<style>
+[id="passwordview"] {
+    background-image: url('../assets/eye-regular.svg');
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: 1.2rem;
+    padding: 0px;
+    width: 28px;
+    background-position-x: 0px;
+}
+[id="passwordview"]:checked {
+    background-image: url('../assets/eye-slash-regular.svg');
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: 1.2rem;
+    padding: 0px;
+    border: 1px #d1d5db solid;
+    border-left: 0px;
+    width: 28px;
+    background-position-x: 0px;
+    background-color: transparent;
+}
+[type='text']:focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, textarea:focus, select:focus {
+    
+    border-color: #284a6b1f!important;
+    border-right: none;
+}
+</style>

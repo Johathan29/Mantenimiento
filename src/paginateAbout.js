@@ -91,33 +91,7 @@ export default {
         this.todos=users.users;
         this.updateVisibleTodos();    
     },
-    ValidityNumber(item,items){
-      const counter= !isNaN(item)
-      if(counter===true && item.length<=4 && items.length<=4){
-        this.MessageNumber=true
-        console.log("number"+ item.length)
-}
-
-else{
- 
-console.log("string")
-}
-     /* if(item.length<=4 && items.length<=4)
-      {
-        if(counter===true ){
-                console.log("number")
-        }
- 
-      else{
-        console.log("string")
-      }
-    }else{
-      console.log("sobre paso el limite de digitos")
-    }
-     */
-  
-    },
-    MessageBoxPassword(repeat_password,floating_password){
+        MessageBoxPassword(repeat_password,floating_password){
       //let Message=false;
       const arraypassword=repeat_password
       var uppercase = /[A-Z]/g;
@@ -272,7 +246,7 @@ console.log("string")
           }
         }
       else{
-    this.login = await fetch('https://dummyjson.com/user/add', {
+        this.login = await fetch('https://dummyjson.com/user/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
