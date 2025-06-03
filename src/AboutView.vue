@@ -31,10 +31,13 @@
                     <div class="relative bg-white rounded-lg shadow-sm ">
                         <!-- Modal header -->
                         <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200">
-                            <h3 class="text-lg font-semibold text-[#18489b] ">
+                            <div class="leading-[0px] text-left">
+                              <h3 class="text-lg font-semibold text-[#18489b] ">
                               Create new User
                             </h3>
-                            <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
+                              <span class="text-[12px] text-red-500">Fields marked with * cannot be empty.</span>
+                            </div> 
+                            <button type="button" class="text-red-500  bg-transparent hover:bg-red-500 hover:text-white rounded-full  border-red-500 border-[1px] text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
                                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                 </svg>
@@ -46,7 +49,7 @@
                           <div class="grid md:grid-cols-2 md:gap-6">
                             <div class="relative z-0 w-full mb-5 group">
                                 <input type="email" name="floating_email" id="floating_email"  v-model="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                                <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-[#18489b] peer-focus:font-bold peer-focus:dark:text-[#18489b] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
+                                <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-[#18489b] peer-focus:font-bold peer-focus:dark:text-[#18489b] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address <sup>*</sup></label>
                                 <div class="w-full">
                                   <span :class="[MessageEmail===true ? 'block text-[12px] text-red-500 flex gap-2 items-center': 'hidden']">
                                     <FontAwesomeIcon :icon="faCircleXmark" class="mb-0"/>
@@ -67,7 +70,11 @@
                           </div>
                           <div class="grid md:grid-cols-2 md:gap-6">
                             <div class="relative z-0 w-full mb-5 group">
-                                <input type="password" name="floating_password" id="floating_password" v-model="floating_password"  :class="[floating_password===repeat_password ? 'block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer':'block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-red-500 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer']" placeholder=" " minlength="8" maxlength="12" required />
+                                <input type="password" name="floating_password" 
+                                id="floating_password" v-model="floating_password"  
+                                @keyup="MessageBoxPassword(repeat_password,floating_password)"
+                                :class="[MessageString===true ? 'block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer':'block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-red-500 appearance-none   focus:ring-0 focus:border-red-500 peer']"
+                                placeholder=" " minlength="8" maxlength="12" required />
                                 <label for="floating_password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#18489b] peer-focus:font-bold peer-focus:dark:text-[#18489b] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
                                 <div class="w-full">
                                   <span :class="[MessagePassword===true ? 'block text-[12px] text-red-500 flex gap-2 items-center': 'hidden']">
@@ -77,20 +84,24 @@
                                 </div>
                               </div>
                             <div class="relative z-0 w-full mb-5 group">
-                                <input type="password" name="repeat_password" @keyup="MessageBoxPassword(repeat_password,floating_password)" id="floating_repeat_password" v-model="repeat_password" :class="[floating_password===repeat_password ? 'block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer':'block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-red-500 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer']" placeholder=" " minlength="8" maxlength="12" required />
+                                <input type="password" name="repeat_password" 
+                                @keyup="MessageBoxPassword(repeat_password,floating_password)" 
+                                id="floating_repeat_password" v-model="repeat_password" 
+                                :class="[MessageString===true ? 'block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer':'block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-red-500 appearance-none   focus:ring-0 focus:border-red-500 peer']"
+                                placeholder=" " minlength="8" maxlength="12" required />
                                 <label for="floating_repeat_password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#18489b] peer-focus:font-bold peer-focus:dark:text-[#18489b] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm password</label>
                                 <div class="w-full">
                                   <span :class="[MessagePassword===true ? 'block text-[12px] text-red-500 flex gap-2 items-center': 'hidden']">
                                     <FontAwesomeIcon :icon="faCircleXmark" class="mb-0"/>
-                                    The field Password is empty  
+                                      The field Password is empty  
                                   </span>
                                 </div>
                               </div>
                           </div>
                           <div class="w-full">
                             <span :class="[number===true ? 'text-[12px] text-green-500 flex gap-2 items-center':'text-[12px] text-red-500 flex gap-2 items-center']">
-                            <FontAwesomeIcon :icon="number===true ? faCircleCheck:faCircleXmark " class="mb-0"/>
-                            It has a Number 
+                              <FontAwesomeIcon :icon="number===true ? faCircleCheck:faCircleXmark " class="mb-0"/>
+                                It has a Number 
                           </span>
                           <span :class="[uppercase===true ? 'text-[12px] text-green-500 flex gap-2 items-center':'text-[12px] text-red-500 flex gap-2 items-center']">
                             <FontAwesomeIcon :icon="uppercase===true ? faCircleCheck:faCircleXmark" class="mb-0"/>
@@ -101,7 +112,7 @@
                             It has a @,$,#,%,^,&,*,! 
                           </span>
                         </div>
-                          <div class="grid md:grid-cols-2 md:gap-6">
+                          <div class="grid md:grid-cols-2 md:gap-6 mt-[1rem]">
                             <div class="relative z-0 w-full mb-5 group">
                                 <input type="text" name="floating_first_name" id="floating_first_name" v-model="floating_first_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                                 <label for="floating_first_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#18489b] peer-focus:font-bold peer-focus:dark:text-[#18489b] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First name</label>
@@ -129,11 +140,15 @@
                                 <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" v-model="floating_phone" name="floating_phone" id="floating_phone" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                                 <label for="floating_phone" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#18489b] peer-focus:font-bold peer-focus:font-bold peer-focus:dark:text-[#18489b] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone number (123-456-7890)</label>
                                 <div class="w-full">
-                                  <span :class="[MessagePhone===true ? 'block text-[12px] text-red-500 flex gap-2 items-center': 'hidden']">
+                                  <span v-if="floating_phone===undefined" :class="[MessagePhone===true ? 'block text-[12px] text-red-500 flex gap-2 items-center': 'hidden']">
                                     <FontAwesomeIcon :icon="faCircleXmark" class="mb-0"/>
-                                    The field Phone is empty  
-                                    </span>
-                                  </div>
+                                      The field Phone is empty  
+                                  </span>
+                                  <span v-else :class="[MessageValitePhone===false ? 'block text-[12px] text-red-500 flex gap-2 items-center': 'hidden']">
+                                    <FontAwesomeIcon :icon="faCircleXmark" class="mb-0"/>
+                                    Invalid Format of the phone 
+                                  </span>
+                                </div>
                               </div>
                             <div class="relative z-0 w-full mb-5 group">
                                 <input type="text" name="floating_company" id="floating_company" v-model="floating_company" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
@@ -146,7 +161,10 @@
                                   </div>
                               </div>
                           </div>
-                          <button type="button" @click="addUser(floating_email,floating_password,repeat_password,floating_first_name,floating_last_name,floating_phone,floating_username)" class="text-white border-[1px] bg-[#18489b] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center hover:bg-white hover:text-[#18489b] hover:border-[#18489b] hover:border-[1px]">Add</button>
+                          <div class="flex gap-2 items-center">
+                            <button type="button" @click="addUser(floating_email,floating_password,repeat_password,floating_first_name,floating_last_name,floating_phone,floating_company,floating_username)" class="text-white border-[1px] bg-[#18489b] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center hover:bg-white hover:text-[#18489b] hover:border-[#18489b] hover:border-[1px]">Add</button>
+                            <Button type="reset" class="text-[#bece1d] border-[1px] border-[#bece1d] bg-white font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center hover:bg-[#bece1d] hover:text-white hover:border-[#bece1d] hover:border-[1px]">Clear</Button>
+                          </div>
                         </form>
                     </div>
                 </div>
@@ -180,7 +198,7 @@
                     <li>
                         <div class="flex items-center p-2 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-600">
                             <input  id="filter-radio-example-2" type="radio" value="desc" @click="endPoint('desc')" name="filter-radio" class="w-4 h-4 text-[#18489b] bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="filter-radio-example-2" class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Z-a</label>
+                            <label for="filter-radio-example" class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300">Z-a</label>
                         </div>
                     </li>
                 </ul>
@@ -236,7 +254,8 @@
     </div>
    
     <div class="max-w-screen-xl md:mx-auto "> <hr class="my-[2rem] "/>
-      <h1 class="text-left text-[2rem] text-[#18489b] font-[emoji]">sers graph </h1>
+      <button @click="ChartDestroy()">Actualizar</button>
+      <h1 class="text-left text-[2rem] text-[#18489b] font-[emoji]">Users graph </h1>
  <div style="width:100%;" class="py-[4rem]"><canvas id="acquisitions" class="bg-[#f8f8ff] p-[3rem] rounded-lg" aria-label="Hello ARIA World" role="img"></canvas></div>
     </div>
    

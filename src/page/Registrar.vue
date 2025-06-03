@@ -13,7 +13,7 @@
     </div>
 <div class="max-w-screen-xl md:mx-auto p-[3rem] bg-gray-50 my-[1rem] rounded-lg">
    
-    <form>
+    <form class="text-left">
         <div class="grid gap-6 mb-6 md:grid-cols-2 text-left ">
             <div class="">
                 <label for="first_name" class="block mb-2 text-sm font-medium text-[#0f49c5] dark:text-white">First name<sup class="top-[0px] text-sm font-medium text-red-500 dark:text-white">*</sup></label>
@@ -65,15 +65,18 @@
             <div>
                 <label for="password" class="block mb-2 text-sm font-medium text-[#0f49c5] dark:text-white">Password<sup class="top-[0px] text-sm font-medium text-red-500 dark:text-white">*</sup></label>
                 <div class="flex items-center ">
-                    <input v-bind:type="viewPassword===true ? 'password' : 'text'" id="password" name="password" @input="event => password = event.target.value" 
-                :class="[confirm_password!==false ? 'z-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg border-r-[0px] focus:ring-[0px] block w-full p-2.5 ':'z-10 bg-gray-50 border border-red-500 text-red-500 text-sm rounded-lg   block w-full p-2.5 focus:ring-[0px]']" placeholder="•••••••••" required />
-                    <input id="passwordview" type="checkbox"  name="check_password" @click="viewPasswords(check_password)" @input="event => check_password = event.target.checked" class=" border-l-[0px] w-4 h-[2.6rem] border border-gray-300 focus:ring-[0px] rounded-r-lg bg-gray-50 " required />
+                    <input v-bind:type="viewPassword===false ? 'password' : 'text'" id="password" name="password" @input="event => password = event.target.value" 
+                :class="[confirm_password!==false ? ' bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg border-r-[0px] focus:ring-[0px] block w-full p-2.5 ':'z-10 bg-gray-50 border border-red-500 text-red-500 text-sm rounded-lg   block w-full p-2.5 focus:ring-[0px]']" placeholder="•••••••••" required />
+                    <input id="passwordview" type="checkbox"  checked name="check_password" @click="viewPasswords(check_password)" @input="event => check_password = event.target.checked" class=" border-l-[0px] w-4 h-[2.6rem] border border-gray-300 focus:ring-[0px] rounded-r-lg bg-gray-50 focus:ring-offset-[0px] " required />
                 </div>
             </div> 
             <div >
                 <label for="confirm_password" class="block mb-2 text-sm font-medium text-[#0f49c5] dark:text-white">Confirm password<sup class="top-[0px] text-sm font-medium text-red-500 dark:text-white">*</sup></label>
-                <input  id="confirm_password" name="confirm_password" @input="event => confirm_password = event.target.value" 
-                :class="[confirm_password!==false ? 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg   block w-full p-2.5 focus:ring-[0px]':'bg-gray-50 border border-red-500 text-red-500 text-sm rounded-lg   block w-full p-2.5 focus:ring-[0px]']" placeholder="•••••••••" required />
+                <div class="flex items-center ">
+                    <input v-bind:type="viewConfirmPassword===false ? 'password' : 'text'" id="confirm_password" name="confirm_password" @input="event => confirm_password = event.target.value" 
+                :class="[confirm_password!==false ? ' bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg border-r-[0px] focus:ring-[0px] block w-full p-2.5 ':'z-10 bg-gray-50 border border-red-500 text-red-500 text-sm rounded-lg   block w-full p-2.5 focus:ring-[0px]']" placeholder="•••••••••" required />
+                    <input id="passwordview" type="checkbox" checked name="check_password" @click="viewConfirmPasswords(check_confirm_password)" @input="event => check_confirm_password = event.target.checked" class=" border-l-[0px] w-4 h-[2.6rem] border border-gray-300 focus:ring-[0px] rounded-r-lg bg-gray-50 focus:ring-offset-[0px] " required />
+                </div>
             </div> 
         </div>
         <div class="flex items-start mb-2">
@@ -86,17 +89,17 @@
         <div class="flex items-start mb-6">
             <label class="text-sm font-medium text-gray-900">Los campos que poseen <strong class="text-red-500">*</strong> son campos obligatorios</label>
         </div>
-        <button type="button" @click="SendDataUser(first_name,last_name,email,phone,password,confirm_password)" :disabled="confirm==true ? '' : disabled"  class="text-white bg-[#1f2937d6] hover:bg-[#0a1729] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+        <button type="button" @click="SendDataUser(first_name,last_name,email,phone,password,confirm_password)" :disabled="confirm==true ? '' : disabled"  class="bg-white text-[#053593] border-[#053593] border-[1px] hover:bg-[#053593] hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Submit</button>
     </form>
 </div>
 </template>
 <script>
 import Breadcrum from '../components/Breadcrum.vue';
-//import  sha256  from  'crypto-js/sha256' ; 
-//import hmacSHA512  from  'crypto-js/hmac-sha512' ; 
-//import  Base64  from  'crypto-js/enc-base64' ;
+import  sha256  from  'crypto-js/sha256' ; 
+import hmacSHA512  from  'crypto-js/hmac-sha512' ; 
+import  Base64  from  'crypto-js/enc-base64' ;
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
- 
+ import CryptoJS from 'crypto-js'
 import { 
   initAccordions, 
   initCarousels, 
@@ -131,11 +134,17 @@ export default{
             MessageFirstName:false,
             MessagePassword:false,
             viewPassword:false,
+            viewConfirmPassword:false
             
             }
     },
     
     methods:{
+        viewConfirmPasswords(items){
+           
+            this.viewConfirmPassword=items
+            
+        },
         viewPasswords(item){
             this.viewPassword=item
         },
@@ -170,13 +179,21 @@ export default{
             }).then((response) => response.json()).then((json) => this.setData=json);
             this.getData.push(this.setData);
             console.log(this.getData);
-            this.confirm_password=password==confirm_password ? true : false;
-            
+                this.confirm_password=password==confirm_password ? true : false;
                if(this.confirm_password==true){
-               /* const clave_privada=''
-                const  hashDigest  =  sha256 (this.confirm_password) ; 
+             /*  const clave_privada=''
+                const  hashDigest  =  sha256 (confirm_password) ; 
                 const  hmacDigest  =  Base64.stringify ( hmacSHA512 (hashDigest , clave_privada ) ) ;
                 console.log(hmacDigest);*/
+                // Encrypt
+                var ciphertext = CryptoJS.AES.encrypt(confirm_password, 'secret key 123');
+                    console.log(ciphertext)
+                // Decrypt
+                var bytes  = CryptoJS.AES.decrypt(ciphertext.toString(), 'secret key 123');
+                var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+
+                console.log(plaintext)
+                
                }
             else{
                 console.log('incorrect password');
@@ -186,8 +203,8 @@ export default{
        },
        async encrypt_data() {
        
-         this.fetch = await fetch('https://dummyjson.com/users');
-this.fetch=  this.fetch.json();
+        this.fetch = await fetch('https://dummyjson.com/users');
+        this.fetch=  this.fetch.json();
            
          
       },
@@ -261,5 +278,11 @@ return this.breadCrumUrl;
     
     border-color: #284a6b1f!important;
     border-right: none;
+}
+input:autofill {
+    appearance: menulist-button;
+    background-image: none !important;
+    background-color: rgb(15 44 94) !important;
+    color: fieldtext !important;
 }
 </style>

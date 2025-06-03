@@ -10,6 +10,7 @@ import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { faDeleteLeft} from '@fortawesome/free-solid-svg-icons'
 import Chart from 'chart.js/auto'
+import CryptoJS from 'crypto-js'
 import {ref} from 'vue';
 import { 
   initAccordions, 
@@ -57,6 +58,7 @@ export default {
       MessageEmail:false,
       MessageCompany:false,
       MessagePhone:false,
+      MessageValitePhone:false,
       MessageLastName:false,
       MessageUserName:false,
       MessageFirstName:false,
@@ -89,27 +91,31 @@ export default {
         response.value = await fetch('https://dummyjson.com/users?limit=208&sortBy=firstName&order='+item+'');
         const users = await response.value.json();
         this.todos=users.users;
-        this.updateVisibleTodos();    
+        this.updateVisibleTodos();   
+        this.CanvasInterface(this.todos); 
     },
-        MessageBoxPassword(repeat_password,floating_password){
+      MessageBoxPassword(repeat_password,floating_password){
       //let Message=false;
-      const arraypassword=repeat_password
-      var uppercase = /[A-Z]/g;
-      var number =/[0-9]/g
-      var signos=/[!@#$%^&*)(+=._-]/g
-      this.uppercase=uppercase.test(arraypassword);
-      this.number=number.test(arraypassword);
-      this.signos=signos.test(arraypassword);
+      const validar=repeat_password===floating_password ? true : false
       //
-      if(repeat_password===floating_password){
+      const arraypassword=repeat_password
+        var uppercase = /[A-Z]/g;
+        var number =/[0-9]/g
+        var signos=/[!@#$%^&*)(+=._-]/g
+        
+        this.uppercase=uppercase.test(arraypassword);
+        this.number=number.test(arraypassword);
+        this.signos=signos.test(arraypassword);
+      if(validar===true && this.uppercase===true && this.number===true && this.signos===true){
         this.MessageString=true
+      
       }else {
         this.MessageString=false
       }
-    
     },
     async searchcategoryTitle(item)
     {
+      
       const response=ref([]);
       response.value = await fetch('https://dummyjson.com/users/filter?key=company.title&value='+item+'');
       const users = await response.value.json();
@@ -117,93 +123,56 @@ export default {
       this.updateVisibleTodos(); 
       this.CanvasInterface(this.todos);
   },
-   CanvasInterface(items) {
-    var title=this.todos.map(item => ({
-      label:item.company.title
-      }))
-    var repetidos = {};
-    const  ctx=document.getElementById('acquisitions');
-    if(items===''){
-    var data = this.todos.map((numero)=>({
-    label:numero.role,
-    data:repetidos[numero.role] = (repetidos[numero.role] || 0) + 1
-    }));
-    this.chart = new Chart(ctx,
-     
-      {
-    type: 'bar',
-        data: {
-          labels:["Admin", "Moderator","User"],
-          datasets:[
-            {
-              label:"admin",
-              data:[repetidos.admin]
-            },
-            {
-              label:"moderator",
-              data:[0,repetidos.moderator]
-            }
-            ,
-            {
-              label:"user",
-              data:[0,0,repetidos.user]
-            }
-          ]
-          ,
-       
-        options: {
-    indexAxis: 'x',
-    interaction: {
-      mode: 'y'
-  }
-  }
-      }
-    }
-    )
-  Chart.update();
-    }else
-    {  
-     var data = this.todos.map((numero)=>({
-      label:numero.role,
-      data:repetidos[numero.role] = (repetidos[numero.role] || 0) + 1
-    }));
-    this.chart = new Chart(ctx,
-     
-      {
-    type: 'bar',
-        data: {
-          labels:["Admin", "Moderator","User"],
-          datasets:[
-            {
-              label:"admin",
-              data:[repetidos.admin]
-            },
-            {
-              label:"moderator",
-              data:[0,repetidos.moderator]
-            }
-            ,
-            {
-              label:"user",
-              data:[0,0,repetidos.user]
-            }
-          ]
-          ,
-       
-        options: {
-    indexAxis: 'x',
-    interaction: {
-      mode: 'y'
-  }
-  }
-      }
-    }
-    )
+  async  CanvasInterface(items) {
   
-    }
-   
-   
+      const ctx = document.getElementById('acquisitions').getContext('2d');
+      const roleCounts = this.todos.reduce((acc, item) => {
+        acc[item.role.toLowerCase()] = (acc[item.role.toLowerCase()] || 0) + 1;
+        return acc;
+      }, {});
+      const data= {
+        labels:["Admin", "Moderator","User"],
+        datasets:[
+          {
+            label:"admin",
+            data:[roleCounts.admin || 0],
+            backgroundColor: 'rgba(255, 99, 132, 0.6)',
+          },
+          {
+            label:"moderator",
+            data:[0,roleCounts.moderator || 0],
+            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+          }
+          ,
+          {
+            label:"user",
+            data:[0,0,roleCounts.user || 0],
+            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+          }
+        ]
+        ,
+        };
+      const configuration = {
+          type: 'bar',
+          data: data,
+          option: {
+              tooltip: {
+                mode: 'index'
+            }
+          }
+        }
+        if (this.chart) {
+          this.chart.destroy();
+         }
+          this.chart = new Chart(ctx, configuration);  
   },
+  ChartDestroy(){
+    
+        
+          this.chart.destroy();
+        },
+  
+  
     search(item){
       this.searchUser=item;
       
@@ -218,11 +187,12 @@ export default {
           this.visibleTodos=dataToFilter;
         }
     },
-    async addUser(email,floating_password,repeat_password,floating_first_name,floating_last_name,floating_phone,floating_username) {
-    
+    async addUser(email,floating_password,repeat_password,floating_first_name,floating_last_name,floating_phone,floating_company,floating_username) {
+    const tel=/^[0-9]{3}-[0-9]{3}-[0-9]{4}/g.test(floating_phone)
+    console.log(tel)
      console.log(email+","+floating_password+","+repeat_password+","+floating_first_name+","+floating_last_name+","+floating_phone+","+floating_username)
-     if(email===undefined || floating_password===''|| repeat_password==='' || floating_first_name===''|| floating_last_name===""||floating_phone===undefined || floating_username===''){ 
-        if(email===undefined){
+     if(email===undefined || floating_password===''|| repeat_password==='' || floating_first_name===''|| floating_last_name===""||floating_phone===undefined || floating_username==='' || this.MessageBoxPassword(floating_password,repeat_password)){ 
+        if(email===undefined || email==''){
             this.MessageEmail=true;
             }else{
               this.MessageEmail=false;
@@ -235,15 +205,31 @@ export default {
           this.MessagePassword=true
           }else{
             this.MessagePassword=false
-          }if(floating_first_name===''){
+          }if(floating_first_name===undefined){
             this.MessageFirstName=true
           }else{
             this.MessageFirstName=false
-          }if(floating_last_name===''){
+          }if(floating_last_name===undefined){
             this.MessageLastName=true
           }else{
             this.MessageLastName=false
           }
+        if(floating_phone===undefined ){
+          this.MessagePhone=true
+        }else{
+          this.MessagePhone=false
+        }
+        if(tel===true){
+          this.MessageValitePhone=true
+        }else{
+          this.MessageValitePhone=false
+        }
+        if(floating_company===undefined){
+          this.MessageCompany=true
+        }else{
+          this.MessageCompany=false
+        }
+          //this.MessageBoxPassword(repeat_password,floating_password);
         }
       else{
         this.login = await fetch('https://dummyjson.com/user/add', {
