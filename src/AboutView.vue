@@ -134,7 +134,6 @@
                                   </div>
                               </div>
                           </div>
-                         
                           <div class="grid md:grid-cols-2 md:gap-6">
                             <div class="relative z-0 w-full mb-5 group">
                                 <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" v-model="floating_phone" name="floating_phone" id="floating_phone" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
@@ -161,10 +160,48 @@
                                   </div>
                               </div>
                           </div>
+                          <div class="grid md:grid-cols-2 md:gap-6">
+                            <div class="relative z-0 w-full mb-5 group">
+                                <select  v-model="floating_role" name="floating_role" id="floating_phone" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"  required >
+                                <option value="" selected >Selection the type user</option>
+                                <option value="admin"  >Admin</option>
+                                <option value="user"  >user</option>
+                                <option value="Modaretor"  >Modaretor</option>
+                                </select>
+                                <label for="floating_role" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#18489b] peer-focus:font-bold peer-focus:font-bold peer-focus:dark:text-[#18489b] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Role</label>
+                                <div class="w-full">
+                                  <span :class="[MessageRole===true ? 'block text-[12px] text-red-500 flex gap-2 items-center': 'hidden']">
+                                    <FontAwesomeIcon :icon="faCircleXmark" class="mb-0"/>
+                                      The field role is empty  
+                                  </span>
+                                 
+                                </div>
+                              </div>
+                            <div class="relative z-0 w-full mb-5 group">
+                                <input type="text" name="floating_title" id="floating_title" v-model="floating_title" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                                <label for="floating_title" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#18489b] peer-focus:font-bold peer-focus:dark:text-[#18489b] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Company Title</label>
+                                <div class="w-full">
+                                  <span :class="[Messagetitle===true ? 'block text-[12px] text-red-500 flex gap-2 items-center': 'hidden']">
+                                    <FontAwesomeIcon :icon="faCircleXmark" class="mb-0"/>
+                                    The field title is empty  
+                                    </span>
+                                  </div>
+                              </div>
+                          </div>
+                          <div id="alert-border-2" :class="[parent===''?'hidden': 'flex items-center p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800']" role="alert">
+                            <FontAwesomeIcon :icon="faCircleInfo" class="mb-0"/>
+                            <div class="ms-3 text-sm font-medium" id="alert">
+                            </div>
+                            <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"  data-dismiss-target="#alert-border-2" aria-label="Close">
+                              <span class="sr-only">Dismiss</span>
+                              <FontAwesomeIcon :icon="faClose" class="mb-0"/>
+                            </button>
+                          </div>
                           <div class="flex gap-2 items-center">
-                            <button type="button" @click="addUser(floating_email,floating_password,repeat_password,floating_first_name,floating_last_name,floating_phone,floating_company,floating_username)" class="text-white border-[1px] bg-[#18489b] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center hover:bg-white hover:text-[#18489b] hover:border-[#18489b] hover:border-[1px]">Add</button>
+                            <button type="button" @click="addUser(floating_email,floating_password,repeat_password,floating_first_name,floating_last_name,floating_phone,floating_company,floating_username,floating_role,floating_title)" class="text-white border-[1px] bg-[#18489b] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center hover:bg-white hover:text-[#18489b] hover:border-[#18489b] hover:border-[1px]">Add</button>
                             <Button type="reset" class="text-[#bece1d] border-[1px] border-[#bece1d] bg-white font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center hover:bg-[#bece1d] hover:text-white hover:border-[#bece1d] hover:border-[1px]">Clear</Button>
                           </div>
+                     
                         </form>
                     </div>
                 </div>
@@ -252,11 +289,30 @@
         
       </div>
     </div>
-   
-    <div class="max-w-screen-xl md:mx-auto "> <hr class="my-[2rem] "/>
-      <button @click="ChartDestroy()">Actualizar</button>
+    <div class="max-w-screen-xl md:mx-auto "> 
+      <hr class="my-[2rem] "/>
       <h1 class="text-left text-[2rem] text-[#18489b] font-[emoji]">Users graph </h1>
- <div style="width:100%;" class="py-[4rem]"><canvas id="acquisitions" class="bg-[#f8f8ff] p-[3rem] rounded-lg" aria-label="Hello ARIA World" role="img"></canvas></div>
+      <div style="width:100%;" class="py-[4rem]">
+        <canvas id="acquisitions" class="bg-[#f8f8ff] p-[3rem] rounded-lg" aria-label="Hello ARIA World" role="img">
+        </canvas>
+      </div>
+      <hr class="my-[2rem] "/>
+      <h1 class="text-left text-[3rem] text-[#18489b] font-[emoji] capitalize">Happy BirthDay  </h1>
+      <span class="text-left text-[1rem] text-[#18489b] font-[emoji] ">{{month}} </span>
+      <ol class="relative border-s border-gray-200 dark:border-gray-700">                  
+            <li class="mb-10 ms-6" v-for="todo in todos.slice()"> 
+              <!--<div v-if="todo.role==='admin' && todo.birthDate.slice(4,7)==='-'+monthNumber+'-'">-->
+                <div v-if="todo.birthDate.slice(4,7)==='-5-'" >
+                  <span class="absolute flex items-center justify-center w-[3.5rem] h-[3.5rem] bg-blue-100 rounded-full start-[-1.75rem] ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+                    <img class="rounded-full shadow-lg" :src="todo.image" alt="Bonnie image"/>
+                  </span>
+                  <div class="items-center ml-[1rem] justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-xs sm:flex dark:bg-gray-700 dark:border-gray-600">
+                      <time class="mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0">{{getMonthDay(todo.birthDate.slice(5,19))}}</time>
+                      <div class="text-[1.2rem] text-gray-500 dark:text-gray-300 font-bold">{{todo.firstName}} {{todo.lastName}}  <span class="bg-gray-100 text-gray-800 text-xs font-normal me-2 px-2.5 py-0.5 rounded-sm dark:bg-gray-600 dark:text-gray-300">{{todo.company.title}}</span></div>
+                </div>
+              </div>             
+            </li>
+        </ol>
     </div>
    
 </template>

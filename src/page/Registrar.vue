@@ -191,8 +191,6 @@ export default{
                 // Decrypt
                 var bytes  = CryptoJS.AES.decrypt(ciphertext.toString(), 'secret key 123');
                 var plaintext = bytes.toString(CryptoJS.enc.Utf8);
-
-                console.log(plaintext)
                 
                }
             else{
