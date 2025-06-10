@@ -89,94 +89,55 @@ export default {
       this.CanvasInterface(this.todos);
   },
    CanvasInterface(items) {
-    var title=this.todos.map(item => ({
-      label:item.company.title
-      }))
-    var repetidos = {};
-    const  ctx=document.getElementById('acquisitions');
-    if(items===''){
-    var data = this.todos.map((numero)=>({
-    label:numero.role,
-    data:repetidos[numero.role] = (repetidos[numero.role] || 0) + 1
-    }));
-    this.chart = new Chart(ctx,
-     
-      {
-    type: 'bar',
-        data: {
-          labels:["Admin", "Moderator","User"],
-          datasets:[
-            {
-              label:"admin",
-              data:[repetidos.admin]
-            },
-            {
-              label:"moderator",
-              data:[0,repetidos.moderator]
-            }
-            ,
-            {
-              label:"user",
-              data:[0,0,repetidos.user]
-            }
-          ]
+    
+      const ctx = document.getElementById('acquisitions').getContext('2d');
+      const roleCounts = this.todos.reduce((acc, item) => {
+        acc[item.role.toLowerCase()] = (acc[item.role.toLowerCase()] || 0) + 1;
+        return acc;
+      }, {});
+      const data= {
+        labels:["Admin", "Moderator","User"],
+        datasets:[
+          {
+            label:"admin",
+            data:[roleCounts.admin || 0],
+            backgroundColor: 'rgba(255, 99, 132, 0.6)',
+          },
+          {
+            label:"moderator",
+            data:[0,roleCounts.moderator || 0],
+            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+          }
           ,
-       
+          {
+            label:"user",
+            data:[0,0,roleCounts.user || 0],
+            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+          }
+        ]
+        ,
+        };
+      const configuration = {
+          type: 'bar',
+          data: data,
+          option: {
+              tooltip: {
+                mode: 'index'
+            },
         options: {
     indexAxis: 'x',
     interaction: {
       mode: 'y'
   }
-  }
-      }
-    }
-    )
-  Chart.update();
-    }else
-    {  
-     var data = items.map((numero)=>({
-      label:numero.role,
-      data:repetidos[numero.role] = (repetidos[numero.role] || 0) + 1
-    }));
-    this.chart = new Chart(ctx,
-     
-      {
-    type: 'bar',
-        data: {
-          labels:["Admin", "Moderator","User"],
-          datasets:[
-            {
-              label:"admin",
-              data:[repetidos.admin]
-            },
-            {
-              label:"moderator",
-              data:[0,repetidos.moderator]
-            }
-            ,
-            {
-              label:"user",
-              data:[0,0,repetidos.user]
-            }
-          ]
-          ,
-       
-        options: {
-    indexAxis: 'x',
-    interaction: {
-      mode: 'y'
-  }
-  }
-      }
-    }
-    )
   
     }
-   if(this.chart){
-    this.chart.destroy()
-   }
-   Chart.update();
-  },
+  }
+}
+if (this.chart) {
+  this.chart.destroy();
+ }
+  this.chart = new Chart(ctx, configuration);  
+},
     search(item){
       this.searchUser=item;
       
@@ -253,14 +214,21 @@ export default {
         month: "long",
         
       };
+      const  date = new Date();
+      let IntlDateTimeFormat=  new Intl.DateTimeFormat("es-span",options1)
+      this.month=IntlDateTimeFormat.format(date);
+      this.year=date.getFullYear();
+      const day=date.getDay()+1;
+      const mes=date.getMonth()+1;
+      this.monthDay=mes+'-'+day
       const ordenar=  this.todos.sort((a,b)=> new Date(a.birthDate) - new Date(b.birthDate))
-      this.orderTodos=ordenar.map(item=> {
+      this.orderTodos=ordenar.map(item=>  {
         const name=item.firstName +" "+ item.lastName  
-        const IntlDateTimeFormat2=  new Intl.DateTimeFormat("es-span",options1)
-        const date= IntlDateTimeFormat2.format(new Date(item.birthDate))
+        const date= IntlDateTimeFormat.format(new Date(item.birthDate))
         const image=item.image
         const cargo=item.company.title
         const departamento=item.company.department
+        
        return {
         date,
         name,
@@ -269,14 +237,8 @@ export default {
         departamento
        }
       })
-      console.log(this.orderTodos)
-      const  date = new Date();
-      const IntlDateTimeFormat=  new Intl.DateTimeFormat("es-span",options1)
-      this.month=IntlDateTimeFormat.format(date);
-      this.year=date.getFullYear();
-      const day=date.getDay()+1;
-      const mes=date.getMonth()+1;
-      this.monthDay=mes+'-'+day
+      console.log(ordenar.filter(item=>item.date===this.month))
+     
       return this.year,this.month, this.monthDay,this.orderTodos;
     }
     
