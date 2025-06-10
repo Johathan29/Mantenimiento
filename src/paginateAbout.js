@@ -39,6 +39,7 @@ export default {
     return {
       users:[],
       todos: users.users,
+      orderTodos:[],
       breadCrumUrl:'',
       searchUser:'',
       nextId: 13,
@@ -133,7 +134,7 @@ export default {
   Chart.update();
     }else
     {  
-     var data = this.todos.map((numero)=>({
+     var data = items.map((numero)=>({
       label:numero.role,
       data:repetidos[numero.role] = (repetidos[numero.role] || 0) + 1
     }));
@@ -171,8 +172,10 @@ export default {
     )
   
     }
-   
-   
+   if(this.chart){
+    this.chart.destroy()
+   }
+   Chart.update();
   },
     search(item){
       this.searchUser=item;
@@ -208,6 +211,8 @@ export default {
       if(this.useradmin){
         this.userId=JSON.parse(localStorage.getItem('usuario')).id;
         const allFilter= this.todos.filter((todo) => todo.id !==JSON.parse(localStorage.getItem('usuario')).id);
+        const users=this.todos.filter((todo) => todo.id===JSON.parse(localStorage.getItem('usuario')).id);
+        this.users=users.map(item=>item.role)
         this.visibleTodos = allFilter.slice(this.currentPage * this.pageSize, (this.currentPage * this.pageSize) + this.pageSize);
   
       }else{
@@ -231,14 +236,14 @@ export default {
     },
     getMonthDay(item)
     {
-      const options1 = {
+      const options = {
         month: "long",
         day:'numeric',
       };
       const value=JSON.stringify(item)
       const  date = new Date(value);
-      const IntlDateTimeFormat=  new Intl.DateTimeFormat("es-span",options1)
-      this.dayhappy=IntlDateTimeFormat.format(date)
+      const IntlDateTimeFormat0=  new Intl.DateTimeFormat("es-span",options)
+      this.dayhappy=IntlDateTimeFormat0.format(date)
       return this.dayhappy
     },
      getDateNow()
@@ -246,18 +251,33 @@ export default {
       const options1 = {
         day:'numeric',
         month: "long",
-        year:"numeric"
+        
       };
+      const ordenar=  this.todos.sort((a,b)=> new Date(a.birthDate) - new Date(b.birthDate))
+      this.orderTodos=ordenar.map(item=> {
+        const name=item.firstName +" "+ item.lastName  
+        const IntlDateTimeFormat2=  new Intl.DateTimeFormat("es-span",options1)
+        const date= IntlDateTimeFormat2.format(new Date(item.birthDate))
+        const image=item.image
+        const cargo=item.company.title
+        const departamento=item.company.department
+       return {
+        date,
+        name,
+        image,
+        cargo,
+        departamento
+       }
+      })
+      console.log(this.orderTodos)
       const  date = new Date();
-     const IntlDateTimeFormat=  new Intl.DateTimeFormat("es-span",options1)
+      const IntlDateTimeFormat=  new Intl.DateTimeFormat("es-span",options1)
       this.month=IntlDateTimeFormat.format(date);
-     this.year=date.getFullYear();
-     
-     
-     const day=date.getDay()+1;
-     const mes=date.getMonth()+1;
-     this.monthDay=mes+'-'+day
-      return this.year,this.month, this.monthDay;
+      this.year=date.getFullYear();
+      const day=date.getDay()+1;
+      const mes=date.getMonth()+1;
+      this.monthDay=mes+'-'+day
+      return this.year,this.month, this.monthDay,this.orderTodos;
     }
     
   },

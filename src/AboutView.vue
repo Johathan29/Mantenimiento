@@ -17,10 +17,10 @@
       
     </div>
     
-   <div class="max-w-screen-xl md:mx-auto  mt-[2rem]">
+   <div class="max-w-screen-xl md:mx-auto  mt-[2rem] md:px-0 px-4">
       <div :class="[breadCrumUrl[1]==='users'?'border-b-[1px] border-[#d1d5db] my-[2rem]':'hidden']" >
                       <!-- Modal toggle -->
-            <a data-modal-target="crud-modal" data-modal-toggle="crud-modal" :class="[userId.role=='admin'?'block w-max text-blue-700 hover:text-blue-800 hover:cursor-pointer focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800':'hidden']" type="button">
+            <a data-modal-target="crud-modal" data-modal-toggle="crud-modal" :class="[users=='admin'?'block w-max text-blue-700 hover:text-blue-800 hover:cursor-pointer focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800':'hidden']" type="button">
               <FontAwesomeIcon :icon="delete" class="mb-0"/>
               <span class="tooltiptextCreate">Create new User </span>
             </a>
@@ -207,14 +207,18 @@
                 </div>
             </div> 
       </div>
-      <div class="text-xs text-[#646161] flex gap-4 items-center bg-[#0798ca30] p-4 w-full text-left">
-            <label class="text-[14px] font-bold w-auto ">filter category:</label>
+      <div class="text-xs text-[#646161] md:flex  block md:gap-4 items-center bg-[#0798ca30] p-4 w-full text-left">
+        <div class="flex gap-2 items-center mb-2">
+          <label class="text-[14px] font-bold w-auto ">Order by:</label>
             <select name="" id="" v-model="selected" @change="SelectFilter(selected)" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 ">
               <option value="" selected disabled >Order by</option>
               <option value="asc" >A-z</option>
               <option value="desc" >Z-a</option>
             </select>
-            <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" :class="[breadCrumUrl[1]!=='' ? 'inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 ':'hidden']" type="button">
+        </div>   
+        <div class="flex gap-2 items-center">
+          <label class="text-[14px] font-bold w-auto ">filter category:</label>
+          <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" :class="[breadCrumUrl[1]!=='' ? 'inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 ':'hidden']" type="button">
                 <svg class="w-3 h-3 text-gray-500 dark:text-gray-400 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z"/>
                     </svg>
@@ -239,10 +243,12 @@
                         </div>
                     </li>
                 </ul>
+        </div> 
+       
             </div>
           </div>
-      <div class="w-full flex justify-center overflow-x-auto ">
-        <table class="text-sm w-full  border-x-[#d8ecf5] border-[2px] border-b-[#d8ecf5] text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <div class="overflow-x-auto relative ">
+        <table class="text-sm md:w-full w-[67rem] border-x-[#d8ecf5] border-[2px] border-b-[#d8ecf5] text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <Thead class="text-xs text-[#646161] uppercase bg-[#0798ca30] w-full ">
             
             <tr>
@@ -289,29 +295,31 @@
         
       </div>
     </div>
-    <div class="max-w-screen-xl md:mx-auto "> 
+    <div class="max-w-screen-xl md:mx-auto md:px-0 px-4"> 
       <hr class="my-[2rem] "/>
       <h1 class="text-left text-[2rem] text-[#18489b] font-[emoji]">Users graph </h1>
       <div style="width:100%;" class="py-[4rem]">
-        <canvas id="acquisitions" class="bg-[#f8f8ff] p-[3rem] rounded-lg" aria-label="Hello ARIA World" role="img">
+        <canvas id="acquisitions" class="bg-[#f8f8ff] p-[3rem] rounded-lg !w-full !h-full" aria-label="Hello ARIA World" role="img">
         </canvas>
       </div>
       <hr class="my-[2rem] "/>
-      <h1 class="text-left text-[3rem] text-[#18489b] font-[emoji] capitalize">Happy BirthDay  </h1>
-      <span class="text-left text-[1rem] text-[#18489b] font-[emoji] ">{{month}} </span>
-      <ol class="relative border-s border-gray-200 dark:border-gray-700">                  
-            <li class="mb-10 ms-6" v-for="todo in todos.slice()"> 
-              <!--<div v-if="todo.role==='admin' && todo.birthDate.slice(4,7)==='-'+monthNumber+'-'">-->
-                <div v-if="todo.birthDate.slice(4,7)==='-5-'" >
-                  <span class="absolute flex items-center justify-center w-[3.5rem] h-[3.5rem] bg-blue-100 rounded-full start-[-1.75rem] ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+    </div>
+    <div class="max-w-screen-xl md:mx-auto md:px-0 px-4"> 
+      <h1 class="text-left text-[3rem] text-[#18489b] font-[emoji] capitalize birthday"  >Happy birthDay  </h1>
+      <span class="text-left text-[1rem] text-[#18489b] font-[emoji] block  ">{{month}} {{  year}} </span>
+      <ol class=" border-s border-gray-200 dark:border-gray-700">                  
+            <li class="mb-10 ms-6" v-for="todo in orderTodos"> 
+                <div v-if="todo.date===month" class="flex items-center md:gap-[1rem]">
+                  <span class="relative  flex items-center justify-center w-[3.5rem] h-[3.5rem] bg-blue-100 rounded-full start-[-2.75rem] md:start-[-1.75rem] ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
                     <img class="rounded-full shadow-lg" :src="todo.image" alt="Bonnie image"/>
                   </span>
-                  <div class="items-center ml-[1rem] justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-xs sm:flex dark:bg-gray-700 dark:border-gray-600">
-                      <time class="mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0">{{getMonthDay(todo.birthDate.slice(5,19))}}</time>
-                      <div class="text-[1.2rem] text-gray-500 dark:text-gray-300 font-bold">{{todo.firstName}} {{todo.lastName}}  <span class="bg-gray-100 text-gray-800 text-xs font-normal me-2 px-2.5 py-0.5 rounded-sm dark:bg-gray-600 dark:text-gray-300">{{todo.company.title}}</span></div>
+                  <div class="items-center  justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-xs sm:flex dark:bg-gray-700 dark:border-gray-600">
+                      <time class="mb-1 text-xs text-gray-400 font-bold sm:order-last sm:mb-0">{{todo.date}} {{year}}</time>
+                      <div class="text-[1.2rem] w-full text-gray-500 dark:text-gray-300 font-bold flex items-center gap-4">{{todo.name}}<span class="bg-gray-100 text-gray-800 text-xs font-normal me-2 px-2.5 py-0.5 rounded-sm dark:bg-gray-600 dark:text-gray-300">{{todo.cargo}}</span><span class="bg-gray-100 text-gray-800 text-xs font-normal me-2 px-2.5 py-0.5 rounded-sm dark:bg-gray-600 dark:text-gray-300">{{todo.departamento}}</span></div>
                 </div>
               </div>             
             </li>
+            {{users}}
         </ol>
     </div>
    
@@ -343,5 +351,26 @@ a.block.text-blue-700.focus\:ring-4.focus\:outline-none.focus\:ring-blue-300.fon
   border-width: 5px;
   border-style: solid;
   border-color: black transparent transparent transparent;
+}
+.birthday{
+font-size: 3rem;
+    font-weight: bold;
+    color: transparent;
+    background-image: url('https://images.unsplash.com/photo-1732535725600-f805d8b33c9c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
+    background-size: 200%; /* Enlarged for smooth animation */
+    background-position: 0 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: animate-background 5s infinite alternate linear;
+}
+
+@keyframes animate-background {
+    0% {
+        background-position: 0 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
 }
 </style>
