@@ -34,7 +34,7 @@ import { counter } from '@fortawesome/fontawesome-svg-core';
                         <FontAwesomeIcon :icon="faEye" class="mb-0"/>
                         <span class="tooltiptext">Ver detalle</span>
                     </router-link>
-                    <a  v-on:click="removeTodo()" v-if="usuario['role']=='admin'" class="font-medium text-blue-600  hover:cursor-pointer"  title="">
+                    <a  v-on:click="removeTodo()" v-if="validation['role']==='admin'" class="font-medium text-blue-600  hover:cursor-pointer"  title="">
                         <FontAwesomeIcon :icon="faDeleteLeft" class="mb-0"/>
                         <span class="tooltiptextDelete">Eliminar usuario </span>
                     
@@ -49,6 +49,7 @@ import { counter } from '@fortawesome/fontawesome-svg-core';
 </template>
 
 <script  lang="ts">
+import Conections from '../components/Endpoints'
 export default {
     name: 'todoitem',
     props: ['todo',],
@@ -57,21 +58,20 @@ export default {
         wordToword:'',
         counters:0,
         usuario:[],
+        validation:[]
         }
     },
   methods: {
     removeTodo() {
       this.$emit('todo:remove', this.todo.id);
     },
-    counterWord(){
+    async counterWord(){
         let index=0;
+        const endPoint=await Conections.methods.usersAll();
         this.usuario=localStorage.getItem('usuario');
         this.usuario=JSON.parse(this.usuario);
-        while (index <= this.todo.firstName.length) {
-            this.wordToword=0;
-             this.counters=this.wordToword+""+this.todo.id;
-             index++
-           }
+        this.validation=endPoint.find(item=> item.id===this.usuario.id)
+       
         }
     },
     mounted(){

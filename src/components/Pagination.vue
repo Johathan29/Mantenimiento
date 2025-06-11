@@ -1,5 +1,5 @@
 <template>
-<nav aria-label="Page navigation example" class="py-[4rem] ">
+<nav aria-label="Page navigation example" class="py-[4rem] md:px-0 px-4">
   <ul class="flex flex-wrap items-center -space-x-px h-8 text-sm">
     <li class="mb-[0.3rem]" v-if="totalPages() > 0">
       <button  
