@@ -56,7 +56,28 @@ export default {
       useradmin:'',
       categoryTitle:title ,
       newarray:[],
-      chart:'' 
+      Message:false,
+      
+      MessageString:false,
+      MessageEmail:"",
+      MessageCompany:false,
+      MessagePhone:false,
+      MessageLastName:false,
+      MessageUserName:false,
+      MessageFirstName:false,
+      MessagePassword:false,
+      MessageNumber:false,
+      MessageValitePhone:false,
+      MessageRepeatPassword:false,
+      categoryTitle:title ,
+      newarray:[],
+      chart:'',
+      uppercase:false,
+      number:false,
+      signos:false,
+      phone:undefined,
+      Messagetitle:false,
+      MessageRole:false
     };
   },
   components: {
@@ -140,8 +161,8 @@ if (this.chart) {
 },
     search(item){
       this.searchUser=item;
-      
-      const dataToFilter=this.todos.filter((todo) => todo.firstName==item);
+    
+      const dataToFilter=this.todos.filter((todo) => todo.firstName.toLowerCase()==item.toLowerCase());
       if(item.length==0) 
         {
           this.updateVisibleTodos();
@@ -152,11 +173,97 @@ if (this.chart) {
           this.visibleTodos=dataToFilter;
         }
     },
-    addTodo(email,password,repet_password,firstname,lastname,floating_phone,age,username,phone,image,gender) {
-      this.todos.push({id: 31, email: email});
-      this.nextId++;
-      console.log(this.todos)
-      this.updateVisibleTodos();
+    MessageBoxPassword(repeat_password,floating_password){
+      //let Message=false;
+      const arraypassword=repeat_password===floating_password ? repeat_password : '' 
+      var uppercase = /[A-Z]/g;
+      var number =/[0-9]/g
+      var signos=/[!@#$%^&*)(+=._-]/g
+      this.uppercase=uppercase.test(arraypassword);
+      this.number=number.test(arraypassword);
+      this.signos=signos.test(arraypassword);
+      if(arraypassword){
+        this.MessageString=true
+      }else{
+        this.MessageString=false
+      }
+      //
+      /*if(repeat_password===floating_password){
+        this.Message=true
+      }else{
+        this.Message=false
+        this.MessageString=true
+      }else {
+        this.MessageString=false
+      }*/
+    
+    },
+     async  addUser(email,floating_password,repeat_password,floating_first_name,floating_last_name,floating_phone,floating_company,floating_username,floating_role,floating_title) {
+        console.log(email+","+floating_password+","+repeat_password+","+floating_first_name+","+floating_last_name+","+floating_phone+","+floating_username)
+    
+        var number =/^\d{3}-\d{3}-\d{4}$/g
+        let MessageValitePhone=number.test(floating_phone)
+        console.log(MessageValitePhone);
+       if(email===undefined || email==='' || floating_password==='' ||  floating_password===undefined || repeat_password==='' || repeat_password===undefined  || floating_first_name==='' || floating_first_name===undefined || floating_last_name===""|| floating_last_name===undefined || floating_phone===undefined || floating_phone==='' || floating_username==='' || floating_username===undefined || floating_title==='' || floating_title===undefined || floating_role==='' || floating_role===undefined){ 
+          if(email===undefined || email===''){
+              this.MessageEmail=true
+              }else{
+                this.MessageEmail=false
+              } if(floating_username==='' || floating_username===undefined)
+            {
+              this.MessageUserName=true
+            }else{
+              this.MessageUserName=false
+            }if(floating_password==='' ||  floating_password===undefined){
+            this.MessagePassword=true
+            }else{
+              this.MessagePassword=false
+            }if(repeat_password==='' || repeat_password===undefined ){
+              this.MessageRepeatPassword=true
+            }else{
+              this.MessageRepeatPassword=false
+            }
+            if(floating_first_name==='' || floating_first_name===undefined){
+              this.MessageFirstName=true
+            }else{
+              this.MessageFirstName=false
+            }if(floating_last_name==='' || floating_last_name===undefined){
+              this.MessageLastName=true
+            }else{
+              this.MessageLastName=false
+            }if(floating_phone==='' || floating_phone===undefined )
+            {
+              
+              this.MessagePhone=true
+            }else{
+              
+              this.MessagePhone=false
+            }if(MessageValitePhone===true)
+            {
+              this.MessageValitePhone=true
+            }else{
+              this.MessageValitePhone=false
+            }
+            if(floating_company==='' || floating_company===undefined )
+            {
+              this.MessageCompany=true
+            }else{
+              this.MessageCompany=false
+            }
+          }else{
+            this.login =  await fetch('https://dummyjson.com/user/add',{
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                firstName:floating_first_name,
+                lastName:floating_last_name,
+                email:email,
+                username:floating_username,
+                password:repeat_password,
+                phone:floating_phone,
+          })
+        })
+      }
     },
     removeTodo(id) {
       let todos = this.todos;
@@ -244,7 +351,7 @@ if (this.chart) {
     
   },
   mounted(){
-   
+  
     this.getDateNow()
    this.CanvasInterface();
     this.updateUrl();

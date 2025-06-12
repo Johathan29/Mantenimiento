@@ -6,6 +6,7 @@ import Registra from '../components/Registrar.vue';
 import { ref } from 'vue';
 //import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import HelloWorld from './HelloWorld.vue';
+import BirthDay from '../components/BirthDay.vue'
 const valores = ref([]);
 console.log(data.value);
 const activeclass = ref('active carousel-item');
@@ -58,7 +59,7 @@ const detalleUser = () => {
 <HelloWorld></HelloWorld>
 
   <fetch> </fetch>
-  
+  <BirthDay></BirthDay>
 </template>
 
 <script  lang="ts">
