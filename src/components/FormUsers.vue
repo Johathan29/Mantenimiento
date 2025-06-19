@@ -73,9 +73,7 @@ data()
         message:''
         };
 },  
-async mounted() {
 
-},
 methods:
 {
  async loginIn(username,password){
