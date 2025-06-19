@@ -39,27 +39,23 @@ import { faHouse } from '@fortawesome/free-solid-svg-icons'
       <div class="hidden w-full md:block md:w-auto" id="navbar-default">
       <ul class="font-medium flex flex-col text-left p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-[#111827]">
         <li>
-          <router-link class="px-3 py-2 text-sm font-medium text-gray-300 hover:bg-[#111827] hover:rounded-[0.375rem] hover:text-white" aria-current="page" to="/">
+          <router-link class="px-3 flex items-baseline gap-[0.4rem] py-2 text-sm font-medium text-gray-300 hover:bg-[#111827] hover:rounded-[0.375rem] hover:text-white" aria-current="page" to="/">
             <FontAwesomeIcon :icon="faHouse" class="mb-0"/> Home
           </router-link>
         </li>
         <li>
-          <router-link class=" px-3 py-2 text-sm font-medium text-gray-300 hover:bg-[#111827] hover:rounded-[0.375rem] hover:text-white" aria-current="page" to="/users">
+          <router-link class=" px-3 py-2 flex items-baseline gap-[0.4rem] text-sm font-medium text-gray-300 hover:bg-[#111827] hover:rounded-[0.375rem] hover:text-white" aria-current="page" to="/users">
            <FontAwesomeIcon :icon="faUsers" class="mb-0"/> Users
           </router-link>
         </li>
         <li>
-          <router-link class=" px-3 py-2 text-sm font-medium text-gray-300 hover:bg-[#111827] hover:rounded-[0.375rem] hover:text-white" aria-current="page" to="/mascotas">
+          <router-link class=" px-3 py-2 flex items-baseline gap-[0.4rem] text-sm font-medium text-gray-300 hover:bg-[#111827] hover:rounded-[0.375rem] hover:text-white" aria-current="page" to="/mascotas">
            <FontAwesomeIcon :icon="faPaw" class="mb-0"/> Mascotas
           </router-link>
         </li>
+        
         <li>
-          <router-link class=" px-3 py-2 text-sm font-medium text-gray-300 hover:bg-[#111827] hover:rounded-[0.375rem] hover:text-white" aria-current="page" to="/mascotas">
-           <FontAwesomeIcon :icon="faPaw" class="mb-0"/> Mascotas
-          </router-link>
-        </li>
-        <li>
-         <router-link class=" px-3 py-2 text-sm font-medium text-gray-300 hover:bg-[#111827] hover:rounded-[0.375rem] hover:text-white" aria-current="page" to="/contacts">
+         <router-link class=" px-3 py-2 flex items-baseline gap-[0.4rem] text-sm font-medium text-gray-300 hover:bg-[#111827] hover:rounded-[0.375rem] hover:text-white" aria-current="page" to="/contacts">
            <FontAwesomeIcon :icon="faPaw" class="mb-0"/> Contacts
           </router-link>
         </li>

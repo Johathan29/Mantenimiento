@@ -1,7 +1,6 @@
-<script setup lang="ts">
-</script>
+
 <template>
-  <BreadCrum :name="breadCrumUrl" ></BreadCrum>
+<BreadCrum :name="breadCrumUrl" ></BreadCrum>
   <div class="py-[4rem] bg-[#0798ca30]">
       <div class="max-w-screen-xl md:mx-auto px-5 ">
           <h1 class="text-left text-[2rem] text-[#18489b] font-[emoji]">Contact Form</h1>
@@ -17,7 +16,7 @@
                   <p class="text-gray-500 text-[16px]">Estamos ubicados en <span class="font-bold text-[16px]">Av. Florencio de Leon 97, Bajos de Haina 91000.</span></p>
               </div>
 
-              <form method="post" action="" class=" md:w-1/2 p-[0.8rem] w-full rounded-r-lg rounded-br-none border-[1px]">
+              <form method="post" action="" class="text-left md:w-1/2 p-[0.8rem] w-full rounded-r-lg rounded-br-none border-[1px]">
               <div class="relative z-0 w-full mb-5 group">
                   <input type="email" name="floating_email" @input="event => floating_email = event.target.value" id="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                   <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
@@ -74,20 +73,21 @@ methods:
   SendData(floating_messenger,floating_last_name,floating_first_name, floating_email){
     console.log(floating_messenger,floating_last_name,floating_first_name, floating_email);
   },
-  updateUrl(){
-    const url=window.location;
-    this.userjson=localStorage.getItem('usuario');
-    this.User=JSON.parse(this.userjson);
-    this.breadCrumUrl=url.hash.split("/");
-
-     return this.breadCrumUrl;
+ updateUrl(){
+    
+      const url=window.location;
+     this.breadCrumUrl=url.hash.split("/");
+     console.log(this.breadCrumUrl)
+    
+ 
+    return this.breadCrumUrl
     },
  
     
   },
   mounted(){
     this.updateUrl();
-    this.main();
+  
   },
   components:{
     BreadCrum

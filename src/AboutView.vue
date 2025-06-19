@@ -51,7 +51,7 @@
                                 <input type="email" name="floating_email" id="floating_email"  v-model="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                                 <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-[#18489b] peer-focus:font-bold peer-focus:dark:text-[#18489b] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address <sup>*</sup></label>
                                 <div class="w-full">
-                                  <span v-if="floating_email===undefined" :class="[MessageEmail===true ? 'block text-[12px] text-red-500 flex gap-2 items-center': 'hidden']">
+                                  <span v-if="floating_email===undefined || floating_email===''" :class="[MessageEmail===true ? 'block text-[12px] text-red-500 flex gap-2 items-center': 'hidden']">
                                     <FontAwesomeIcon :icon="faCircleXmark" class="mb-0"/>
                                       The field Email is empty 
                                      </span>

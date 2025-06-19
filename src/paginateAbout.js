@@ -23,11 +23,11 @@ import {
   initTabs, 
   initTooltips } from 'flowbite';
 // constants
-const PHONE_REGEX = /^\d{3}-\d{3}-\d{4}$/g;
+
 const UPPERCASE_REGEX = /[A-Z]/g;
 const NUMBER_REGEX = /[0-9]/g;
 const SYMBOLS_REGEX = /[!@#$%^&*)(+=._-]/g;
- const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/g;
+ 
 const response=ref([]); 
 const users=ref([]);
 const categoryTitle=ref(['']);
@@ -72,7 +72,7 @@ export default {
       MessageFirstName:false,
       MessagePassword:false,
       MessageNumber:false,
-      MessageValitePhone:ref(false),
+      MessageValitePhone:false,
       MessageRepeatPassword:false,
       newarray:[],
       chart:'',
@@ -206,11 +206,12 @@ if (this.chart) {
     },
      async  addUser(email,floating_password,repeat_password,floating_first_name,floating_last_name,floating_phone,floating_company,floating_username,floating_role,floating_title) {
         console.log(email+","+floating_password+","+repeat_password+","+floating_first_name+","+floating_last_name+","+floating_phone+","+floating_username)
+        let PHONE_REGEX = /^\d{3}-\d{3}-\d{4}$/g;
+        const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/g;
         let MessageValitePhone=PHONE_REGEX.test(floating_phone)
         let EmailValite=EMAIL_REGEX.test(email);
         console.log(EmailValite)
-       
-              this.MessageValitePhone.value=MessageValitePhone
+       // this.MessageValitePhone=MessageValitePhone
             
        if(email===undefined || email==='' || floating_password==='' ||  floating_password===undefined || repeat_password==='' || repeat_password===undefined  || floating_first_name==='' || floating_first_name===undefined || floating_last_name===""|| floating_last_name===undefined || floating_phone===undefined || floating_phone==='' || floating_username==='' || floating_username===undefined || floating_title==='' || floating_title===undefined || floating_role==='' || floating_role===undefined){ 
           if(EmailValite===true)
@@ -252,6 +253,10 @@ if (this.chart) {
             }else{
               
               this.MessagePhone=false
+            }if(MessageValitePhone===true){
+              this.MessageValitePhone=true
+            }else{
+              this.MessageValitePhone=false
             }
             if(floating_company==='' || floating_company===undefined )
             {
