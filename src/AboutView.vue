@@ -91,7 +91,7 @@
                                 placeholder=" " minlength="8" maxlength="12" required />
                                 <label for="floating_repeat_password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[#18489b] peer-focus:font-bold peer-focus:dark:text-[#18489b] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm password</label>
                                 <div class="w-full">
-                                  <span :class="[MessagePassword===true ? 'block text-[12px] text-red-500 flex gap-2 items-center': 'hidden']">
+                                  <span :class="[MessageRepeatPassword===true ? 'block text-[12px] text-red-500 flex gap-2 items-center': 'hidden']">
                                     <FontAwesomeIcon :icon="faCircleXmark" class="mb-0"/>
                                       The field Password is empty  
                                   </span>
@@ -119,7 +119,7 @@
                                 <div class="w-full">
                                   <span :class="[MessageFirstName===true ? 'block text-[12px] text-red-500 flex gap-2 items-center': 'hidden']">
                                     <FontAwesomeIcon :icon="faCircleXmark" class="mb-0"/>
-                                    The field FirstName is empty  
+                                    The field FirstName is empty  {{ MessageFirstName }}
                                     </span>
                                   </div>
                               </div>
@@ -145,7 +145,7 @@
                                   </span>
                                   <span v-else :class="[MessageValitePhone===false ? 'block text-[12px] text-red-500 flex gap-2 items-center': 'hidden']">
                                     <FontAwesomeIcon :icon="faCircleXmark" class="mb-0"/>
-                                    Invalid Format of the phone 
+                                    Invalid Format of the phone {{ MessageValitePhone }}
                                   </span>
                                 </div>
                               </div>
@@ -208,7 +208,7 @@
             </div> 
       </div>
       <div class="text-xs text-[#646161] md:flex  block md:gap-4 items-center bg-[#0798ca30] p-4 w-full text-left">
-        <div class="flex gap-2 items-center mb-2">
+        <div class="flex gap-2 items-center ">
           <label class="text-[14px] font-bold w-auto ">Order by:</label>
             <select name="" id="" v-model="selected" @change="SelectFilter(selected)" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 ">
               <option value="" selected disabled >Order by</option>
@@ -268,7 +268,7 @@
             </tr>
           </Thead>
           <tbody>
-            <todo-item
+            <todo-item 
               v-for="(todo,index) in visibleTodos"
               v-bind:visibleTodos="visibleTodos"
               v-bind:currentPage="currentPage"
@@ -278,7 +278,7 @@
             </todo-item>
           </tbody>
         </table>
-        
+
       </div>
       <div v-if="breadCrumUrl[1]=='users'">
         <pagination 
@@ -303,7 +303,7 @@
         </canvas>
       </div>
     </div>
-    <div class="max-w-screen-xl md:mx-auto md:px-0 px-4"> 
+    <!--<div class="max-w-screen-xl md:mx-auto md:px-0 px-4"> 
       <h1 class="text-left text-[3rem] text-[#18489b] font-[emoji] capitalize birthday"  >Happy birthDay  </h1>
       <span class="text-left text-[1rem] text-[#18489b] font-[emoji] block  ">{{month}} {{  year}} </span>
       <hr class="mb-[2rem] mt-[0.4rem]"/>
@@ -320,7 +320,7 @@
               </div>         
             </li>
         </ol>
-    </div>
+    </div>-->
    
 </template>
 <script src="./paginateAbout.js"></script>
@@ -355,7 +355,7 @@ a.block.text-blue-700.focus\:ring-4.focus\:outline-none.focus\:ring-blue-300.fon
 font-size: 3rem;
     font-weight: bold;
     color: transparent;
-    background-image: url('https://images.unsplash.com/photo-1732535725600-f805d8b33c9c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZCk4TJ-tY5URT1BaSeUlGyYgX0c1KNwy6Yg&s'); 
     background-size: 200%; /* Enlarged for smooth animation */
     background-position: 0 50%;
     background-clip: text;
@@ -369,7 +369,17 @@ font-size: 3rem;
         background-position: 0 50%;
     }
     100% {
-        background-position: 100% 50%;
+        background-position: 100% 70%;
     }
+}
+input:-internal-autofill-selected {
+    background-color:transparent!important;
+    
+}
+input:-internal-autofill-selected {
+    appearance: menulist-button;
+    background-image: none !important;
+    background-color: light-dark(rgb(232, 240, 254)) !important;
+    color: fieldtext !important;
 }
 </style>
