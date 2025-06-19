@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 #app {
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     max-width: 100%!important;
     margin: 0 0!important;
     padding: 0rem!important; 
@@ -13,6 +13,6 @@ body{
     overflow-x: hidden;
 }
 .splide__list{
-    height: 24rem!important;
+    /*height: 24rem!important;*/
     justify-content: space-between;
 }

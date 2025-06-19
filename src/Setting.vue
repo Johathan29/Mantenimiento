@@ -52,16 +52,16 @@ onMounted(() =>
 })
   //https://jsonplaceholder.typicode.com/users
 onMounted(async () => 
-{
-  const response = await fetch('https://dummyjson.com/users');
-  users.value = await response.json();
-  users.value=users.value.users;
-  userregistered.value=users.value.find(item=>item.id===id.value);
-  datos.value.push(datos.value.Email=userregistered.value.email,datos.value.FirstName=userregistered.value.firstName,datos.value.Id=userregistered.value.id);
-  breadcrum.value=datos.value.FirstName;
-  console.log(datos.value);
+    {
+    const response = await fetch('https://dummyjson.com/users');
+    users.value = await response.json();
+    users.value=users.value.users;
+    userregistered.value=users.value.find(item=>item.id===id.value);
+    datos.value.push(datos.value.Email=userregistered.value.email,datos.value.FirstName=userregistered.value.firstName,datos.value.Id=userregistered.value.id);
+    breadcrum.value=datos.value.FirstName;
+    console.log(datos.value);
 
-}
+    }
 );
 const datails =computed( 
     {

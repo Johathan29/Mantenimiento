@@ -1,18 +1,18 @@
 <template>
-<nav aria-label="Page navigation example" class="p-5 flex justify-center">
-  <ul class="flex items-center -space-x-px h-8 text-sm">
-    <li v-if="totalPages() > 0">
+<nav aria-label="Page navigation example" class="py-[4rem] md:px-0 px-4">
+  <ul class="flex flex-wrap items-center -space-x-px h-8 text-sm">
+    <li class="mb-[0.3rem]" v-if="totalPages() > 0">
       <button  
       v-bind:disabled="showPreviousLink()"  
       v-on:click="updatePage(currentPage - 1)" 
       class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 border border-e-0 rounded-s-lg  bg-gray-800 border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white"><span class="sr-only">Previous</span><svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"></path></svg>
       </button>
     </li>
-      <li v-for="item in totalPages()">
+      <li v-for="item in totalPages()" class="mb-[0.3rem]">
       <a  :class="['flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 border border-e-0   border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white',item==currentPage+1 ? 'bg-gray-700 text-white' : ' bg-gray-800 cursor-pointer']" v-on:click="updatePage(item-1)">{{ item  }}</a>
     </li>
    
-    <li>
+    <li class="mb-[0.3rem]">
       <button  
       v-bind:disabled="showNextLink()" 
       v-on:click="updatePage(currentPage + 1)"  

@@ -2,6 +2,7 @@
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faPaw } from '@fortawesome/free-solid-svg-icons'
+import {faUsers } from '@fortawesome/free-solid-svg-icons'
 import { faHouse } from '@fortawesome/free-solid-svg-icons'
 </script>
 <template>
@@ -44,7 +45,7 @@ import { faHouse } from '@fortawesome/free-solid-svg-icons'
         </li>
         <li>
           <router-link class=" px-3 py-2 text-sm font-medium text-gray-300 hover:bg-[#111827] hover:rounded-[0.375rem] hover:text-white" aria-current="page" to="/users">
-           <FontAwesomeIcon :icon="faPaw" class="mb-0"/> Users
+           <FontAwesomeIcon :icon="faUsers" class="mb-0"/> Users
           </router-link>
         </li>
         <li>
