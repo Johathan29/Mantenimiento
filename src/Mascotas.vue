@@ -236,9 +236,7 @@ data()
       userregistered:{}
         };
 },  
-async mounted() {
 
-},
 methods:
 { 
   updateUrl(){
