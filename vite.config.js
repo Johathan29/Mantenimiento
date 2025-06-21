@@ -5,7 +5,8 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [vue()],
   build: {
-    target: "ES2022" 
+    target: "ES2022",
+     chunkSizeWarningLimit: 1600,
   },
   /*resolve:
     { 
